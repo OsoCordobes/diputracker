@@ -2,6 +2,8 @@
 
 **La Cámara de Diputados de la Nación Argentina, banca por banca.**
 
+🔗 **En vivo: [diputracker.vercel.app](https://diputracker.vercel.app)**
+
 Índice de alineamiento con el gobierno nacional, poder de bisagra (Banzhaf), disidencias
 documentadas y simulador de mayorías sobre las **257 bancas reales** de la HCDN.
 Proyecto ciudadano independiente, sin afiliación con la HCDN ni con fuerza política alguna.
@@ -40,6 +42,15 @@ nominales completas (dataset `votaciones_nominales` de datos.hcdn.gob.ar):
 - La **ausencia** es categoría propia: no computa como apoyo ni rechazo.
   La **abstención** sí integra el denominador.
 - Los diputados que asumieron después de una votación no la computan.
+
+## Verificación
+
+El dataset completo fue verificado el 2026-07-07 mediante contraste multi-fuente:
+cada una de las 9 votaciones contra sus fuentes citadas más cobertura independiente
+(HCDN Prensa, Chequeado, Parlamentario, Infobae, Ámbito, La Nación, Letra P), y la
+nómina de 257 diputados contra el listado oficial vivo de la HCDN (coincidencia exacta:
+nombres, bloques, distritos, mandatos y fotos). Las discrepancias encontradas se
+corrigieron citando la evidencia en el historial de commits.
 
 ## Actualización automática
 
