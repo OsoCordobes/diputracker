@@ -13,10 +13,24 @@ Proyecto ciudadano independiente, sin afiliación con la HCDN ni con fuerza pol�
 1. **Solo datos reales.** Nada se inventa ni se estima sin fuente. Cada votación cita su acta
    o cobertura de prensa; cada cifra lleva su fuente y fecha de consulta.
 2. **Datos abiertos y auditables.** Los datasets viven en este repo
-   ([`public/data/`](public/data/)) y cada actualización queda registrada en el historial
-   de git — cualquiera puede auditar qué cambió, cuándo y por qué.
+   ([`public/data/`](public/data/)), documentados campo por campo en el
+   [**diccionario de datos**](docs/DATASET.md), y se sirven como API pública con CORS.
+   Cada actualización queda registrada en el historial de git — cualquiera puede auditar
+   qué cambió, cuándo y por qué.
 3. **Metodología explícita.** Cada índice publica qué mide, cómo se calcula y qué **no**
    permite afirmar (sección *Índices* de la app).
+
+## Datos abiertos
+
+Los tres datasets se sirven como API pública con CORS abierto y están documentados en el
+[**diccionario de datos** (`docs/DATASET.md`)](docs/DATASET.md) — estructura campo por campo,
+códigos de posición, metodología y guía de consumo:
+
+```
+https://diputracker.vercel.app/data/diputados.json
+https://diputracker.vercel.app/data/votaciones.json
+https://diputracker.vercel.app/data/contexto.json
+```
 
 ## Fuentes
 
