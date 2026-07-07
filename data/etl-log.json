@@ -37,5 +37,22 @@
   "cambios": [],
   "errores": [],
   "aborted": false
+ },
+ {
+  "ts": "2026-07-07T12:51:54.101Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [],
+  "aborted": false
+ },
+ {
+  "ts": "2026-07-07T12:52:10.297Z",
+  "script": "etl-votaciones",
+  "nuevasActas": 0,
+  "nominalDisponible": false,
+  "errores": [
+   "votaciones.hcdn.gob.ar: HTTP 404 en https://votaciones.hcdn.gob.ar/votaciones/2026"
+  ],
+  "nominalRecursos": 4
  }
 ]
