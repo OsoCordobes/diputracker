@@ -1,0 +1,45 @@
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#FAFAF9;}
+body{color:#1C1A17;-webkit-font-smoothing:antialiased;}
+::selection{background:#1C1A17;color:#FAFAF9;}
+@keyframes dtShimmer{0%{background-position:-700px 0;}100%{background-position:700px 0;}}
+.dt-num{font-family:var(--font-mono),monospace;font-variant-numeric:tabular-nums;}
+.dt-serif{font-family:var(--font-serif),Georgia,serif;}
+.dt-scroll::-webkit-scrollbar{width:9px;height:9px;}
+.dt-scroll::-webkit-scrollbar-thumb{background:#D8D3C8;border-radius:6px;}
+.dt-seat:focus-visible{outline:none;}
+a{color:#B45309;}
+a:hover{color:#8A3D06;}
+@keyframes dtViewIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@keyframes dtRowIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:none;}}
+@keyframes dtSeatIn{from{opacity:0;}to{opacity:1;}}
+@keyframes dtDrawerIn{from{opacity:0;transform:translateX(26px);}to{opacity:1;transform:none;}}
+@keyframes dtFadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes dtPopIn{from{opacity:0;transform:translateY(8px) scale(0.985);}to{opacity:1;transform:none;}}
+@keyframes dtBarIn{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+.dt-view{animation:dtViewIn .5s cubic-bezier(.22,.61,.36,1) both;}
+.dt-row{animation:dtRowIn .45s cubic-bezier(.22,.61,.36,1) both;}
+.dt-seatg{animation:dtSeatIn .55s ease both;}
+.dt-drawer{animation:dtDrawerIn .34s cubic-bezier(.22,.61,.36,1) both;}
+.dt-fade{animation:dtFadeIn .25s ease both;}
+.dt-pop{animation:dtPopIn .28s cubic-bezier(.22,.61,.36,1) both;}
+.dt-bar{transform-origin:left center;animation:dtBarIn .7s cubic-bezier(.22,.61,.36,1) both;}
+@media (prefers-reduced-motion:reduce){.dt-view,.dt-row,.dt-seatg,.dt-drawer,.dt-fade,.dt-pop,.dt-bar{animation:none;}}
+@media (max-width:1120px){.dt-searchlabel{display:none;}.dt-g4{grid-template-columns:repeat(2,1fr) !important;}}
+.dt-xwrap{overflow-x:auto;overflow-y:hidden;}
+.dt-minw{min-width:730px;}
+.dt-minw2{min-width:620px;}
+@media (max-width:920px){
+  .dt-g2,.dt-g3,.dt-g4{grid-template-columns:1fr !important;}
+  .dt-h1{font-size:33px !important;}
+  .dt-hidem{display:none !important;}
+}
+@media (max-width:560px){
+  .dt-rgrid{grid-template-columns:96px 1fr 88px !important;gap:8px !important;}
+}
+
+/* hover utilities — equivalentes de los style-hover del prototipo */
+.hov-row:hover{background:#FBF9F4 !important;}
+.hov-row-sel:hover{background:#F4F1EB !important;}
+.hov-dark:hover{background:#2B2823 !important;}
+.hov-border:hover{border-color:#C9C4BA !important;}

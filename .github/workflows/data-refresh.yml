@@ -1,0 +1,47 @@
+name: Actualización de datos (fuentes oficiales HCDN)
+
+on:
+  schedule:
+    # Nómina + chequeo de votaciones — dos veces por día (08:23 y 20:23 ART)
+    - cron: "23 11 * * *"
+    - cron: "23 23 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: ETL nómina (diputados, bloques, interbloques)
+        run: node scripts/etl-nomina.mjs
+        continue-on-error: false
+
+      - name: ETL votaciones (nuevas actas / dataset nominal)
+        run: node scripts/etl-votaciones.mjs
+
+      - name: Validar invariantes
+        run: node scripts/validate-data.mjs
+
+      - name: Commit si hay cambios
+        run: |
+          git config user.name "diputracker-bot"
+          git config user.email "actions@github.com"
+          git add public/data data/etl-log.json data/seed || true
+          if git diff --cached --quiet; then
+            echo "Sin cambios en los datos."
+          else
+            git commit -m "data: actualización automática desde fuentes oficiales HCDN ($(date -u +%Y-%m-%d\ %H:%M) UTC)"
+            git push
+          fi
