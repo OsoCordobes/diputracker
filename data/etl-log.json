@@ -54,5 +54,12 @@
    "votaciones.hcdn.gob.ar: HTTP 404 en https://votaciones.hcdn.gob.ar/votaciones/2026"
   ],
   "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-07-07T17:07:46.302Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [],
+  "aborted": false
  }
 ]

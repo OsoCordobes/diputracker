@@ -8,9 +8,9 @@
 // Principios: nunca se inventa nada; si la fuente no cierra (no hay 257 filas, bloque
 // desconocido sin resolución, etc.) el script ABORTA sin tocar los datos y deja registro.
 // Los cambios de bloque y las altas/bajas se registran en ctx.movimientos citando la fuente.
-import fs from "node:fs";
 import path from "node:path";
-import { appendLog, DATA, decodeEntities, fetchText, readJson, ROOT, todayIso, writeJsonCompact } from "./etl-lib.mjs";
+import { appendLog, DATA, fetchText, readJson, ROOT, todayIso, writeJsonCompact } from "./etl-lib.mjs";
+import { blocAliases, distritoCanon, isoFromDdMmYyyy, norm, parseBloqueCounts, parseNomina } from "./etl-nomina-parse.mjs";
 
 const NOMINA_URL = "https://www.diputados.gov.ar/diputados/";
 const BLOQUES_URL = "https://www.hcdn.gob.ar/diputados/diputados-por-bloque.html";
@@ -20,75 +20,6 @@ const FOTOS_SUFIJO = "_small.png";
 const DIP_FILE = path.join(DATA, "diputados.json");
 const CTX_FILE = path.join(DATA, "contexto.json");
 const SEED_DIR = path.join(ROOT, "data", "seed");
-
-// Distritos canónicos (forma de presentación usada por el dataset)
-const DISTRITOS = [
-  "Buenos Aires", "CABA", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes",
-  "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
-  "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
-  "Santiago del Estero", "Tierra del Fuego", "Tucumán",
-];
-const norm = (s) =>
-  s.normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase().replace(/\s+/g, " ").trim();
-const distritoCanon = new Map(DISTRITOS.map((d) => [norm(d), d]));
-// alias oficiales que difieren de la forma canónica
-distritoCanon.set("CIUDAD AUTONOMA DE BUENOS AIRES", "CABA");
-distritoCanon.set("CIUDAD DE BUENOS AIRES", "CABA");
-distritoCanon.set("C.A.B.A.", "CABA");
-distritoCanon.set("CAPITAL FEDERAL", "CABA");
-distritoCanon.set("TIERRA DEL FUEGO, ANTARTIDA E ISLAS DEL ATLANTICO SUR", "Tierra del Fuego");
-
-function isoFromDdMmYyyy(s) {
-  const m = s.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-  return m ? `${m[3]}-${m[2]}-${m[1]}` : null;
-}
-
-// ---------- parseo de la nómina oficial ----------
-function parseNomina(html) {
-  const rows = [];
-  // cada fila: <tr> ... <img src="https://parlamentaria.hcdn.gob.ar/image/<id>_small.png" ...>
-  //            <a href="/diputados/<slug>/">Apellido, Nombre</a> ... columnas de texto
-  const trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
-  let m;
-  while ((m = trRe.exec(html))) {
-    const tr = m[1];
-    const nameM = tr.match(/<a[^>]*href="\/diputados\/[^"]*"[^>]*>([^<]+)<\/a>/);
-    if (!nameM) continue; // header u otras filas
-    const a = decodeEntities(nameM[1]);
-    const fotoM = tr.match(/parlamentaria\.hcdn\.gob\.ar\/image\/([A-Za-z0-9_]+)_small\.png/);
-    const tds = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((t) =>
-      decodeEntities(t[1].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim()
-    );
-    // columnas: [foto, diputado, distrito, bloque, mandato, inicia, finaliza, nacimiento]
-    if (tds.length < 7) continue;
-    const distritoRaw = tds[2] ?? "";
-    const bloqueRaw = tds[3] ?? "";
-    const mandato = (tds[4] || "").match(/\d{4}-\d{4}/)?.[0] ?? null;
-    const inicia = isoFromDdMmYyyy(tds[5] || "");
-    rows.push({
-      a,
-      distritoRaw,
-      bloqueRaw,
-      mandato,
-      inicia,
-      foto: fotoM ? fotoM[1] : "silueta",
-    });
-  }
-  return rows;
-}
-
-function parseBloqueCounts(html) {
-  // acordeones: <button ...>NOMBRE DEL BLOQUE <algo> (N)</button> — el conteo aparece junto al nombre
-  const counts = new Map();
-  const re = /accordion[^>]*>[\s\S]*?<button[^>]*>([\s\S]*?)<\/button>/g;
-  let m;
-  while ((m = re.exec(html))) {
-    const txt = decodeEntities(m[1].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
-    const cm = txt.match(/^(.*?)[\s(]+(\d+)\)?\s*$/);
-    if (cm) counts.set(norm(cm[1]), parseInt(cm[2], 10));
-  }
-  return counts;
-}
 
 // ---------- main ----------
 const run = { script: "etl-nomina", cambios: [], errores: [], aborted: false };
@@ -110,10 +41,7 @@ try {
     const parts = b.nombre.split(" - ");
     for (const p of parts) blocByName.set(norm(p), b.k);
   }
-  // alias oficiales con el nombre expandido del frente
-  blocByName.set(norm("PTS-FRENTE DE IZQUIERDA Y DE TRABAJADORES UNIDAD"), "PTSFIT");
-  blocByName.set(norm("PARTIDO OBRERO EN EL FRENTE DE IZQUIERDA Y DE TRABAJADORES-UNIDAD"), "POFIT");
-  blocByName.set(norm("MOVIMIENTO DE INTEGRACION Y DESARROLLO"), "MID");
+  blocAliases(blocByName);
 
   const unknownBlocs = new Set();
   const parsed = rows.map((r) => {
