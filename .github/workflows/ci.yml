@@ -18,6 +18,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Auditoría de dependencias (supply-chain)
+        # Solo falla ante vulnerabilidades high/critical (accionables); las moderate
+        # transitivas y no explotables no rompen el gate. Hoy: 0 vulnerabilidades.
+        run: npm audit --audit-level=high
       - name: Validar datos
         run: node scripts/validate-data.mjs
       - name: Tests de regresión del índice
