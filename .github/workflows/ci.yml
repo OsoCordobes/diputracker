@@ -20,5 +20,7 @@ jobs:
       - run: npm ci
       - name: Validar datos
         run: node scripts/validate-data.mjs
+      - name: Tests de regresión del índice
+        run: npm test
       - name: Build
         run: npm run build
