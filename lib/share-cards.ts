@@ -75,9 +75,9 @@ function wrapText(c: CanvasRenderingContext2D, text: string, maxW: number): stri
 }
 
 const PER_CARD: Record<Periodo, string> = {
-  todo: "período dic-2025 → may-2026",
+  todo: "período dic-2025 → jun-2026",
   ext: "extraordinarias dic-2025 → feb-2026",
-  ord: "ordinarias abr → may 2026",
+  ord: "ordinarias abr → jun 2026",
 };
 
 export function shareCardDep(d: Dep, periodo: Periodo, corte: string, daltonico = false) {

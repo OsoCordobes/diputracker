@@ -325,7 +325,7 @@ export function srcView(src: VoteSrc): { label: string; tip: string } {
 }
 
 export const PER_LABEL: Record<Periodo, string> = {
-  todo: "dic-2025 → may-2026",
+  todo: "dic-2025 → jun-2026",
   ext: "extraordinarias dic-2025/feb-2026",
-  ord: "ordinarias abr/may-2026",
+  ord: "ordinarias abr/jun-2026",
 };

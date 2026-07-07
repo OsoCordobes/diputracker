@@ -6,7 +6,7 @@ export default function TopChrome({ V }: { V: DTVals }) {
     <>
       {/* ===================== REAL DATA STRIP ===================== */}
       <div style={{ background: "#1C1A17", color: "#D8D3C8", fontSize: "11.5px", letterSpacing: "0.02em", padding: "7px 28px", textAlign: "center" }}>
-        <span style={{ color: "#FDBA74", fontWeight: 600 }}>DATOS OFICIALES HCDN</span> · 257 bancas · {V.nVots} votaciones reales: extraordinarias dic-2025→feb-2026 + ordinarias abr→may 2026 · índice provisional a nivel bloque, con registros individuales documentados · <a href="#/indices" style={{ color: "#FDBA74", textDecoration: "none", borderBottom: "1px solid rgba(253,186,116,0.45)" }}>metodología</a>
+        <span style={{ color: "#FDBA74", fontWeight: 600 }}>DATOS OFICIALES HCDN</span> · 257 bancas · {V.nVots} votaciones reales: extraordinarias dic-2025→feb-2026 + ordinarias abr→jun 2026 · índice provisional a nivel bloque, con registros individuales documentados · <a href="#/indices" style={{ color: "#FDBA74", textDecoration: "none", borderBottom: "1px solid rgba(253,186,116,0.45)" }}>metodología</a>
       </div>
 
       {/* ===================== TOP NAV ===================== */}

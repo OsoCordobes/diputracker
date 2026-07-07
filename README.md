@@ -48,11 +48,19 @@ nominales completas (dataset `votaciones_nominales` de datos.hcdn.gob.ar):
 ## Verificación
 
 El dataset completo fue verificado el 2026-07-07 mediante contraste multi-fuente:
-cada una de las 9 votaciones contra sus fuentes citadas más cobertura independiente
+cada votación contra sus fuentes citadas más cobertura independiente
 (HCDN Prensa, Chequeado, Parlamentario, Infobae, Ámbito, La Nación, Letra P), y la
 nómina de 257 diputados contra el listado oficial vivo de la HCDN (coincidencia exacta:
 nombres, bloques, distritos, mandatos y fotos). Las discrepancias encontradas se
 corrigieron citando la evidencia en el historial de commits.
+
+Las votaciones del 24-jun-2026 (Súper RIGI y acuerdo con holdouts) se incorporaron tras
+un barrido de 4 ángulos independientes sobre el período 21-may → 7-jul (prensa oficial,
+prensa especializada, medios grandes y búsqueda inversa de ausencia de sesiones) más
+verificación adversarial: fue la única sesión con votaciones del recinto en ese lapso,
+confirmada por el listado oficial de sesiones del Período 144. Además, una suite de
+tests de regresión pinnea el índice de cada caso borde con aritmética verificada a mano
+(`npm test`, corre en CI).
 
 ## Actualización automática
 

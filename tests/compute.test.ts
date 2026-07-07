@@ -25,6 +25,11 @@ const vot = JSON.parse(fs.readFileSync(path.join(DATA, "votaciones.json"), "utf8
 const ctx = JSON.parse(fs.readFileSync(path.join(DATA, "contexto.json"), "utf8")) as CtxFile;
 
 const D = processData(dip, vot, ctx);
+
+// Medias de la Cámara pinneadas del motor (los anclajes individuales de abajo,
+// derivados a mano desde las fuentes, son la verificación independiente).
+const MEDIA_TODO = 56;
+const MEDIA_ORD = 59;
 const byName = (a: string) => {
   const d = D.deps.find((x) => x.a === a);
   assert.ok(d, `diputado no encontrado: ${a}`);
@@ -73,50 +78,50 @@ test("helpers de presentación", () => {
 test("dataset: composición base", () => {
   assert.equal(D.deps.length, 257);
   assert.equal(D.bloques.length, 20);
-  assert.equal(D.votaciones.length, 9);
+  assert.equal(D.votaciones.length, 11);
   for (const d of D.deps) {
     assert.ok(d.indice === null || (d.indice >= 0 && d.indice <= 100), `índice fuera de rango: ${d.a}`);
     assert.equal(d.votes.length, D.votaciones.length);
   }
 });
 
-test("período completo: valores certificados por la auditoría del 2026-07-07", () => {
+test("período completo (11 votaciones): partida doble contra aritmética manual", () => {
   applyPeriod(D, "todo");
-  assert.equal(byName("Grabois, Juan").indice, 0);
-  assert.equal(byName("Grabois, Juan").counted, 9);
-  assert.equal(byName("Bornoroni, Gabriel").indice, 100);
-  assert.equal(byName("Andino, Cristian").indice, 22); // 2/9: disidencias AF en mercosur y glaciares
-  // 1/8 = 12,5 → 13: mercosur-ue es DIV para UxP y Chica no tiene registro ahí (no computa);
-  // su única disidencia AF es glaciares. (El informe de auditoría escribió "11 (1/9)" por error
-  // de prosa; ambas implementaciones computan 13.)
-  assert.equal(byName("Chica, Jorge").indice, 13);
+  assert.equal(byName("Grabois, Juan").indice, 0); // 0/11: UxP NEG en todas las computables
+  assert.equal(byName("Grabois, Juan").counted, 11);
+  assert.equal(byName("Bornoroni, Gabriel").indice, 100); // LLA 11/11
+  assert.equal(byName("Andino, Cristian").indice, 18); // 2/11: disidencias AF en mercosur y glaciares
+  // 1/10 = 10: mercosur-ue es DIV para UxP y Chica no tiene registro ahí (no computa);
+  // su única disidencia AF es glaciares.
+  assert.equal(byName("Chica, Jorge").indice, 10);
   const schiaretti = byName("Schiaretti, Juan");
-  assert.equal(schiaretti.counted, 3); // juró el 12-feb: computan penal-juvenil, mercosur y laboral
-  assert.equal(schiaretti.indice, 67);
+  assert.equal(schiaretti.counted, 4); // penal, mercosur, laboral + holdouts (PU=AF); rigi es DIV
+  assert.equal(schiaretti.indice, 75); // 3/4
   const matzkin = byName("Matzkin, Martín");
-  assert.equal(matzkin.indice, null); // asumió el 24-jun, sin votaciones computables
-  assert.equal(matzkin.counted, 0);
-  assert.equal(byName("Zago, Oscar").indice, 80); // 4/5: AUS no computa, ABS sí
-  assert.equal(byName("Falcone, Eduardo").indice, 80);
-  assert.equal(byName("Schneider, Darío").indice, 75); // 3/4 con abstención en la general
+  assert.equal(matzkin.counted, 2); // juró el 24-jun al inicio de la sesión: computan rigi y holdouts
+  assert.equal(matzkin.indice, 100); // línea LLA en ambas
+  assert.equal(byName("Zago, Oscar").indice, 86); // 6/7: AUS no computa, ABS sí; MID AF en las dos de junio
+  assert.equal(byName("Falcone, Eduardo").indice, 86);
+  assert.equal(byName("Schneider, Darío").indice, 83); // 5/6 con abstención en la general
+  assert.equal(byName("Lousteau, Martín").indice, 43); // 3/7: NEG documentado en el rigi pisa el DIV de PU
 
   const conIndice = D.deps.filter((d) => d.indice != null);
-  assert.equal(conIndice.length, 256); // todos menos Matzkin
+  assert.equal(conIndice.length, 257); // con junio, todas las bancas computan al menos una
   const media = Math.round(conIndice.reduce((a, d) => a + (d.indice as number), 0) / conIndice.length);
-  assert.equal(media, 55);
-  assert.equal(D.deps.filter((d) => d.hasExc).length, 15);
+  assert.equal(media, MEDIA_TODO);
+  assert.equal(D.deps.filter((d) => d.hasExc).length, 19); // 15 + Lousteau, Juliano, Arrieta, Capozzi
 });
 
-test("períodos parciales: medias y registros certificados", () => {
+test("períodos parciales: medias y registros", () => {
   applyPeriod(D, "ext");
   const ext = D.deps.filter((d) => d.indice != null);
-  assert.equal(Math.round(ext.reduce((a, d) => a + (d.indice as number), 0) / ext.length), 56);
-  assert.equal(D.deps.filter((d) => d.hasExc).length, 14); // Chica solo registra en glaciares (ordinarias)
+  assert.equal(Math.round(ext.reduce((a, d) => a + (d.indice as number), 0) / ext.length), 56); // sin cambios: junio es ordinarias
+  assert.equal(D.deps.filter((d) => d.hasExc).length, 14);
 
   applyPeriod(D, "ord");
   const ord = D.deps.filter((d) => d.indice != null);
-  assert.equal(Math.round(ord.reduce((a, d) => a + (d.indice as number), 0) / ord.length), 49);
-  assert.equal(D.deps.filter((d) => d.hasExc).length, 5);
+  assert.equal(Math.round(ord.reduce((a, d) => a + (d.indice as number), 0) / ord.length), MEDIA_ORD);
+  assert.equal(D.deps.filter((d) => d.hasExc).length, 9); // 5 de glaciares + 4 del rigi
 
   applyPeriod(D, "todo"); // restaurar
 });

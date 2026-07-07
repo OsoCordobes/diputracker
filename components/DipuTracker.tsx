@@ -817,7 +817,7 @@ export default function DipuTracker() {
         ali: {
           que: "El porcentaje de posiciones a favor del gobierno nacional sobre las votaciones que computan para cada banca: 100 acompañó siempre, 0 nunca. Es conducta, no afiliación.",
           como:
-            "Las votaciones del período seleccionado en el panel — hoy hasta nueve: extraordinarias dic–feb y ordinarias abr–may 2026. Cada banca toma la posición documentada de su bloque; los votos y ausencias individuales con registro la pisan. La ausencia no computa en el denominador; la abstención sí.",
+            "Las votaciones del período seleccionado en el panel — hoy hasta once: extraordinarias dic–feb y ordinarias abr–jun 2026. Cada banca toma la posición documentada de su bloque; los votos y ausencias individuales con registro la pisan. La ausencia no computa en el denominador; la abstención sí.",
           lim: "Es provisional a nivel bloque: sin voto nominal completo, una banca hereda la línea mayoritaria. Si el bloque votó dividido o sin línea documentada, esa votación no computa. Tampoco mide presencia ni trabajo en comisiones.",
         },
         dis: {
