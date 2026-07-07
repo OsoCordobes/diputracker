@@ -21,6 +21,13 @@ const DIP_FILE = path.join(DATA, "diputados.json");
 const CTX_FILE = path.join(DATA, "contexto.json");
 const SEED_DIR = path.join(ROOT, "data", "seed");
 
+// ISO → "DD-mmm-YYYY" (formato que cita el listado de interbloques, p. ej. 07-jul-2026)
+function ddMmmYyyy(iso) {
+  const M = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+  const [y, mo, d] = iso.split("-");
+  return `${d}-${M[parseInt(mo, 10) - 1]}-${y}`;
+}
+
 // ---------- main ----------
 const run = { script: "etl-nomina", cambios: [], errores: [], aborted: false };
 
@@ -161,18 +168,30 @@ try {
     throw new Error("los conteos por bloque no cierran contra el listado oficial — no se modifica nada: " + run.errores.join("; "));
   }
 
-  if (run.cambios.length) {
+  // Una verificación exitosa contra la fuente oficial es información aunque no haya cambios:
+  // deja registro de que la nómina sigue vigente. Se refresca la fecha de consulta (a lo sumo
+  // una vez por día, para no generar churn) además de cuando hay cambios reales.
+  const bumpFecha = dip.meta.consultado !== today;
+  if (run.cambios.length || bumpFecha) {
     dip.meta.consultado = today;
     dip.meta.fotosBase = FOTOS_BASE;
     dip.meta.fotosSufijo = FOTOS_SUFIJO;
+    // mantener alineada la fecha citada del listado de interbloques
+    if (ctx.interbloques?.fuente) {
+      ctx.interbloques.fuente = ctx.interbloques.fuente.replace(/consultado \d{2}-\w{3}-\d{4}/, "consultado " + ddMmmYyyy(today));
+    }
     writeJsonCompact(DIP_FILE, dip);
     writeJsonCompact(CTX_FILE, ctx);
     writeJsonCompact(path.join(SEED_DIR, "diputados.json"), dip);
     writeJsonCompact(path.join(SEED_DIR, "contexto.json"), ctx);
-    console.log(`✓ nómina actualizada — ${run.cambios.length} cambio(s):`);
-    run.cambios.forEach((c) => console.log("  · " + c));
+    if (run.cambios.length) {
+      console.log(`✓ nómina actualizada — ${run.cambios.length} cambio(s):`);
+      run.cambios.forEach((c) => console.log("  · " + c));
+    } else {
+      console.log("✓ nómina verificada vigente (sin cambios); fecha de consulta → " + today);
+    }
   } else {
-    console.log("✓ nómina sin cambios respecto de la fuente oficial");
+    console.log("✓ nómina sin cambios, ya verificada hoy");
   }
 } catch (e) {
   run.aborted = true;
