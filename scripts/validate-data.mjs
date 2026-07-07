@@ -69,6 +69,10 @@ for (const v of vot.votaciones) {
     check(byName.has(e.a), `${v.id}: excepción de diputado desconocido "${e.a}"`);
     check(["AF", "NEG", "ABS", "AUS"].includes(e.v), `${v.id}: excepción con voto inválido ${e.v}`);
     check(typeof e.nota === "string" && e.nota.length > 4, `${v.id}: excepción sin nota`);
+    // Un registro individual no puede ser anterior a la asunción del diputado:
+    // si esto falla, o la fecha "i" está mal o la excepción apunta a la persona equivocada.
+    const dep = byName.get(e.a);
+    if (dep?.i) check(dep.i <= v.fecha, `${v.id}: excepción de "${e.a}" pero asumió ${dep.i}, después de la votación (${v.fecha})`);
   }
   check(Array.isArray(v.fuentes) && v.fuentes.length >= 1, `${v.id}: sin fuentes citadas`);
   for (const f of v.fuentes) check(/^https:\/\/[^\s"]+$/.test(f.u || ""), `${v.id}: fuente sin URL https válida: ${f.u}`);

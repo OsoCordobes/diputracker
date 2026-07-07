@@ -41,7 +41,9 @@ nominales completas (dataset `votaciones_nominales` de datos.hcdn.gob.ar):
 - Los votos y ausencias individuales con registro documental **pisan** la línea de bloque.
 - La **ausencia** es categoría propia: no computa como apoyo ni rechazo.
   La **abstención** sí integra el denominador.
-- Los diputados que asumieron después de una votación no la computan.
+- Los diputados que asumieron después de una votación no la computan. Si la asunción
+  coincide con la fecha de la sesión, la votación computa (caso verificado contra el acta:
+  la jura ocurre al inicio de la sesión).
 
 ## Verificación
 

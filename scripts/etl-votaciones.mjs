@@ -20,9 +20,21 @@ const result = { script: "etl-votaciones", nuevasActas: 0, nominalDisponible: fa
 // ---- 1. actas nuevas en la plataforma de votaciones ----
 try {
   // La plataforma expone las votaciones por año en HTML; buscamos filas con fechas
-  // posteriores a la última votación cargada.
+  // posteriores a la última votación cargada. El host principal sufre caídas
+  // intermitentes, así que se intenta también el espejo institucional.
   const year = new Date().getFullYear();
-  const html = await fetchText(`https://votaciones.hcdn.gob.ar/votaciones/${year}`);
+  const HOSTS = [`https://votaciones.hcdn.gob.ar/votaciones/${year}`, `https://votaciones.diputados.gob.ar/votaciones/${year}`];
+  let html = null;
+  for (const url of HOSTS) {
+    try {
+      html = await fetchText(url, { retries: 2, timeoutMs: 25000 });
+      result.fuenteActas = url;
+      break;
+    } catch (e) {
+      result.errores.push(url + ": " + e.message);
+    }
+  }
+  if (html == null) throw new Error("ningún host de la plataforma de votaciones respondió");
   // fechas en formato dd/mm/yyyy dentro de la tabla de actas
   const fechas = [...html.matchAll(/(\d{2})\/(\d{2})\/(\d{4})/g)]
     .map((m) => `${m[3]}-${m[2]}-${m[1]}`)
