@@ -8,7 +8,7 @@ export default function HomeView({ V }: { V: DTVals }) {
       <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "48px 28px 8px" }}>
         <div style={{ display: "flex", alignItems: "flex-end", gap: "14px", flexWrap: "wrap" }}>
           <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "#B45309" }}>Cámara de Diputados de la Nación</div>
-          <div className="dt-num" style={{ fontSize: "11px", color: "#B0AB9F", letterSpacing: "0.04em" }}>nómina oficial · corte {V.nomConsultado}</div>
+          <div className="dt-num" style={{ fontSize: "11px", color: "#B0AB9F", letterSpacing: "0.04em" }}>nómina oficial · corte {V.corte}</div>
         </div>
         <h1 className="dt-h1" style={{ fontFamily: "var(--font-serif), Georgia, serif", fontWeight: 600, fontSize: "46px", lineHeight: 1.04, letterSpacing: "-0.02em", margin: "14px 0 0", maxWidth: "880px" }}>Índice de alineamiento con el gobierno nacional</h1>
         <p style={{ fontSize: "18px", lineHeight: 1.5, color: "#57534E", maxWidth: "720px", margin: "16px 0 0" }}>Las 257 bancas reales, coloreadas por su acompañamiento al oficialismo en las {V.nVotsWord} votaciones decisivas del período — extraordinarias dic–feb y ordinarias abr–may 2026. No es color de partido: es comportamiento registrado — hoy medido por la posición documentada de cada bloque, con las disidencias individuales que dejaron registro.</p>

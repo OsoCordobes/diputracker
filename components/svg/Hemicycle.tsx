@@ -26,7 +26,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen
     [g.m172, "172 · dos tercios"],
   ];
 
-  const hov = hoverId != null ? D.deps[hoverId] : null;
+  const hov = hoverId != null ? D.byId[hoverId] : null;
   const hovPos = hov ? (mode === "indice" ? hov.posI : hov.posB) : null;
   const tw = 250;
 

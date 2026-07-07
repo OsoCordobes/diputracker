@@ -28,3 +28,8 @@ next-env.d.ts
 
 # design prototype (referencia local, no se redistribuye)
 /design/
+
+.vercel
+
+# prototipo temporal para comparación visual
+/public/__proto/

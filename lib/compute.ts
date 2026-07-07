@@ -128,8 +128,12 @@ export function processData(dip: DipFile, vot: VotFile, ctx: CtxFile): DTData {
   power.forEach((p) => (pmap[p.k] = p));
   const maxRatio = Math.max(...power.map((p) => p.ratio));
 
+  const byId: Record<number, Dep> = {};
+  deps.forEach((d) => (byId[d.id] = d));
+
   const data: DTData = {
     deps,
+    byId,
     bloques: dip.bloques,
     blocMap,
     votaciones,

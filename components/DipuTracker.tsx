@@ -125,7 +125,7 @@ export default function DipuTracker() {
     const p = h.split("/");
     if (p[0] === "diputado" && p[1] != null) {
       const id = parseInt(p[1], 10);
-      if (D.deps[id]) {
+      if (D.byId[id]) {
         setS({ fichaId: id });
         return;
       }
@@ -152,7 +152,7 @@ export default function DipuTracker() {
         const ids = p[1]
           .split(",")
           .map((x) => parseInt(x, 10))
-          .filter((x) => D.deps[x] != null)
+          .filter((x) => D.byId[x] != null)
           .slice(0, 3);
         if (ids.length) st.compare = ids;
       }
@@ -551,7 +551,7 @@ export default function DipuTracker() {
       .map((d) => d!.id);
     const teaserIds = S.compare.length ? S.compare : teaserDefaults;
     out.compareTeaser = teaserIds.slice(0, 3).map((id) => {
-      const d = D.deps[id];
+      const d = D.byId[id];
       return {
         initials: iniOf(d),
         nombre: displayName(d.a),
@@ -697,7 +697,7 @@ export default function DipuTracker() {
       out.canAddCompare = S.compare.length > 0 && S.compare.length < 3;
       out.compareCols = "repeat(" + Math.min(3, S.compare.length + (S.compare.length < 3 ? 1 : 0)) + ", 1fr)";
       out.compareCards = S.compare.map((id) => {
-        const d = D.deps[id];
+        const d = D.byId[id];
         return {
           initials: iniOf(d),
           nombre: displayName(d.a),
@@ -1029,8 +1029,8 @@ export default function DipuTracker() {
     }
 
     // ---- FICHA ----
-    if (S.fichaId != null && D.deps[S.fichaId]) {
-      const d = D.deps[S.fichaId];
+    if (S.fichaId != null && D.byId[S.fichaId]) {
+      const d = D.byId[S.fichaId];
       out.fichaOpen = true;
       out.fNombre = displayName(d.a);
       out.fInitials = d.foto ? "" : initialsOf(d.a);

@@ -161,6 +161,7 @@ export interface PowerRow {
 
 export interface DTData {
   deps: Dep[];
+  byId: Record<number, Dep>;
   bloques: Bloque[];
   blocMap: Record<string, Bloque>;
   votaciones: Votacion[];

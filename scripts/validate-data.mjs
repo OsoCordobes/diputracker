@@ -37,7 +37,9 @@ for (const d of dip.diputados) {
   check(typeof d.f === "string" && d.f.length > 0, `foto inválida para ${d.a}`);
   if (d.i) check(/^\d{4}-\d{2}-\d{2}$/.test(d.i), `fecha de asunción inválida "${d.i}" para ${d.a}`);
 }
-for (let i = 0; i < 257; i++) check(ids.has(i), `falta id ${i} (los ids deben ser 0..256 contiguos)`);
+// Los ids son estables por persona (permalinks #/diputado/<id>): únicos y no negativos,
+// no necesariamente contiguos — las altas usan max+1 y las bajas dejan huecos.
+for (const id of ids) check(Number.isInteger(id) && id >= 0, `id inválido: ${id}`);
 check(dip.meta?.fotosBase?.startsWith("https://"), "meta.fotosBase inválido");
 check(/^\d{4}-\d{2}-\d{2}$/.test(dip.meta?.consultado || ""), "meta.consultado inválido");
 
