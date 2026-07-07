@@ -18,6 +18,7 @@ import {
 } from "@/lib/compute";
 import { shareCardDep, shareCardVot } from "@/lib/share-cards";
 import { downloadCsv } from "@/lib/csv";
+import { useFailedPhotos } from "@/lib/useFailedPhotos";
 import CountUp from "@/components/CountUp";
 import Hemicycle from "@/components/svg/Hemicycle";
 import MiniHemi from "@/components/svg/MiniHemi";
@@ -111,6 +112,14 @@ export default function DipuTracker() {
 
   const stateRef = useRef(S);
   stateRef.current = S;
+
+  // Fotos oficiales que no cargan → se muestran las iniciales en vez de un disco vacío.
+  const photoUrls = useMemo(
+    () => (Dref.current ? Dref.current.deps.map((d) => d.foto).filter((f): f is string => !!f) : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [S.loading]
+  );
+  const failedPhotos = useFailedPhotos(photoUrls);
 
   // ---------- helpers con estado ----------
   const setHash = useCallback((h: string) => {
@@ -293,7 +302,8 @@ export default function DipuTracker() {
   // ---------- cómputo de V (port de renderVals) ----------
   const V: DTVals = useMemo(() => {
     const num = (to: number) => <CountUp to={to} />;
-    const fotoCss = (d: DTData["deps"][number]) => (FOTOS_EN_LISTAS && d.foto ? `url('${d.foto}')` : "none");
+    const fotoCss = (d: DTData["deps"][number]) =>
+      FOTOS_EN_LISTAS && d.foto && !failedPhotos.has(d.foto) ? `url('${d.foto}')` : "none";
     const iniOf = (d: DTData["deps"][number]) => (fotoCss(d) === "none" ? initialsOf(d.a) : "");
     const swatch = (v: number | null) => (v == null ? "#C9C4BA" : ramp(v / 100, MODO_DALTONICO));
     const rampD = (t: number) => ramp(t, MODO_DALTONICO);
@@ -476,6 +486,7 @@ export default function DipuTracker() {
         mode={S.mode}
         hoverId={S.hoverId}
         daltonico={MODO_DALTONICO}
+        failedPhotos={failedPhotos}
         onHover={(id) => setS({ hoverId: id })}
         onOpen={(id) => openFicha(id)}
       />
@@ -1032,10 +1043,11 @@ export default function DipuTracker() {
     if (S.fichaId != null && D.byId[S.fichaId]) {
       const d = D.byId[S.fichaId];
       out.fichaOpen = true;
+      const fHasFoto = !!d.foto && !failedPhotos.has(d.foto);
       out.fNombre = displayName(d.a);
-      out.fInitials = d.foto ? "" : initialsOf(d.a);
+      out.fInitials = fHasFoto ? "" : initialsOf(d.a);
       out.fSwatch = swatch(d.indice);
-      out.fFotoCss = d.foto ? `url('${d.foto}')` : "none";
+      out.fFotoCss = fHasFoto ? `url('${d.foto}')` : "none";
       out.fBloc = d.blocName;
       out.fChip = d.chip;
       out.fDistrito = d.d;
@@ -1236,7 +1248,7 @@ export default function DipuTracker() {
 
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [S]);
+  }, [S, failedPhotos]);
 
   void bump;
 

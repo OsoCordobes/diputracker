@@ -8,11 +8,12 @@ interface Props {
   mode: Mode;
   hoverId: number | null;
   daltonico: boolean;
+  failedPhotos?: Set<string>;
   onHover: (id: number | null) => void;
   onOpen: (id: number) => void;
 }
 
-export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen }: Props) {
+export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, onHover, onOpen }: Props) {
   const g = D.geo;
   const svgRef = useRef<SVGSVGElement>(null);
   // Roving tabindex: una sola parada de Tab; las flechas recorren las bancas en orden
@@ -168,7 +169,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen
                 height: "40px",
                 borderRadius: "8px",
                 flexShrink: 0,
-                background: (hov.foto ? `url('${hov.foto}') center/cover, ` : "") + "#3A3733",
+                background: (hov.foto && !failedPhotos?.has(hov.foto) ? `url('${hov.foto}') center/cover, ` : "") + "#3A3733",
               }}
             />
             <div>
