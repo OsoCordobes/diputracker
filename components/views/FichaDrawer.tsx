@@ -2,23 +2,45 @@
 import { useEffect, useRef } from "react";
 import type { DTVals } from "@/components/DipuTracker";
 
+function trapTab(e: React.KeyboardEvent<HTMLElement>) {
+  if (e.key !== "Tab") return;
+  const focusables = [...e.currentTarget.querySelectorAll<HTMLElement>('button, input, a[href], [tabindex="0"]')];
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
 export default function FichaDrawer({ V }: { V: DTVals }) {
   const drawerRef = useRef<HTMLDivElement>(null);
+  // Opener capturado en el primer render, antes de que el drawer robe el foco.
+  const openerRef = useRef<HTMLElement | null>(typeof document !== "undefined" ? (document.activeElement as HTMLElement) : null);
   useEffect(() => {
     if (V.fichaOpen) drawerRef.current?.focus();
   }, [V.fichaOpen, V.fNombre]);
+  // Al cerrar el drawer, el foco vuelve al elemento que lo abrió (banca, fila, resultado).
+  useEffect(() => {
+    const opener = openerRef.current;
+    return () => opener?.focus?.();
+  }, []);
   return (
     <>
       {V.fichaOpen && (
         <>
           <div className="dt-fade" style={{ position: "fixed", inset: 0, zIndex: 80, background: "rgba(28,26,23,0.32)", backdropFilter: "blur(2px)" }} onClick={V.closeFicha}></div>
-          <div ref={drawerRef} role="dialog" aria-modal="true" aria-label={"Ficha del diputado " + V.fNombre} tabIndex={-1} className="dt-scroll dt-drawer" style={{ position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 81, width: "min(480px,100vw)", background: "#FAFAF9", borderLeft: "1px solid #E7E3DB", boxShadow: "-30px 0 60px -30px rgba(28,26,23,0.3)", overflowY: "auto", outline: "none" }}>
+          <div ref={drawerRef} onKeyDown={trapTab} role="dialog" aria-modal="true" aria-label={"Ficha del diputado " + V.fNombre} tabIndex={-1} className="dt-scroll dt-drawer" style={{ position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 81, width: "min(480px,100vw)", background: "#FAFAF9", borderLeft: "1px solid #E7E3DB", boxShadow: "-30px 0 60px -30px rgba(28,26,23,0.3)", overflowY: "auto", outline: "none" }}>
             <div style={{ position: "sticky", top: 0, background: "rgba(250,250,249,0.9)", backdropFilter: "blur(8px)", borderBottom: "1px solid #E7E3DB", padding: "14px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 2 }}>
               <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9A958A" }}>Ficha del diputado</span>
               <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                <button onClick={V.shareCard} title="Descargar tarjeta PNG lista para redes o una nota" className="dt-num" style={{ background: "#1C1A17", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#FAFAF9", fontSize: "11.5px" }}>{V.shareLabel}</button>
-                <button onClick={V.copyCita} title="Copiar resumen citable para una nota" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.citaLabel}</button>
-                <button onClick={V.copyLink} title="Copiar link directo" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.copyLabel}</button>
+                <button onClick={V.shareCard} aria-live="polite" title="Descargar tarjeta PNG lista para redes o una nota" className="dt-num" style={{ background: "#1C1A17", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#FAFAF9", fontSize: "11.5px" }}>{V.shareLabel}</button>
+                <button onClick={V.copyCita} aria-live="polite" title="Copiar resumen citable para una nota" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.citaLabel}</button>
+                <button onClick={V.copyLink} aria-live="polite" title="Copiar link directo" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.copyLabel}</button>
                 <button onClick={V.closeFicha} style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", width: "30px", height: "30px", cursor: "pointer", color: "#57534E", fontSize: "15px" }}>✕</button>
               </div>
             </div>

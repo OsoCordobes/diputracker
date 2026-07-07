@@ -24,7 +24,10 @@ a:hover{color:#8A3D06;}
 .dt-fade{animation:dtFadeIn .25s ease both;}
 .dt-pop{animation:dtPopIn .28s cubic-bezier(.22,.61,.36,1) both;}
 .dt-bar{transform-origin:left center;animation:dtBarIn .7s cubic-bezier(.22,.61,.36,1) both;}
-@media (prefers-reduced-motion:reduce){.dt-view,.dt-row,.dt-seatg,.dt-drawer,.dt-fade,.dt-pop,.dt-bar{animation:none;}}
+@media (prefers-reduced-motion:reduce){
+  .dt-view,.dt-row,.dt-seatg,.dt-drawer,.dt-fade,.dt-pop,.dt-bar{animation:none;}
+  .dt-seat,.dt-seatg,.dt-bar{transition:none !important;}
+}
 @media (max-width:1120px){.dt-searchlabel{display:none;}.dt-g4{grid-template-columns:repeat(2,1fr) !important;}}
 .dt-xwrap{overflow-x:auto;overflow-y:hidden;}
 .dt-minw{min-width:730px;}

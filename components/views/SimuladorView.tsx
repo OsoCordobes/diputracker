@@ -71,10 +71,10 @@ export default function SimuladorView({ V }: { V: DTVals }) {
                   <div className="dt-num" style={{ fontSize: "11px", color: "#A8A296" }}>{r.count}</div>
                 </div>
                 <div style={{ display: "flex", gap: "2px", background: "#F0EDE6", borderRadius: "7px", padding: "2px", flexShrink: 0 }}>
-                  <button onClick={r.setAf} title="A favor" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.afBg, color: r.afFg }}>AF</button>
-                  <button onClick={r.setNeg} title="En contra" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.negBg, color: r.negFg }}>NG</button>
-                  <button onClick={r.setAbs} title="Abstención" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.absBg, color: r.absFg }}>AB</button>
-                  <button onClick={r.setAus} title="Ausente" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.ausBg, color: r.ausFg }}>AU</button>
+                  <button onClick={r.setAf} aria-pressed={r.afBg !== "#FFFFFF"} title="A favor" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.afBg, color: r.afFg }}>AF</button>
+                  <button onClick={r.setNeg} aria-pressed={r.negBg !== "#FFFFFF"} title="En contra" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.negBg, color: r.negFg }}>NG</button>
+                  <button onClick={r.setAbs} aria-pressed={r.absBg !== "#FFFFFF"} title="Abstención" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.absBg, color: r.absFg }}>AB</button>
+                  <button onClick={r.setAus} aria-pressed={r.ausBg !== "#FFFFFF"} title="Ausente" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.ausBg, color: r.ausFg }}>AU</button>
                 </div>
               </div>
             ))}

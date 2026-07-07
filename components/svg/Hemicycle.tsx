@@ -1,4 +1,5 @@
 "use client";
+import { useMemo, useRef, useState } from "react";
 import type { DTData, Mode } from "@/lib/types";
 import { displayName, ramp, rampPower } from "@/lib/compute";
 
@@ -13,6 +14,27 @@ interface Props {
 
 export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen }: Props) {
   const g = D.geo;
+  const svgRef = useRef<SVGSVGElement>(null);
+  // Roving tabindex: una sola parada de Tab; las flechas recorren las bancas en orden
+  // visual (izquierda → derecha). Sin esto, cruzar el hemiciclo son 257 Tabs.
+  const [rovingId, setRovingId] = useState<number | null>(null);
+  const seatOrder = useMemo(
+    () =>
+      D.deps
+        .slice()
+        .sort((a, b) => (mode === "indice" ? b.posI.a - a.posI.a : b.posB.a - a.posB.a))
+        .map((d) => d.id),
+    [D, mode]
+  );
+  const activeSeatId = rovingId != null && D.byId[rovingId] ? rovingId : seatOrder[0];
+  const moveFocus = (fromId: number, delta: number | "home" | "end") => {
+    const i = seatOrder.indexOf(fromId);
+    const ni =
+      delta === "home" ? 0 : delta === "end" ? seatOrder.length - 1 : Math.min(seatOrder.length - 1, Math.max(0, i + delta));
+    const nid = seatOrder[ni];
+    setRovingId(nid);
+    (svgRef.current?.querySelector(`[data-seat-id="${nid}"]`) as SVGElement | null)?.focus();
+  };
   const interColor = (d: DTData["deps"][number]) => {
     if (d.b === "LLA") return "#7C3AED";
     if (d.b === "UXP") return "#38BDF8";
@@ -32,10 +54,11 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen
 
   return (
     <svg
+      ref={svgRef}
       viewBox={`0 0 ${g.W} ${g.H}`}
       style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}
       role="group"
-      aria-label="Hemiciclo de 257 bancas reales"
+      aria-label="Hemiciclo de 257 bancas reales. Con el foco en una banca, las flechas recorren el hemiciclo."
     >
       {markers.map((mm, i) => {
         const m = mm[0];
@@ -77,11 +100,12 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen
             {flag && <circle r={12.5} fill="none" stroke="#1C1A17" strokeWidth={1.5} opacity={0.85} />}
             <circle
               className="dt-seat"
+              data-seat-id={d.id}
               r={isHov ? 8.4 : flag ? 7.6 : 7}
               fill={fill}
               stroke={isHov || flag ? "#1C1A17" : "#FFFFFF"}
               strokeWidth={isHov ? 2 : flag ? 2.2 : 1}
-              tabIndex={0}
+              tabIndex={d.id === activeSeatId ? 0 : -1}
               role="button"
               aria-label={
                 "Diputado " + displayName(d.a) + ", bloque " + d.blocName + (d.indice != null ? ", índice " + d.indice : ", sin datos")
@@ -89,13 +113,28 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen
               style={{ cursor: "pointer", transition: "fill 700ms cubic-bezier(.4,0,.2,1), r 150ms, stroke 150ms", outline: "none" }}
               onMouseEnter={() => onHover(d.id)}
               onMouseLeave={() => onHover(null)}
-              onFocus={() => onHover(d.id)}
+              onFocus={() => {
+                onHover(d.id);
+                setRovingId(d.id);
+              }}
               onBlur={() => onHover(null)}
               onClick={() => onOpen(d.id)}
               onKeyDown={(ev) => {
                 if (ev.key === "Enter" || ev.key === " ") {
                   ev.preventDefault();
                   onOpen(d.id);
+                } else if (ev.key === "ArrowRight" || ev.key === "ArrowDown") {
+                  ev.preventDefault();
+                  moveFocus(d.id, 1);
+                } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") {
+                  ev.preventDefault();
+                  moveFocus(d.id, -1);
+                } else if (ev.key === "Home") {
+                  ev.preventDefault();
+                  moveFocus(d.id, "home");
+                } else if (ev.key === "End") {
+                  ev.preventDefault();
+                  moveFocus(d.id, "end");
                 }
               }}
             />

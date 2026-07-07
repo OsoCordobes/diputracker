@@ -1,11 +1,35 @@
 "use client";
+import { useEffect, useRef } from "react";
 import type { DTVals } from "@/components/DipuTracker";
 
+// Mantiene el Tab dentro del diálogo mientras está abierto.
+function trapTab(e: React.KeyboardEvent<HTMLElement>) {
+  if (e.key !== "Tab") return;
+  const focusables = [...e.currentTarget.querySelectorAll<HTMLElement>('button, input, a[href], [tabindex="0"]')];
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
 export default function SearchModal({ V }: { V: DTVals }) {
+  // El opener se captura en el primer render (antes de que el input haga autofocus) y
+  // recibe el foco de vuelta al cerrar: el botón de búsqueda, la banca, etc.
+  const openerRef = useRef<HTMLElement | null>(typeof document !== "undefined" ? (document.activeElement as HTMLElement) : null);
+  useEffect(() => {
+    const opener = openerRef.current;
+    return () => opener?.focus?.();
+  }, []);
   if (!V.searchOpen) return null;
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 90, background: "rgba(28,26,23,0.34)", backdropFilter: "blur(3px)", display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "80px 20px 20px" }} onClick={V.closeSearch}>
-      <div onClick={V.stop} role="dialog" aria-modal="true" aria-label="Buscar diputado" className="dt-pop" style={{ width: "min(620px,100%)", background: "#FAFAF9", border: "1px solid #E7E3DB", borderRadius: "16px", boxShadow: "0 30px 80px -30px rgba(28,26,23,0.5)", overflow: "hidden" }}>
+      <div onClick={V.stop} onKeyDown={trapTab} role="dialog" aria-modal="true" aria-label="Buscar diputado" className="dt-pop" style={{ width: "min(620px,100%)", background: "#FAFAF9", border: "1px solid #E7E3DB", borderRadius: "16px", boxShadow: "0 30px 80px -30px rgba(28,26,23,0.5)", overflow: "hidden" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px 20px", borderBottom: "1px solid #E7E3DB" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8A296" strokeWidth="2.2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
           <input autoFocus value={V.query} onChange={V.onQuery} placeholder="Buscar por nombre, distrito o bloque" style={{ border: "none", outline: "none", background: "none", fontFamily: "inherit", fontSize: "17px", width: "100%", color: "#1C1A17" }} />

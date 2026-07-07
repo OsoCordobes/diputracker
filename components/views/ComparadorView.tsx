@@ -50,7 +50,7 @@ export default function ComparadorView({ V }: { V: DTVals }) {
             )}
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "14px" }}>
-            <button onClick={V.copyCompareLink} title="Esta comparación tiene URL propia: copiala y compartila" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", padding: "8px 14px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.compareLinkLabel}</button>
+            <button onClick={V.copyCompareLink} aria-live="polite" title="Esta comparación tiene URL propia: copiala y compartila" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", padding: "8px 14px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.compareLinkLabel}</button>
           </div>
         </>
       )}

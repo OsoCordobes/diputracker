@@ -13,7 +13,7 @@ export default function VotacionView({ V }: { V: DTVals }) {
 
       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "22px" }}>
         {V.lawChips.map((l: any, i: number) => (
-          <button key={i} onClick={l.onPick} style={{ border: `1px solid ${l.border}`, background: l.bg, color: l.fg, borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: l.weight, cursor: "pointer", maxWidth: "240px", textAlign: "left", lineHeight: 1.25 }}>{l.corto}</button>
+          <button key={i} onClick={l.onPick} aria-pressed={l.bg === "#1C1A17"} style={{ border: `1px solid ${l.border}`, background: l.bg, color: l.fg, borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: l.weight, cursor: "pointer", maxWidth: "240px", textAlign: "left", lineHeight: 1.25 }}>{l.corto}</button>
         ))}
       </div>
 
@@ -35,7 +35,7 @@ export default function VotacionView({ V }: { V: DTVals }) {
               <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}><span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "repeating-linear-gradient(45deg,#E7E3DB 0 2px,#F7F5F0 2px 4px)", border: "1px solid #E2DDD2" }}></span>Sin posición asignable</span>
             </div>
             <div className="dt-num" style={{ textAlign: "center", fontSize: "11px", color: "#A8A296", marginTop: "10px" }}>{V.coverage}</div>
-            <button onClick={V.shareVotCard} className="hov-dark" style={{ marginTop: "14px", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", background: "#1C1A17", color: "#FAFAF9", border: "none", borderRadius: "9px", padding: "10px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: 600, cursor: "pointer", transition: "background .2s" }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M4 21h16"></path></svg>{V.shareVotLabel}</button>
+            <button onClick={V.shareVotCard} aria-live="polite" className="hov-dark" style={{ marginTop: "14px", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", background: "#1C1A17", color: "#FAFAF9", border: "none", borderRadius: "9px", padding: "10px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: 600, cursor: "pointer", transition: "background .2s" }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M4 21h16"></path></svg>{V.shareVotLabel}</button>
           </div>
 
           {V.hasExc && (
