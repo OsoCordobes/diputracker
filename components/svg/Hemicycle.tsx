@@ -34,7 +34,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, onHover, onOpen
     <svg
       viewBox={`0 0 ${g.W} ${g.H}`}
       style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}
-      role="img"
+      role="group"
       aria-label="Hemiciclo de 257 bancas reales"
     >
       {markers.map((mm, i) => {

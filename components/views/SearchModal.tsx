@@ -5,7 +5,7 @@ export default function SearchModal({ V }: { V: DTVals }) {
   if (!V.searchOpen) return null;
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 90, background: "rgba(28,26,23,0.34)", backdropFilter: "blur(3px)", display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "80px 20px 20px" }} onClick={V.closeSearch}>
-      <div onClick={V.stop} className="dt-pop" style={{ width: "min(620px,100%)", background: "#FAFAF9", border: "1px solid #E7E3DB", borderRadius: "16px", boxShadow: "0 30px 80px -30px rgba(28,26,23,0.5)", overflow: "hidden" }}>
+      <div onClick={V.stop} role="dialog" aria-modal="true" aria-label="Buscar diputado" className="dt-pop" style={{ width: "min(620px,100%)", background: "#FAFAF9", border: "1px solid #E7E3DB", borderRadius: "16px", boxShadow: "0 30px 80px -30px rgba(28,26,23,0.5)", overflow: "hidden" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px 20px", borderBottom: "1px solid #E7E3DB" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8A296" strokeWidth="2.2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
           <input autoFocus value={V.query} onChange={V.onQuery} placeholder="Buscar por nombre, distrito o bloque" style={{ border: "none", outline: "none", background: "none", fontFamily: "inherit", fontSize: "17px", width: "100%", color: "#1C1A17" }} />

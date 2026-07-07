@@ -57,7 +57,7 @@ export default function VotacionView({ V }: { V: DTVals }) {
             ))}
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "10px" }}>
               {V.selFuentes.map((f: any, i: number) => (
-                <a key={i} href={f.u} target="_blank" style={{ fontSize: "11.5px", color: "#B45309", textDecoration: "none", border: "1px solid #F0D9B8", background: "#FFF9F0", borderRadius: "20px", padding: "3px 11px" }}>{f.n} ↗</a>
+                <a key={i} href={f.u} target="_blank" rel="noopener noreferrer" style={{ fontSize: "11.5px", color: "#B45309", textDecoration: "none", border: "1px solid #F0D9B8", background: "#FFF9F0", borderRadius: "20px", padding: "3px 11px" }}>{f.n} ↗</a>
               ))}
             </div>
           </div>

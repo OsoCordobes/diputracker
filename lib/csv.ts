@@ -3,7 +3,13 @@ import type { DTData, Periodo } from "./types";
 import { PER_LABEL } from "./compute";
 
 export function downloadCsv(D: DTData, P: number[], periodo: Periodo, corte: string) {
-  const esc = (x: unknown) => '"' + String(x == null ? "" : x).replace(/"/g, '""') + '"';
+  // Además de escapar comillas, se neutralizan prefijos de fórmula (= + - @ \t) para que
+  // un nombre proveniente del HTML oficial nunca pueda ejecutarse al abrir el CSV en Excel.
+  const esc = (x: unknown) => {
+    let s = String(x == null ? "" : x);
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return '"' + s.replace(/"/g, '""') + '"';
+  };
   const rows: unknown[][] = [
     [
       "apellido_nombre",

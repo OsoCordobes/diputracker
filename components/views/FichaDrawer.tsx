@@ -1,13 +1,18 @@
 "use client";
+import { useEffect, useRef } from "react";
 import type { DTVals } from "@/components/DipuTracker";
 
 export default function FichaDrawer({ V }: { V: DTVals }) {
+  const drawerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (V.fichaOpen) drawerRef.current?.focus();
+  }, [V.fichaOpen, V.fNombre]);
   return (
     <>
       {V.fichaOpen && (
         <>
           <div className="dt-fade" style={{ position: "fixed", inset: 0, zIndex: 80, background: "rgba(28,26,23,0.32)", backdropFilter: "blur(2px)" }} onClick={V.closeFicha}></div>
-          <div className="dt-scroll dt-drawer" style={{ position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 81, width: "min(480px,100vw)", background: "#FAFAF9", borderLeft: "1px solid #E7E3DB", boxShadow: "-30px 0 60px -30px rgba(28,26,23,0.3)", overflowY: "auto" }}>
+          <div ref={drawerRef} role="dialog" aria-modal="true" aria-label={"Ficha del diputado " + V.fNombre} tabIndex={-1} className="dt-scroll dt-drawer" style={{ position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 81, width: "min(480px,100vw)", background: "#FAFAF9", borderLeft: "1px solid #E7E3DB", boxShadow: "-30px 0 60px -30px rgba(28,26,23,0.3)", overflowY: "auto", outline: "none" }}>
             <div style={{ position: "sticky", top: 0, background: "rgba(250,250,249,0.9)", backdropFilter: "blur(8px)", borderBottom: "1px solid #E7E3DB", padding: "14px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 2 }}>
               <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9A958A" }}>Ficha del diputado</span>
               <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
@@ -85,8 +90,8 @@ export default function FichaDrawer({ V }: { V: DTVals }) {
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "#EFEBE3", border: "1px solid #EFEBE3", borderRadius: "12px", overflow: "hidden", marginTop: "18px" }}>
-                <div style={{ background: "#FFFFFF", padding: "14px 16px" }}><div className="dt-num" style={{ fontSize: "17px", fontWeight: 500 }}>{V.fDieta}</div><div style={{ fontSize: "11.5px", color: "#9A958A", marginTop: "2px" }}>Dieta mensual <a href={V.dietaU} target="_blank" style={{ color: "#B45309", textDecoration: "none" }}>(fuente ↗)</a></div></div>
-                <div style={{ background: "#FFFFFF", padding: "14px 16px" }}><a href="https://www2.jus.gov.ar/consultaddjj/Home/Busqueda" target="_blank" style={{ fontSize: "14px", fontWeight: 600, color: "#B45309", textDecoration: "none" }}>Buscar su DDJJ ↗</a><div style={{ fontSize: "11.5px", color: "#9A958A", marginTop: "2px" }}>patrimonio declarado · búsqueda por apellido en la OA · <a href="#/patrimonio" style={{ color: "#B45309", textDecoration: "none" }}>cómo funciona</a></div></div>
+                <div style={{ background: "#FFFFFF", padding: "14px 16px" }}><div className="dt-num" style={{ fontSize: "17px", fontWeight: 500 }}>{V.fDieta}</div><div style={{ fontSize: "11.5px", color: "#9A958A", marginTop: "2px" }}>Dieta mensual <a href={V.dietaU} target="_blank" rel="noopener noreferrer" style={{ color: "#B45309", textDecoration: "none" }}>(fuente ↗)</a></div></div>
+                <div style={{ background: "#FFFFFF", padding: "14px 16px" }}><a href="https://www2.jus.gov.ar/consultaddjj/Home/Busqueda" target="_blank" rel="noopener noreferrer" style={{ fontSize: "14px", fontWeight: 600, color: "#B45309", textDecoration: "none" }}>Buscar su DDJJ ↗</a><div style={{ fontSize: "11.5px", color: "#9A958A", marginTop: "2px" }}>patrimonio declarado · búsqueda por apellido en la OA · <a href="#/patrimonio" style={{ color: "#B45309", textDecoration: "none" }}>cómo funciona</a></div></div>
               </div>
 
               <div style={{ marginTop: "18px" }}>

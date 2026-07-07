@@ -34,13 +34,13 @@ for (const d of dip.diputados) {
   check(blocKeys.has(d.b), `bloque desconocido "${d.b}" para ${d.a}`);
   check(DISTRITOS.has(d.d), `distrito desconocido "${d.d}" para ${d.a}`);
   check(/^\d{4}-\d{4}$/.test(d.m), `mandato inválido "${d.m}" para ${d.a}`);
-  check(typeof d.f === "string" && d.f.length > 0, `foto inválida para ${d.a}`);
+  check(d.f === "silueta" || /^[A-Za-z0-9_]+$/.test(d.f), `id de foto inválido para ${d.a}: "${d.f}"`);
   if (d.i) check(/^\d{4}-\d{2}-\d{2}$/.test(d.i), `fecha de asunción inválida "${d.i}" para ${d.a}`);
 }
 // Los ids son estables por persona (permalinks #/diputado/<id>): únicos y no negativos,
 // no necesariamente contiguos — las altas usan max+1 y las bajas dejan huecos.
 for (const id of ids) check(Number.isInteger(id) && id >= 0, `id inválido: ${id}`);
-check(dip.meta?.fotosBase?.startsWith("https://"), "meta.fotosBase inválido");
+check(dip.meta?.fotosBase === "https://parlamentaria.hcdn.gob.ar/image/", "meta.fotosBase no es el host oficial de fotos de la HCDN");
 check(/^\d{4}-\d{2}-\d{2}$/.test(dip.meta?.consultado || ""), "meta.consultado inválido");
 
 // ---- votaciones ----
@@ -71,7 +71,7 @@ for (const v of vot.votaciones) {
     check(typeof e.nota === "string" && e.nota.length > 4, `${v.id}: excepción sin nota`);
   }
   check(Array.isArray(v.fuentes) && v.fuentes.length >= 1, `${v.id}: sin fuentes citadas`);
-  for (const f of v.fuentes) check(f.u?.startsWith("http"), `${v.id}: fuente sin URL válida`);
+  for (const f of v.fuentes) check(/^https:\/\/[^\s"]+$/.test(f.u || ""), `${v.id}: fuente sin URL https válida: ${f.u}`);
 }
 // orden cronológico
 const fechas = vot.votaciones.map((v) => v.fecha);
@@ -88,8 +88,8 @@ for (const m of ctx.movimientos) {
   if (m.a) check(byName.has(m.a), `movimiento con diputado desconocido: ${m.a}`);
   check(typeof m.fuente === "string" && m.fuente.length > 2, `movimiento sin fuente: ${m.nota?.slice(0, 40)}`);
 }
-check(ctx.dieta?.u?.startsWith("http"), "dieta sin fuente URL");
-check(ctx.ddjj?.u?.startsWith("http"), "ddjj sin URL oficial");
+check(/^https:\/\//.test(ctx.dieta?.u || ""), "dieta sin fuente URL https");
+check(/^https:\/\//.test(ctx.ddjj?.u || ""), "ddjj sin URL oficial https");
 
 if (errors.length) {
   console.error(`✗ VALIDACIÓN FALLÓ — ${errors.length} problema(s):`);
