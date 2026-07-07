@@ -33,3 +33,9 @@ next-env.d.ts
 
 # prototipo temporal para comparación visual
 /public/__proto/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/.playwright/

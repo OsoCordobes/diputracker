@@ -11,7 +11,8 @@
     "etl:nomina": "node scripts/etl-nomina.mjs",
     "etl:votaciones": "node scripts/etl-votaciones.mjs",
     "validate": "node scripts/validate-data.mjs",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "next": "^15.3.0",
@@ -19,6 +20,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
