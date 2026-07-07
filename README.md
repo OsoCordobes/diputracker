@@ -99,6 +99,12 @@ npm run etl:nomina   # refresca la nómina desde las fuentes oficiales
 npm run etl:votaciones # chequea nuevas actas / dataset nominal
 ```
 
+## Documentación
+
+- [`docs/ESTADO.md`](docs/ESTADO.md) — estado del proyecto de un vistazo.
+- [`docs/DATASET.md`](docs/DATASET.md) — diccionario de datos y guía de la API.
+- [`docs/MANTENIMIENTO.md`](docs/MANTENIMIENTO.md) — runbook: cómo curar una votación nueva y operar el proyecto.
+
 ## Cómo citar
 
 > "DipuTracker, con datos oficiales de la HCDN (jul-2026)"
