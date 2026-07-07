@@ -35,6 +35,15 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Instalar navegador de Playwright
-        run: npx playwright install --with-deps chromium
+        # Reintento tolerante: el paso apt de --with-deps a veces choca con un mirror
+        # transitorio (p. ej. packages.microsoft.com InRelease inválido). El fallo es de
+        # infraestructura del runner, no del test; un par de reintentos lo resuelven.
+        run: |
+          for i in 1 2 3; do
+            npx playwright install --with-deps chromium && exit 0
+            echo "instalación falló (intento $i/3), reintentando en 15s…"; sleep 15
+          done
+          echo "fallback: instalar el navegador sin deps del SO (ubuntu-latest ya trae la mayoría)"
+          npx playwright install chromium
       - name: Smoke E2E (la app renderiza de verdad)
         run: npm run e2e
