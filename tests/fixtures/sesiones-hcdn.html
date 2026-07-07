@@ -1,0 +1,4616 @@
+<!DOCTYPE html>
+    <html lang="es">
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+<head>
+		   
+
+
+
+
+
+
+
+
+
+
+	
+
+	<meta charset="UTF-8">	
+	<meta name="description" content="Listado de sesiones por periodo" />			
+	<meta name="keywords" content="Sesiones" />	
+	<meta http-equiv="expires" content="0"/>
+	<meta name="robots" content="index, follow" />
+	<meta name="revisit-after" content="7 days" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	 
+        
+        
+            <title>Sesiones</title>
+        
+    
+
+	<meta name="version" content="3.0">
+    <!-- Se cambia la version va a forzar la recarga de la pagina ignorando la cache -->
+    <script>
+        (function() {
+            const currentVersion = document.querySelector('meta[name="version"]').getAttribute('content');
+            const storedVersion = localStorage.getItem('page_version');
+ 
+            if (storedVersion !== currentVersion) {
+                localStorage.setItem('page_version', currentVersion);
+                location.reload(true); // Forzar la recarga desde el servidor
+            }
+        })();
+    </script>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1Q0ZDMM4ZH"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'G-1Q0ZDMM4ZH');
+	</script>
+
+	<!-- Google Tag Manager 
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+														  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+								})(window,document,'script','dataLayer','GTM-NW7PCRN5');</script>
+	End Google Tag Manager -->
+	
+	<link rel="apple-touch-icon" sizes="180x180"  href="/export/system/modules/ar.gob.hcdn.base/resources/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/export/system/modules/ar.gob.hcdn.base/resources/img/favicon-32x32.png" >
+	<link rel="icon" type="image/png" sizes="16x16"  href="/export/system/modules/ar.gob.hcdn.base/resources/img/favicon-16x16.png" >
+	<link rel="icon" type="image/png" sizes="16x16"  href="/system/modules/ar.gob.hcdn.base/resources/img/favicon.ico" >
+	
+	
+	<link href='/export/system/modules/ar.gob.hcdn.base/resources/vendor/css/roboto.min.css' rel='stylesheet' type='text/css'>	
+
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/vendor/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/vendor/fontawesome6/css/fontawesome.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/vendor/fontawesome6/css/brands.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/vendor/fontawesome6/css/solid.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/vendor/slick/css/slick.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/vendor/slick/css/slick-theme.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/vendor/css/video-js.css" rel="stylesheet" />
+	
+	
+<link rel="stylesheet" href="/export/system/modules/ar.gob.hcdn.grid/resources/css/sgGrid.css" type="text/css" />
+	
+	
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/accordion.css" rel="stylesheet"> 
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/var.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/body.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/header.css" rel="stylesheet">
+    <link href="/export/system/modules/ar.gob.hcdn.base/resources/css/nav-tpl.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/footer.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/nav-left.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/buttons.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/tables.css" rel="stylesheet">
+	<link href="/export/system/modules/ar.gob.hcdn.base/resources/css/paginador.css" rel="stylesheet">
+	<!--<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/jquery-3.2.1.min.js"></script>-->
+	
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/jquery-3.7.1.min.js"></script>
+
+	
+	
+	
+	
+	
+	 <!-- Videojs -->
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/vjs/ie8/videojs-ie8.min.js"></script>
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/vjs/video.min.js"></script>
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/vjs/lang/es.js"></script>
+	  <!-- Videojs: Flash fallback -->
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/vjs/plugins/videojs-flash.min.js"></script>
+	  <!-- Videojs: Hls -->
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/vjs/plugins/videojs-hls.min.js"></script>
+	  <!-- Videojs: Dash -->
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/vjs/plugins/dash.all.min.js"></script>
+	<script src="/export/system/modules/ar.gob.hcdn.base/resources/vendor/js/vjs/plugins/videojs-dash.min.js"></script>
+	
+	<script src="/system/modules/ar.gob.hcdn.base/resources/js/hcdn.js"></script>
+	
+	
+</head>
+
+		<body>
+
+				<!-- Google Tag Manager (noscript) 
+				<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NW7PCRN5"
+								  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+				 End Google Tag Manager (noscript) -->	
+			
+				<div  class="header-hcdn">
+	<header>
+		<div class="row">
+			 <div class="col text-center">
+				<a href="/index.html">
+					<img class="logoHCDN" src="/export/system/modules/ar.gob.hcdn.base/resources/img/logo-hcdn-vertical.jpg" alt="Honorable Cámara  de Diputados 				de la Nación Argentina">					  
+				</a>
+			</div>
+		</div>					      
+	</header>	
+
+	<nav class="navbar navbar-expand-lg nav-top"  id="navTop">
+		<div class="wrapper-nav-top">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-			expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0" id="nav1">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Institucional
+						</a>
+						<ul class="dropdown-menu" id="subnav1">
+							<li><a class="dropdown-item" href="/institucional/autoridades/index.html">Autoridades</a></li>
+							<li><a class="dropdown-item" href="/institucional/presentacion.html">La cámara</a></li>
+							<li><a class="dropdown-item" href="https://www.congreso.gob.ar/constitucionNacional.php" target="_blank">Constitución Nacional</a></li>
+							<li><a class="dropdown-item" href="https://www.congreso.gob.ar/constitucionesProvinciales.php"  target="_blank">Constituciones Provinciales</a></li>
+							<li><a class="dropdown-item" href="/diplomacia_parlamentaria/index.html">Diplomacia Parlamentaria</a></li>
+							<li><a class="dropdown-item" href="/institucional/cuidadoPatrimonio/index.html">Cuidado del Patrimonio</a></li>
+							<li><a class="dropdown-item" href="/prensa/index.html">Prensa</a></li>
+
+						</ul>
+					</li>
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="/institucional/transparencia/index.html">Transparencia</a></li>
+					
+
+
+
+
+
+
+
+
+		 <li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/diputados/">Diputados</a>
+        </li>
+		<li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/proyectos/">Proyectos</a>
+        </li>
+		<li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/comisiones/">Comisiones</a>
+        </li>
+		<li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/sesiones/">Sesiones</a>
+        </li>
+
+</ul>
+
+				 <ul class="navbar-nav" id="nav2">
+				<li class="nav-item"><a class="nav-link" aria-current="page" aria-label="facebook.com" href="https://www.facebook.com/Diputados.Argentina" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+				<li class="nav-item"><a class="nav-link" aria-current="page" aria-label="twiter.com" href="https://twitter.com/DiputadosAR" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+				<li class="nav-item"><a class="nav-link" aria-current="page" aria-label="youtube.com" href="https://www.youtube.com/channel/UC5KfW9_wv4tqbIPgY8tMG-w/featured" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>
+				<li class="nav-item"><a class="nav-link" aria-current="page" aria-label="instagram.com" href="https://www.instagram.com/diputados.argentina" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+				<li class="nav-item"><a class="nav-link" aria-current="page" aria-label="tiktok.com" href="https://www.tiktok.com/@diputadosargentina" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li> 
+				
+				<!--
+				<li class="nav-item dropdown buscador">
+					<a class="nav-link dropdown-toggle" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Buscador
+				  	</a>
+				  	<ul class="dropdown-menu">
+						<li>
+							<form  method="post" class="d-flex" role="search">
+								<div class="input-group busquedaPortada">
+								  <input class="form-control me-2"  aria-label="Buscar" title="buscador" type="text" placeholder="Buscar..." name="query">
+								  <span>
+								        <button type="submit"  action="/results.html"> <i class="fa-solid fa-magnifying-glass"></i></button>
+								  </span>
+								</div>
+								
+								<input type="hidden" name="index" value="Buscador - Todo el Sitio">
+							</form>
+						</li>
+					</ul>
+				</li>
+				-->
+			</ul>
+
+</div>
+		</div>
+	</nav>
+</div>
+
+<script>
+	window.addEventListener('scroll', function() {
+		let navbar = document.querySelector('.header-hcdn');
+		let scrollPosition = window.scrollY || window.pageYOffset;
+
+		if (scrollPosition > 50) {
+			navbar.classList.add('fixed');
+		} else {
+			navbar.classList.remove('fixed');
+		}
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar d-none d-md-block " id="navParlamentaria">
+      <ul class="nav container-xl justify-content-center">
+       	
+
+
+
+
+
+
+
+
+		 <li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/diputados/">Diputados</a>
+        </li>
+		<li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/proyectos/">Proyectos</a>
+        </li>
+		<li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/comisiones/">Comisiones</a>
+        </li>
+		<li class="nav-item li-parl col-2">
+          <a class="nav-link" href="/sesiones/">Sesiones</a>
+        </li>
+
+
+      </ul>
+</nav>
+
+
+<main class="container-fluid
+				
+				
+				">
+				<section class="container-xl mt-4 breadcrumb">
+						<a href="/index.html" style="margin-right: 5px;">Home » </a>
+						Sesiones  » 
+
+							</section>
+					<section class="container-xl" id="nav_left">
+						<div class="nav">
+									<div class="nav-item">
+										
+										<ul class="SagaMenu-listado nivel-1 " data-nivel="1" data-bloque-numero="4" style="">
+												</ul>
+									</div>
+									
+									<div class="dropdown btnSesiones">
+											<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+												Informacion general
+											</button>
+											
+											<ul class="dropdown-menu">
+													<a class="dropdown-item" href="/secparl/dclp/plan_de_labor/plt.html">Plan de Labor - Temario</a>
+													<a class="dropdown-item" href="/secparl/dtaqui/diario-de-sesiones.html">Diario de Sesiones (Versiones Taquigráficas)</a>
+													<a class="dropdown-item" href="https://www2.hcdn.gob.ar/secparl/dclp/asistencia.html">Estadística de Asistencia</a>
+													<a class="dropdown-item" href="https://votaciones.hcdn.gob.ar/">Votaciones</a>
+													<a class="dropdown-item" href="/secparl/dsecretaria/bat/index.html">Boletín de Asuntos Tratados</a>																										
+											</ul>
+									</div>
+									</div>
+								<a class="nav-link" onclick="window.history.back();" href="#"></a>
+							</section>
+					<section id="main"class="container-xl">
+
+						<div  id="contenedorPpal" class="grid_container" ><div class="sgsection-main_container complex visibilidad-always anchoCompleto" id="sgsection-254be091-3f7f-11ee-9638-005056894ace" data-cssid="sgsection-254be091-3f7f-11ee-9638-005056894ace" >
+
+                <div class="sgsection-main_wrapper" id="sgsection-254be091-3f7f-11ee-9638-005056894ace">
+
+                <div class="sgsection-columna col_xxs-12  visibilidadColumna-always"  data-cssid="sgsection-254be091-3f7f-11ee-9638-005056894ace-sgsectioncolumn_n1">
+
+                        <div class="cms_container-section" ><div class="sgrow-main_container visibilidadFila-always" id="sgrow_n51ceae90-3f7f-11ee-9638-005056894ace" data-cssid="sgrow_n51ceae90-3f7f-11ee-9638-005056894ace" >
+
+                <div class="sgrow-wrapper">
+
+                <div class="sgrow-columna col_xxs-12  visibilidadColumnaFila-always"  data-cssid="51ceae90-3f7f-11ee-9638-005056894ace-sgrowcolumn_n1" data-recursos-tipo="sesiones, hcdncontent">
+
+                        <div class="cms_container-row" ><section>
+<h1>Sesiones</h1>
+<div>
+
+
+<br>
+
+
+<script src="jquery-accessible-accordion-aria.js"></script><script>$(function () {$('.js-accordion').accordion({ multiselectable: false });});</script><div id="periodos" class="js-accordion" ><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 144 (01/03/2026 - 28/02/2027)
+</button><ul>
+<li>
+<a href="sesion.html?id=3583&numVid=0&reunion=5&periodo=144" target=_blank>5° Reunión - 4° Sesión Ordinaria Especial - (24/06/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3582&numVid=0&reunion=4&periodo=144" target=_blank>4° Reunión - Expresiones en Minoría - (23/06/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3581&numVid=0&reunion=null&periodo=144" target=_blank> Sesión Ordinaria Especial CITADA - NO EFECTUADA - (20/05/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3580&numVid=0&reunion=3&periodo=144" target=_blank>3° Reunión - 3° Sesión Ordinaria Especial - (20/05/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3578&numVid=0&reunion=2&periodo=144" target=_blank>2° Reunión - 2° Sesión Ordinaria Informativa - (29/04/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3577&numVid=0&reunion=1&periodo=144" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (08/04/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3576&numVid=0&reunion=1&periodo=144" target=_blank>Asamblea Legislativa - (01/03/2026)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 143 (01/03/2025 - 28/02/2026)
+</button><ul>
+<li>
+<a href="sesion.html?id=3575&numVid=0&reunion=22&periodo=143" target=_blank>22° Reunión - 3° Sesión Extraordinaria Especial - (19/02/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3574&numVid=0&reunion=21&periodo=143" target=_blank>21° Reunión - 2° Sesión Extraordinaria Especial - (12/02/2026)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3573&numVid=0&reunion=20&periodo=143" target=_blank>20° Reunión - 1° Sesión Extraordinaria Especial - (17/12/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3571&numVid=0&reunion=19&periodo=143" target=_blank>19° Reunión - Sesión Preparatoria - (03/12/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3572&numVid=0&reunion=18&periodo=143" target=_blank>18° Reunión - 14° Sesión Especial - (03/12/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3570&numVid=0&reunion=17&periodo=143" target=_blank>17° Reunión - Informativa - Art. 71 CN CITADA - FRACASADA - (15/10/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3569&numVid=0&reunion=16&periodo=143" target=_blank>16° Reunión - Informativa - Art. 71 CN CITADA - FRACASADA - (15/10/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3568&numVid=0&reunion=15&periodo=143" target=_blank>15° Reunión - 13° Sesión Ordinaria Especial - (08/10/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3567&numVid=0&reunion=14&periodo=143" target=_blank>14° Reunión - 12° Sesión Ordinaria Especial - (17/09/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3566&numVid=0&reunion=13&periodo=143" target=_blank>13° Reunión - 11° Sesión Ordinaria Informativa - (27/08/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3565&numVid=0&reunion=12&periodo=143" target=_blank>12° Reunión - 10° Sesión Ordinaria Especial - (20/08/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3564&numVid=0&reunion=11&periodo=143" target=_blank>11° Reunión - 9° Sesión Ordinaria Especial - (06/08/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3563&numVid=0&reunion=null&periodo=143" target=_blank> Sesión Ordinaria Especial CITADA - NO EFECTUADA - (02/07/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3562&numVid=0&reunion=10&periodo=143" target=_blank>10° Reunión - 8° Sesión Ordinaria Especial - (02/07/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3561&numVid=0&reunion=9&periodo=143" target=_blank>9° Reunión - 7° Sesión Ordinaria Especial - (04/06/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3560&numVid=0&reunion=8&periodo=143" target=_blank>8° Reunión - Expresiones en Minoría - (21/05/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3558&numVid=0&reunion=7&periodo=143" target=_blank>7° Reunión - 6° Sesión Ordinaria Informativa - Art. 71 CN - (29/04/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3559&numVid=0&reunion=6&periodo=143" target=_blank>6° Reunión - 5° Sesión Ordinaria Especial de Homenaje - (22/04/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3557&numVid=0&reunion=5&periodo=143" target=_blank>5° Reunión - 4° Sesión Ordinaria Informativa - (16/04/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3556&numVid=0&reunion=4&periodo=143" target=_blank>4° Reunión - 3° Sesión Ordinaria Especial - (08/04/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3555&numVid=0&reunion=3&periodo=143" target=_blank>3° Reunión - Expresiones en Minoría - (19/03/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3554&numVid=0&reunion=2&periodo=143" target=_blank>2° Reunión - 2° Sesión Ordinaria Especial - (19/03/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3553&numVid=0&reunion=1&periodo=143" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (12/03/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3551&numVid=0&reunion=1&periodo=143" target=_blank>Asamblea Legislativa - (01/03/2025)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 142 (01/03/2024 - 28/02/2025)
+</button><ul>
+<li>
+<a href="sesion.html?id=3550&numVid=0&reunion=22&periodo=142" target=_blank>22° Reunión - 2° Sesión Extraordinaria Especial - (12/02/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3549&numVid=0&reunion=21&periodo=142" target=_blank>21° Reunión - 1° Sesión Extraordinaria Especial - (06/02/2025)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3548&numVid=0&reunion=20&periodo=142" target=_blank>20° Reunión - Sesión Preparatoria - (04/12/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3547&numVid=0&reunion=19&periodo=142" target=_blank>19° Reunión - Expresiones en Minoría - (28/11/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3546&numVid=0&reunion=18&periodo=142" target=_blank>18° Reunión - 11° Sesión Ordinaria Especial - (27/11/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3544&numVid=0&reunion=17&periodo=142" target=_blank>17° Reunión - Expresiones en Minoría - (26/11/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3545&numVid=0&reunion=16&periodo=142" target=_blank>16° Reunión - Expresiones en Minoría - (26/11/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3543&numVid=0&reunion=15&periodo=142" target=_blank>15° Reunión - Expresiones en Minoría - (20/11/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3542&numVid=0&reunion=14&periodo=142" target=_blank>14° Reunión - Expresiones en Minoría - (12/11/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3537&numVid=0&reunion=13&periodo=142" target=_blank>13° Reunión - 10° Sesión Ordinaria Especial - (09/10/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3535&numVid=0&reunion=12&periodo=142" target=_blank>12° Reunión - 9° Sesión Ordinaria Especial - (01/10/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3534&numVid=0&reunion=null&periodo=142" target=_blank>  Presentación  de Presupuesto - (15/09/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3533&numVid=0&reunion=11&periodo=142" target=_blank>11° Reunión - 8° Sesión Ordinaria Especial - (11/09/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3532&numVid=0&reunion=10&periodo=142" target=_blank>10° Reunión - 7° Sesión Ordinaria Informativa - (04/09/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3531&numVid=0&reunion=9&periodo=142" target=_blank>9° Reunión - 6° Sesión Ordinaria Especial - (21/08/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3529&numVid=0&reunion=null&periodo=142" target=_blank> Sesión Ordinaria Especial CITADA - NO EFECTUADA - (15/08/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3528&numVid=0&reunion=null&periodo=142" target=_blank> Sesión Ordinaria Especial CITADA - NO EFECTUADA - (14/08/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3527&numVid=0&reunion=8&periodo=142" target=_blank>8° Reunión - 5° Sesión Ordinaria Especial - (14/08/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3525&numVid=0&reunion=7&periodo=142" target=_blank>7° Reunión - Expresiones en Minoría - (07/08/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3523&numVid=0&reunion=6&periodo=142" target=_blank>6° Reunión - 4° Sesión Ordinaria Especial - (27/06/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3522&numVid=0&reunion=null&periodo=142" target=_blank> Sesión Ordinaria Especial CITADA-NO EFECTUADA - (04/06/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3521&numVid=0&reunion=5&periodo=142" target=_blank>5° Reunión - 3° Sesión Ordinaria Especial - (04/06/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3520&numVid=0&reunion=4&periodo=142" target=_blank>4° Reunión - 2° Sesión Ordinaria Especial - (21/05/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3519&numVid=0&reunion=3&periodo=142" target=_blank>3° Reunión - 1° Sesión Ordinaria Especial - (29/04/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3518&numVid=0&reunion=2&periodo=142" target=_blank>2° Reunión - Expresiones en Minoría - (24/04/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3517&numVid=0&reunion=1&periodo=142" target=_blank>1° Reunión - Expresiones en Minoría - (13/03/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3516&numVid=0&reunion=1&periodo=142" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2024)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 141 (01/03/2023 - 29/02/2024)
+</button><ul>
+<li>
+<a href="sesion.html?id=3515&numVid=0&reunion=15&periodo=141" target=_blank>15° Reunión - 1° Sesión Extraordinaria Especial CONTINUACIÓN - (06/02/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3514&numVid=0&reunion=14&periodo=141" target=_blank>14° Reunión - 1° Sesión Extraordinaria Especial CONTINUACIÓN - (02/02/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3513&numVid=0&reunion=13&periodo=141" target=_blank>13° Reunión - 1° Sesión Extraordinaria Especial CONTINUACIÓN - (01/02/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3512&numVid=0&reunion=12&periodo=141" target=_blank>12° Reunión - 1° Sesión Extraordinaria Especial - (31/01/2024)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3504&numVid=0&reunion=4&periodo=141" target=_blank>Asamblea Legislativa - (10/12/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3501&numVid=0&reunion=11&periodo=141" target=_blank>11° Reunión - Sesión Preparatoria - (07/12/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3503&numVid=0&reunion=10&periodo=141" target=_blank>10° Reunión - 1° Sesión Ordinaria De Prórroga Especial - (07/12/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3502&numVid=0&reunion=3&periodo=141" target=_blank>Asamblea Legislativa - (29/11/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3499&numVid=0&reunion=2&periodo=141" target=_blank>Asamblea Legislativa - (02/11/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3498&numVid=0&reunion=9&periodo=141" target=_blank>9° Reunión - 9° Sesión Ordinaria Especial - (02/11/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3497&numVid=0&reunion=8&periodo=141" target=_blank>8° Reunión - 8° Sesión Ordinaria Especial - (10/10/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=3496&numVid=0&reunion=7&periodo=141" target=_blank>7° Reunión - 7° Sesión Ordinaria Especial - (19/09/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1415&numVid=0&reunion=6&periodo=141" target=_blank>6° Reunión - 6° Sesión Ordinaria Especial - (23/08/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1414&numVid=0&reunion=5&periodo=141" target=_blank>5° Reunión - 5° Sesión Ordinaria Especial - (05/07/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1413&numVid=0&reunion=4&periodo=141" target=_blank>4° Reunión - 4° Sesión Ordinaria Informativa - (13/06/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=707&numVid=0&reunion=3&periodo=141" target=_blank>3° Reunión - 3° Sesión Ordinaria Especial - (19/04/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=705&numVid=0&reunion=2&periodo=141" target=_blank>2° Reunión - 2° Sesión Ordinaria Informativa - (29/03/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=704&numVid=0&reunion=1&periodo=141" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (28/03/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=712&numVid=0&reunion=1&periodo=141" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2023)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 140 (01/03/2022 - 28/02/2023)
+</button><ul>
+<li>
+<a href="sesion.html?id=703&numVid=0&reunion=17&periodo=140" target=_blank>17° Reunión - 1° Sesión Extraordinaria Especial - (28/02/2023)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=711&numVid=0&reunion=16&periodo=140" target=_blank>16° Reunión - Expresiones en Minoría - (21/12/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=701&numVid=0&reunion=15&periodo=140" target=_blank>15° Reunión - 1° Sesión Ordinaria De Prórroga Especial - (01/12/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=700&numVid=0&reunion=14&periodo=140" target=_blank>14° Reunión - Expresiones en Minoría - (01/12/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=699&numVid=0&reunion=13&periodo=140" target=_blank>13° Reunión - 13° Sesión Ordinaria Especial - (24/11/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=697&numVid=0&reunion=12&periodo=140" target=_blank>12° Reunión - 12° Sesión Ordinaria Especial - (09/11/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=478&numVid=0&reunion=11&periodo=140" target=_blank>11° Reunión - 11° Sesión Ordinaria Especial - (25/10/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=477&numVid=0&reunion=10&periodo=140" target=_blank>10° Reunión - 10° Sesión Ordinaria Especial - (12/10/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=475&numVid=0&reunion=9&periodo=140" target=_blank>9° Reunión - 9° Sesión Ordinaria Especial - (15/09/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=474&numVid=0&reunion=8&periodo=140" target=_blank>8° Reunión - 8° Sesión Ordinaria Informativa - (14/09/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=471&numVid=0&reunion=7&periodo=140" target=_blank>7° Reunión - 7° Sesión Ordinaria Especial - (03/09/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=469&numVid=0&reunion=6&periodo=140" target=_blank>6° Reunión - 6° Sesión Ordinaria Especial - (02/08/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=468&numVid=0&reunion=5&periodo=140" target=_blank>5° Reunión - 5° Sesión Ordinaria Especial - (05/07/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=466&numVid=0&reunion=4&periodo=140" target=_blank>4° Reunión - 4° Sesión Ordinaria Especial - (15/06/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=465&numVid=0&reunion=3&periodo=140" target=_blank>3° Reunión - 3° Sesión Ordinaria Especial - (08/06/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=384&numVid=0&reunion=2&periodo=140" target=_blank>2° Reunión - 2° Sesión Ordinaria Especial - (05/05/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=460&numVid=0&reunion=1&periodo=140" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (10/03/2022)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=450&numVid=0&reunion=1&periodo=140" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2022)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 139 (01/03/2021 - 28/02/2022)
+</button><ul>
+<li>
+<a href="sesion.html?id=448&numVid=0&reunion=12&periodo=139" target=_blank>12° Reunión - 2° Sesión Ordinaria De Prórroga Especial - (21/12/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=458&numVid=0&reunion=11&periodo=139" target=_blank>11° Reunión - 1° Sesión Ordinaria De Prórroga Especial - (16/12/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=445&numVid=0&reunion=10&periodo=139" target=_blank>10° Reunión - Sesión De Prórroga Preparatoria - (07/12/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=443&numVid=0&reunion=9&periodo=139" target=_blank>9° Reunión - 6° Sesión Ordinaria Especial - (26/10/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=441&numVid=0&reunion=8&periodo=139" target=_blank>8° Reunión - Expresiones en Minoría - (05/10/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=439&numVid=0&reunion=7&periodo=139" target=_blank>7° Reunión - 5° Sesión Ordinaria Informativa (Remota) - (08/07/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=456&numVid=0&reunion=6&periodo=139" target=_blank>6° Reunión - 4° Sesión Ordinaria Especial (Remota) - (01/07/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=455&numVid=0&reunion=5&periodo=139" target=_blank>5° Reunión - 3° Sesión Ordinaria Especial (Remota) - (10/06/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=434&numVid=0&reunion=4&periodo=139" target=_blank>4° Reunión - 2° Sesión Ordinaria Especial (Remota) - (19/05/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=454&numVid=0&reunion=3&periodo=139" target=_blank>3° Reunión - 1° Sesión Ordinaria Especial (Remota) - (27/03/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=431&numVid=0&reunion=2&periodo=139" target=_blank>2° Reunión - Expresiones en Minoría - (25/03/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=430&numVid=0&reunion=1&periodo=139" target=_blank>1° Reunión - Expresiones en Minoría - (25/03/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=428&numVid=0&reunion=1&periodo=139" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2021)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 138 (01/03/2020 - 28/02/2021)
+</button><ul>
+<li>
+<a href="sesion.html?id=425&numVid=0&reunion=19&periodo=138" target=_blank>19° Reunión - 1° Sesión Extraordinaria Especial (Remota) - (11/02/2021)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=422&numVid=0&reunion=18&periodo=138" target=_blank>18° Reunión - 2° Sesión Ordinaria De Prórroga Especial (Remota) - (29/12/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=421&numVid=0&reunion=17&periodo=138" target=_blank>17° Reunión - 1° Sesión Ordinaria De Prórroga Especial (Remota) - (10/12/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=452&numVid=0&reunion=16&periodo=138" target=_blank>16° Reunión - Sesión De Prórroga Preparatoria - (09/12/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1411&numVid=0&reunion=15&periodo=138" target=_blank>15° Reunión - 13° Sesión Ordinaria Especial (Remota) - (30/11/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=416&numVid=0&reunion=14&periodo=138" target=_blank>14° Reunión - 12° Sesión Ordinaria Especial (Remota) - (17/11/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1409&numVid=0&reunion=13&periodo=138" target=_blank>13° Reunión - 11° Sesión Ordinaria Especial (Remota) - (11/11/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1408&numVid=0&reunion=12&periodo=138" target=_blank>12° Reunión - Expresiones en Minoría - (11/11/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=412&numVid=0&reunion=11&periodo=138" target=_blank>11° Reunión - 10° Sesión Ordinaria Especial (Remota) - (28/10/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1405&numVid=0&reunion=10&periodo=138" target=_blank>10° Reunión - 9° Sesión Ordinaria Especial (Remota) - (07/10/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1404&numVid=0&reunion=9&periodo=138" target=_blank>9° Reunión - 8° Sesión Ordinaria Especial (Remota) - (24/09/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1403&numVid=0&reunion=8&periodo=138" target=_blank>8° Reunión - 7° Sesión Ordinaria Especial (Remota) - (01/09/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=405&numVid=0&reunion=7&periodo=138" target=_blank>7° Reunión - 6° Sesión Ordinaria Especial (Remota) - (04/08/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=404&numVid=0&reunion=6&periodo=138" target=_blank>6° Reunión - 5° Sesión Ordinaria Especial (Remota) - (31/07/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1399&numVid=0&reunion=5&periodo=138" target=_blank>5° Reunión - 4° Sesión Ordinaria Informativa (Remota) - (30/07/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=402&numVid=0&reunion=4&periodo=138" target=_blank>4° Reunión - 3° Sesión Ordinaria Especial (Remota) - (25/06/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1401&numVid=0&reunion=3&periodo=138" target=_blank>3° Reunión - Expresiones en Minoría - (28/05/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1208&numVid=0&reunion=2&periodo=138" target=_blank>2° Reunión - 2° Sesión Ordinaria Especial (Remota) - (21/05/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1207&numVid=0&reunion=1&periodo=138" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial (Remota) - (13/05/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1205&numVid=0&reunion=1&periodo=138" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2020)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 137 (01/03/2019 - 29/02/2020)
+</button><ul>
+<li>
+<a href="sesion.html?id=1412&numVid=0&reunion=15&periodo=137" target=_blank>15° Reunión - 5° Sesión Extraordinaria Especial - (27/02/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1203&numVid=0&reunion=14&periodo=137" target=_blank>14° Reunión - 4° Sesión Extraordinaria Especial Informativa - (12/02/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1199&numVid=0&reunion=13&periodo=137" target=_blank>13° Reunión - 3° Sesión Extraordinaria Especial - (29/01/2020)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1197&numVid=0&reunion=12&periodo=137" target=_blank>12° Reunión - 2° Sesión Extraordinaria Especial - (19/12/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1196&numVid=0&reunion=11&periodo=137" target=_blank>11° Reunión - 1° Sesión Extraordinaria Especial - (19/12/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1189&numVid=0&reunion=3&periodo=137" target=_blank>Asamblea Legislativa - (10/12/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1195&numVid=0&reunion=10&periodo=137" target=_blank>10° Reunión - Sesión Extraordinaria Preparatoria - (04/12/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1188&numVid=0&reunion=9&periodo=137" target=_blank>9° Reunión - Expresiones en Minoría - (21/11/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1187&numVid=0&reunion=8&periodo=137" target=_blank>8° Reunión - 8° Sesión Ordinaria Especial - (20/11/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1192&numVid=0&reunion=7&periodo=137" target=_blank>7° Reunión - 7° Sesión Ordinaria Especial - (13/11/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1186&numVid=0&reunion=2&periodo=137" target=_blank>Asamblea Legislativa - Proclamación Presidente y Vice - (13/11/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1184&numVid=0&reunion=6&periodo=137" target=_blank>6° Reunión - 6° Sesión Ordinaria Especial - (12/09/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1182&numVid=0&reunion=5&periodo=137" target=_blank>5° Reunión - 5° Sesión Ordinaria Especial - (26/06/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1180&numVid=0&reunion=4&periodo=137" target=_blank>4° Reunión - 4° Sesión Ordinaria Especial - (15/05/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1396&numVid=0&reunion=3&periodo=137" target=_blank>3° Reunión - 3° Sesión Ordinaria  - (24/04/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1179&numVid=0&reunion=2&periodo=137" target=_blank>2° Reunión - 2° Sesión Ordinaria Informativa - (10/04/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1394&numVid=0&reunion=1&periodo=137" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (04/04/2019)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1177&numVid=0&reunion=1&periodo=137" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2019)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 136 (01/03/2018 - 28/02/2019)
+</button><ul>
+<li>
+<a href="sesion.html?id=1390&numVid=0&reunion=19&periodo=136" target=_blank>19° Reunión - 3° Sesión Extraordinaria Especial - (18/12/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1176&numVid=0&reunion=18&periodo=136" target=_blank>18° Reunión - 2° Sesión Extraordinaria Especial - (06/12/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1388&numVid=0&reunion=17&periodo=136" target=_blank>17° Reunión - 1° Sesión Extraordinaria Especial - (05/12/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=400&numVid=0&reunion=16&periodo=136" target=_blank>16° Reunión - Sesión Extraordinaria Preparatoria - (05/12/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=398&numVid=0&reunion=15&periodo=136" target=_blank>15° Reunión - 11° Sesión Ordinaria Especial - (24/10/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=397&numVid=0&reunion=14&periodo=136" target=_blank>14° Reunión - 10° Sesión Ordinaria Informativa - (03/10/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=396&numVid=0&reunion=13&periodo=136" target=_blank>13° Reunión - Expresiones en Minoría - (13/09/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1384&numVid=0&reunion=12&periodo=136" target=_blank>12° Reunión - Expresiones en Minoría - (07/08/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1383&numVid=0&reunion=11&periodo=136" target=_blank>11° Reunión - 9° Sesión Ordinaria Informativa - (01/08/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=389&numVid=0&reunion=10&periodo=136" target=_blank>10° Reunión - 8° Sesión Ordinaria Especial - (04/07/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=387&numVid=0&reunion=9&periodo=136" target=_blank>9° Reunión - Expresiones en Minoría - (19/06/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=386&numVid=0&reunion=8&periodo=136" target=_blank>8° Reunión - 7° Sesión Ordinaria  - (13/06/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=203&numVid=0&reunion=7&periodo=136" target=_blank>7° Reunión - 6° Sesión Ordinaria Informativa - (23/05/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1382&numVid=0&reunion=6&periodo=136" target=_blank>6° Reunión - 5° Sesión Ordinaria Especial - (09/05/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1381&numVid=0&reunion=5&periodo=136" target=_blank>5° Reunión - 4° Sesión Ordinaria Especial - (09/05/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=202&numVid=0&reunion=4&periodo=136" target=_blank>4° Reunión - 3° Sesión Ordinaria Especial - (25/04/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=201&numVid=0&reunion=3&periodo=136" target=_blank>3° Reunión - Expresiones en Minoría - (18/04/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=200&numVid=0&reunion=2&periodo=136" target=_blank>2° Reunión - 2° Sesión Ordinaria  - (21/03/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=198&numVid=0&reunion=1&periodo=136" target=_blank>1° Reunión - 1° Sesión Ordinaria Informativa - (14/03/2018)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=199&numVid=0&reunion=1&periodo=136" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2018)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 135 (01/03/2017 - 28/02/2018)
+</button><ul>
+<li>
+<a href="sesion.html?id=197&numVid=0&reunion=26&periodo=135" target=_blank>26° Reunión - 3° Sesión Extraordinaria Especial - (21/12/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1374&numVid=0&reunion=25&periodo=135" target=_blank>25° Reunión - 2° Sesión Extraordinaria Especial cont. - (19/12/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=196&numVid=0&reunion=24&periodo=135" target=_blank>24° Reunión - 2° Sesión Extraordinaria Especial - (18/12/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=195&numVid=0&reunion=23&periodo=135" target=_blank>23° Reunión - 1° Sesión Extraordinaria Especial - (14/12/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=193&numVid=0&reunion=22&periodo=135" target=_blank>22° Reunión - Sesión Ordinaria Preparatoria - (06/12/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1175&numVid=0&reunion=21&periodo=135" target=_blank>21° Reunión - Expresiones en Minoría - (30/11/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1378&numVid=0&reunion=20&periodo=135" target=_blank>20° Reunión - 14° Sesión Ordinaria Especial - (22/11/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=192&numVid=0&reunion=19&periodo=135" target=_blank>19° Reunión - 13° Sesión Ordinaria Especial - (08/11/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=191&numVid=0&reunion=18&periodo=135" target=_blank>18° Reunión - 12° Sesión Ordinaria Especial - (25/10/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=190&numVid=0&reunion=17&periodo=135" target=_blank>17° Reunión - 11° Sesión Ordinaria Informativa - (04/10/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=187&numVid=0&reunion=16&periodo=135" target=_blank>16° Reunión - 10° Sesión Ordinaria Especial - (13/09/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=720&numVid=0&reunion=15&periodo=135" target=_blank>15° Reunión - 9° Sesión Ordinaria Informativa - (30/08/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=717&numVid=0&reunion=14&periodo=135" target=_blank>14° Reunión - 8° Sesión Ordinaria Especial - (26/07/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1367&numVid=0&reunion=13&periodo=135" target=_blank>13° Reunión - Expresiones en Minoría - (12/07/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=716&numVid=0&reunion=12&periodo=135" target=_blank>12° Reunión - 7° Sesión Ordinaria Especial cont. - (05/07/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=715&numVid=0&reunion=11&periodo=135" target=_blank>11° Reunión - 7° Sesión Ordinaria Especial - (28/06/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=714&numVid=0&reunion=10&periodo=135" target=_blank>10° Reunión - 6° Sesión Ordinaria Especial - (21/06/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1366&numVid=0&reunion=9&periodo=135" target=_blank>9° Reunión - Expresiones en Minoría - (13/06/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1365&numVid=0&reunion=8&periodo=135" target=_blank>8° Reunión - 5° Sesión Ordinaria Informativa - (31/05/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1035&numVid=0&reunion=7&periodo=135" target=_blank>7° Reunión - Expresiones en Minoría - (10/05/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1034&numVid=0&reunion=6&periodo=135" target=_blank>6° Reunión - 4° Sesión Ordinaria Especial - (09/05/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1142&numVid=0&reunion=5&periodo=135" target=_blank>5° Reunión - 3° Sesión Ordinaria Especial - (26/04/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1123&numVid=0&reunion=4&periodo=135" target=_blank>4° Reunión - 2° Sesión Ordinaria Especial - (19/04/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1122&numVid=0&reunion=3&periodo=135" target=_blank>3° Reunión - Expresiones en Minoría - (19/04/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1121&numVid=0&reunion=2&periodo=135" target=_blank>2° Reunión - Expresiones en Minoría - (18/04/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1000&numVid=0&reunion=1&periodo=135" target=_blank>1° Reunión - 1° Sesión Ordinaria Informativa - (22/03/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1033&numVid=0&reunion=1&periodo=135" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2017)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 134 (01/03/2016 - 28/02/2017)
+</button><ul>
+<li>
+<a href="sesion.html?id=999&numVid=0&reunion=25&periodo=134" target=_blank>25° Reunión - 3° Sesión Extraordinaria Especial - (15/02/2017)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1059&numVid=0&reunion=24&periodo=134" target=_blank>24° Reunión - 2° Sesión Extraordinaria Especial - (22/12/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1063&numVid=0&reunion=23&periodo=134" target=_blank>23° Reunión - 1° Sesión Extraordinaria Especial - (06/12/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1055&numVid=0&reunion=22&periodo=134" target=_blank>22° Reunión - Sesión Ordinaria Preparatoria - (30/11/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1054&numVid=0&reunion=21&periodo=134" target=_blank>21° Reunión - 20° Sesión Ordinaria Especial - (23/11/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1052&numVid=0&reunion=20&periodo=134" target=_blank>20° Reunión - 19° Sesión Ordinaria Especial - (16/11/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1027&numVid=0&reunion=19&periodo=134" target=_blank>19° Reunión - 18° Sesión Ordinaria Especial - (02/11/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1061&numVid=0&reunion=18&periodo=134" target=_blank>18° Reunión - 17° Sesión Ordinaria Especial - (26/10/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1060&numVid=0&reunion=17&periodo=134" target=_blank>17° Reunión - 16° Sesión Ordinaria Especial - (19/10/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1051&numVid=0&reunion=16&periodo=134" target=_blank>16° Reunión - 15° Sesión Ordinaria Especial de Homenaje - (05/10/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1026&numVid=0&reunion=15&periodo=134" target=_blank>15° Reunión - 14° Sesión Ordinaria  - (28/09/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1048&numVid=0&reunion=14&periodo=134" target=_blank>14° Reunión - 13° Sesión Ordinaria  - (14/09/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=998&numVid=0&reunion=13&periodo=134" target=_blank>13° Reunión - 12° Sesión Ordinaria Especial - (01/09/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1046&numVid=0&reunion=12&periodo=134" target=_blank>12° Reunión - 11° Sesión Ordinaria Informativa - (24/08/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=990&numVid=0&reunion=11&periodo=134" target=_blank>11° Reunión - 10° Sesión Ordinaria Especial - (10/08/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1044&numVid=0&reunion=10&periodo=134" target=_blank>10° Reunión - 9° Sesión Ordinaria Especial - (30/06/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1043&numVid=0&reunion=9&periodo=134" target=_blank>9° Reunión - 8° Sesión Ordinaria Especial - (23/06/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=986&numVid=0&reunion=8&periodo=134" target=_blank>8° Reunión - 7° Sesión Ordinaria Especial - (15/06/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1119&numVid=0&reunion=7&periodo=134" target=_blank>7° Reunión - 6° Sesión Ordinaria  - (01/06/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=976&numVid=0&reunion=6&periodo=134" target=_blank>6° Reunión - 5° Sesión Ordinaria  - (18/05/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=975&numVid=0&reunion=5&periodo=134" target=_blank>5° Reunión - Expresiones en Minoría - (12/05/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=997&numVid=0&reunion=4&periodo=134" target=_blank>4° Reunión - 4° Sesión Ordinaria Informativa - (27/04/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1116&numVid=0&reunion=3&periodo=134" target=_blank>3° Reunión - 3° Sesión Ordinaria Especial - (06/04/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=996&numVid=0&reunion=2&periodo=134" target=_blank>2° Reunión - 2° Sesión Ordinaria Especial - (15/03/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1115&numVid=0&reunion=1&periodo=134" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (01/03/2016)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1032&numVid=0&reunion=1&periodo=134" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2016)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 133 (01/03/2015 - 29/02/2016)
+</button><ul>
+<li>
+<a href="sesion.html?id=969&numVid=0&reunion=4&periodo=133" target=_blank>Asamblea Legislativa - Juramento Presidente Macri - (10/12/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=985&numVid=0&reunion=10&periodo=133" target=_blank>10° Reunión - Sesión Extraordinaria Preparatoria - (04/12/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=964&numVid=0&reunion=3&periodo=133" target=_blank>Asamblea Legislativa - Resultado elecciones - (04/12/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1114&numVid=0&reunion=9&periodo=133" target=_blank>9° Reunión - 9° Sesión Ordinaria Especial - (26/11/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1113&numVid=0&reunion=8&periodo=133" target=_blank>8° Reunión - 8° Sesión Ordinaria Especial - (04/11/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=451&numVid=0&reunion=2&periodo=133" target=_blank>Asamblea Legislativa - Resultado elecciones - (04/11/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1111&numVid=0&reunion=7&periodo=133" target=_blank>7° Reunión - 7° Sesión Ordinaria Especial - (07/10/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=962&numVid=0&reunion=6&periodo=133" target=_blank>6° Reunión - 6° Sesión Ordinaria Especial - (23/09/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=960&numVid=0&reunion=5&periodo=133" target=_blank>5° Reunión - 5° Sesión Ordinaria  - (26/08/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=957&numVid=0&reunion=4&periodo=133" target=_blank>4° Reunión - 4° Sesión Ordinaria Especial - (15/07/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=955&numVid=0&reunion=3&periodo=133" target=_blank>3° Reunión - 3° Sesión Ordinaria Especial - (10/06/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=953&numVid=0&reunion=2&periodo=133" target=_blank>2° Reunión - 2° Sesión Ordinaria  - (29/04/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=951&numVid=0&reunion=1&periodo=133" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (08/04/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=950&numVid=0&reunion=1&periodo=133" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2015)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 132 (01/03/2014 - 28/02/2015)
+</button><ul>
+<li>
+<a href="sesion.html?id=947&numVid=0&reunion=27&periodo=132" target=_blank>27° Reunión - 1° Sesión Extraordinaria Especial - (25/02/2015)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=944&numVid=0&reunion=26&periodo=132" target=_blank>26° Reunión - 2° Sesión Ordinaria De Prórroga Especial - (16/12/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=942&numVid=0&reunion=25&periodo=132" target=_blank>25° Reunión - 1° Sesión Ordinaria De Prórroga Especial - (04/12/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=941&numVid=0&reunion=24&periodo=132" target=_blank>24° Reunión - Sesión De Prórroga Preparatoria - (03/12/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=939&numVid=0&reunion=23&periodo=132" target=_blank>23° Reunión - 18° Sesión Ordinaria  - (19/11/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1025&numVid=0&reunion=22&periodo=132" target=_blank>22° Reunión - 17° Sesión Ordinaria Especial - (12/11/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1024&numVid=0&reunion=21&periodo=132" target=_blank>21° Reunión - 16° Sesión Ordinaria Informativa - (05/11/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1107&numVid=0&reunion=20&periodo=132" target=_blank>20° Reunión - 15° Sesión Ordinaria Especial - (29/10/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=935&numVid=0&reunion=19&periodo=132" target=_blank>19° Reunión - 14° Sesión Ordinaria Especial - (22/10/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=934&numVid=0&reunion=18&periodo=132" target=_blank>18° Reunión - 13° Sesión Ordinaria Especial - (08/10/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1105&numVid=0&reunion=17&periodo=132" target=_blank>17° Reunión - 12° Sesión Ordinaria Especial - (01/10/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=932&numVid=0&reunion=16&periodo=132" target=_blank>16° Reunión - 11° Sesión Ordinaria Especial - (17/09/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=931&numVid=0&reunion=15&periodo=132" target=_blank>15° Reunión - 10° Sesión Ordinaria Especial - (10/09/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=929&numVid=0&reunion=14&periodo=132" target=_blank>14° Reunión - 9° Sesión Ordinaria Informativa - (03/09/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=928&numVid=0&reunion=13&periodo=132" target=_blank>13° Reunión - 8° Sesión Ordinaria  - (27/08/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1103&numVid=0&reunion=12&periodo=132" target=_blank>12° Reunión - 7° Sesión Ordinaria Especial - (06/08/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=925&numVid=0&reunion=11&periodo=132" target=_blank>11° Reunión - 6° Sesión Ordinaria  - (02/07/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=924&numVid=0&reunion=10&periodo=132" target=_blank>10° Reunión - 5° Sesión Ordinaria Informativa - (04/06/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=923&numVid=0&reunion=9&periodo=132" target=_blank>9° Reunión - Expresiones en Minoría - (03/06/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=922&numVid=0&reunion=8&periodo=132" target=_blank>8° Reunión - Expresiones en Minoría - (03/06/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=921&numVid=0&reunion=7&periodo=132" target=_blank>7° Reunión - Expresiones en Minoría - (21/05/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1098&numVid=0&reunion=6&periodo=132" target=_blank>6° Reunión - 4° Sesión Ordinaria Especial - (21/05/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=920&numVid=0&reunion=5&periodo=132" target=_blank>5° Reunión - Expresiones en Minoría - (14/05/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1097&numVid=0&reunion=4&periodo=132" target=_blank>4° Reunión - 3° Sesión Ordinaria Especial - (14/05/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1100&numVid=0&reunion=2&periodo=132" target=_blank>Asamblea Legislativa - Pte. Bachelet Chile - (12/05/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=912&numVid=0&reunion=3&periodo=132" target=_blank>3° Reunión - Expresiones en Minoría - (07/05/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=911&numVid=0&reunion=2&periodo=132" target=_blank>2° Reunión - 2° Sesión Ordinaria Especial - (23/04/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1095&numVid=0&reunion=1&periodo=132" target=_blank>1° Reunión - 1° Sesión Ordinaria Informativa - (03/04/2014)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1094&numVid=0&reunion=1&periodo=132" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2014)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 131 (01/03/2013 - 28/02/2014)
+</button><ul>
+<li>
+<a href="sesion.html?id=906&numVid=0&reunion=13&periodo=131" target=_blank>13° Reunión - 11° Sesión De Prórroga Preparatoria - (04/12/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=904&numVid=0&reunion=12&periodo=131" target=_blank>12° Reunión - 10° Sesión Ordinaria Especial - (27/11/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=901&numVid=0&reunion=11&periodo=131" target=_blank>11° Reunión - 9° Sesión Ordinaria Especial - (25/09/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=900&numVid=0&reunion=10&periodo=131" target=_blank>10° Reunión - 8° Sesión Ordinaria  - (11/09/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=899&numVid=0&reunion=9&periodo=131" target=_blank>9° Reunión - 7° Sesión Ordinaria Especial - (04/09/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=897&numVid=0&reunion=8&periodo=131" target=_blank>8° Reunión - 6° Sesión Ordinaria  - (03/07/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1088&numVid=0&reunion=7&periodo=131" target=_blank>7° Reunión - Expresiones en Minoría - (06/06/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=893&numVid=0&reunion=6&periodo=131" target=_blank>6° Reunión - 5° Sesión Ordinaria  - (05/06/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=892&numVid=0&reunion=5&periodo=131" target=_blank>5° Reunión - 4° Sesión Ordinaria Especial - (29/05/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=894&numVid=0&reunion=4&periodo=131" target=_blank>4° Reunión - Expresiones en Minoría - (28/05/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=888&numVid=0&reunion=3&periodo=131" target=_blank>3° Reunión - 3° Sesión Ordinaria Especial - (24/04/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=887&numVid=0&reunion=2&periodo=131" target=_blank>2° Reunión - 2° Sesión Ordinaria Especial - (17/04/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=883&numVid=0&reunion=1&periodo=131" target=_blank>1° Reunión - 1° Sesión Ordinaria  - (13/03/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1093&numVid=0&reunion=1&periodo=131" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2013)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 130 (01/03/2012 - 28/02/2013)
+</button><ul>
+<li>
+<a href="sesion.html?id=917&numVid=0&reunion=24&periodo=130" target=_blank>24° Reunión - 2° Sesión Extraordinaria Especial - (27/02/2013)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=879&numVid=0&reunion=23&periodo=130" target=_blank>23° Reunión - 1° Sesión Extraordinaria Especial - (19/12/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1084&numVid=0&reunion=22&periodo=130" target=_blank>22° Reunión - 19° Sesión Extraordinaria Preparatoria - (05/12/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1083&numVid=0&reunion=21&periodo=130" target=_blank>21° Reunión - 18° Sesión Ordinaria  - (28/11/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=952&numVid=0&reunion=2&periodo=130" target=_blank>Asamblea Legislativa - Pte. Peru Ollanta H. - (27/11/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=877&numVid=0&reunion=20&periodo=130" target=_blank>20° Reunión - 17° Sesión Ordinaria  - (21/11/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=875&numVid=0&reunion=19&periodo=130" target=_blank>19° Reunión - 16° Sesión Ordinaria Especial - (14/11/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1080&numVid=0&reunion=18&periodo=130" target=_blank>18° Reunión - 15° Sesión Ordinaria Especial - (31/10/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1079&numVid=0&reunion=17&periodo=130" target=_blank>17° Reunión - 14° Sesión Ordinaria Especial - (24/10/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=872&numVid=0&reunion=16&periodo=130" target=_blank>16° Reunión - 13° Sesión Ordinaria Especial - (10/10/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=870&numVid=0&reunion=15&periodo=130" target=_blank>15° Reunión - 12° Sesión Ordinaria Especial - (22/08/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1076&numVid=0&reunion=14&periodo=130" target=_blank>14° Reunión - 11° Sesión Ordinaria  - (08/08/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1075&numVid=0&reunion=13&periodo=130" target=_blank>13° Reunión - 10° Sesión Ordinaria Especial - (04/07/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=866&numVid=0&reunion=12&periodo=130" target=_blank>12° Reunión - 9° Sesión Ordinaria Informativa - (04/07/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1074&numVid=0&reunion=11&periodo=130" target=_blank>11° Reunión - 8° Sesión Ordinaria  - (27/06/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1073&numVid=0&reunion=10&periodo=130" target=_blank>10° Reunión - Expresiones en Minoría - (27/06/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=864&numVid=0&reunion=9&periodo=130" target=_blank>9° Reunión - 7° Sesión Ordinaria Especial - (25/06/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=863&numVid=0&reunion=8&periodo=130" target=_blank>8° Reunión - 6° Sesión Ordinaria  - (23/05/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=861&numVid=0&reunion=7&periodo=130" target=_blank>7° Reunión - 5° Sesión Ordinaria Especial cont. - (03/05/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1070&numVid=0&reunion=6&periodo=130" target=_blank>6° Reunión - 5° Sesión Ordinaria Especial - (02/05/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=860&numVid=0&reunion=5&periodo=130" target=_blank>5° Reunión - 4° Sesión Ordinaria  - (18/04/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=859&numVid=0&reunion=4&periodo=130" target=_blank>4° Reunión - 3° Sesión Ordinaria Especial - (28/03/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=858&numVid=0&reunion=3&periodo=130" target=_blank>3° Reunión - Ordinaria Conjunta - (24/03/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=857&numVid=0&reunion=2&periodo=130" target=_blank>2° Reunión - 2° Sesión Ordinaria  - (21/03/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1067&numVid=0&reunion=1&periodo=130" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (14/03/2012)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=855&numVid=0&reunion=1&periodo=130" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2012)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 129 (01/03/2011 - 28/02/2012)
+</button><ul>
+<li>
+<a href="sesion.html?id=846&numVid=0&reunion=13&periodo=129" target=_blank>13° Reunión - 1° Sesión Extraordinaria Especial cont. - (15/12/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1065&numVid=0&reunion=12&periodo=129" target=_blank>12° Reunión - 1° Sesión Extraordinaria Especial - (14/12/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1064&numVid=0&reunion=3&periodo=129" target=_blank>Asamblea Legislativa - Juramento Presidente Fernandez de Kirchner - (10/12/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=853&numVid=0&reunion=11&periodo=129" target=_blank>11° Reunión - Sesión Extraordinaria Preparatoria - (06/12/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=854&numVid=0&reunion=2&periodo=129" target=_blank>Asamblea Legislativa - Proclamación Presidente y Vice - (01/12/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=845&numVid=0&reunion=10&periodo=129" target=_blank>10° Reunión - 7° Sesión Ordinaria Especial - (30/11/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=841&numVid=0&reunion=9&periodo=129" target=_blank>9° Reunión - Expresiones en Minoría - (05/10/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=840&numVid=0&reunion=8&periodo=129" target=_blank>8° Reunión - 6° Sesión Ordinaria Especial - (07/09/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=838&numVid=0&reunion=7&periodo=129" target=_blank>7° Reunión - 5° Sesión Ordinaria Especial - (03/08/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=834&numVid=0&reunion=6&periodo=129" target=_blank>6° Reunión - 4° Sesión Ordinaria Especial - (01/06/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=832&numVid=0&reunion=5&periodo=129" target=_blank>5° Reunión - 3° Sesión Ordinaria Especial - (04/05/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=831&numVid=0&reunion=4&periodo=129" target=_blank>4° Reunión - Expresiones en Minoría - (04/05/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=829&numVid=0&reunion=3&periodo=129" target=_blank>3° Reunión - 2° Sesión Ordinaria  - (13/04/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=851&numVid=0&reunion=2&periodo=129" target=_blank>2° Reunión - Expresiones en Minoría - (30/03/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=850&numVid=0&reunion=1&periodo=129" target=_blank>1° Reunión - 1° Sesión Ordinaria  - (16/03/2011)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=826&numVid=0&reunion=1&periodo=129" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2011)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 128 (01/03/2010 - 28/02/2011)
+</button><ul>
+<li>
+<a href="sesion.html?id=822&numVid=0&reunion=29&periodo=128" target=_blank>29° Reunión - Sesión Extraordinaria Preparatoria - (01/12/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=819&numVid=0&reunion=28&periodo=128" target=_blank>28° Reunión - 18° Sesión Ordinaria Especial - (24/11/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=820&numVid=0&reunion=27&periodo=128" target=_blank>27° Reunión - Expresiones en Minoría - (17/11/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=818&numVid=0&reunion=26&periodo=128" target=_blank>26° Reunión - 17° Sesión Ordinaria Especial - (10/11/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=815&numVid=0&reunion=25&periodo=128" target=_blank>25° Reunión - 16° Sesión Ordinaria Especial de Homenaje - (03/11/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=812&numVid=0&reunion=24&periodo=128" target=_blank>24° Reunión - 15° Sesión Ordinaria  - (13/10/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=981&numVid=0&reunion=23&periodo=128" target=_blank>23° Reunión - Expresiones en Minoría - (12/10/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=811&numVid=0&reunion=22&periodo=128" target=_blank>22° Reunión - Expresiones en Minoría - (29/09/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=146&numVid=0&reunion=21&periodo=128" target=_blank>21° Reunión - 14° Sesión Ordinaria Informativa - (15/09/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=145&numVid=0&reunion=20&periodo=128" target=_blank>20° Reunión - 13° Sesión Ordinaria  - (08/09/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=144&numVid=0&reunion=19&periodo=128" target=_blank>19° Reunión - Expresiones en Minoría - (01/09/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=143&numVid=0&reunion=18&periodo=128" target=_blank>18° Reunión - Expresiones en Minoría - (25/08/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=352&numVid=0&reunion=17&periodo=128" target=_blank>17° Reunión - 12° Sesión Ordinaria  - (18/08/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=342&numVid=0&reunion=16&periodo=128" target=_blank>16° Reunión - 11° Sesión Ordinaria  - (11/08/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=341&numVid=0&reunion=15&periodo=128" target=_blank>15° Reunión - Expresiones en Minoría - (04/08/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=350&numVid=0&reunion=14&periodo=128" target=_blank>14° Reunión - 10° Sesión Ordinaria  - (14/07/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=340&numVid=0&reunion=13&periodo=128" target=_blank>13° Reunión - 9° Sesión Ordinaria  - (30/06/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=338&numVid=0&reunion=12&periodo=128" target=_blank>12° Reunión - 8° Sesión Ordinaria  - (23/06/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=978&numVid=0&reunion=11&periodo=128" target=_blank>11° Reunión - 7° Sesión Ordinaria  - (09/06/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=915&numVid=0&reunion=10&periodo=128" target=_blank>10° Reunión - 6° Sesión Ordinaria Especial de Homenaje - (26/05/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=914&numVid=0&reunion=9&periodo=128" target=_blank>9° Reunión - 5° Sesión Ordinaria  - (12/05/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=349&numVid=0&reunion=8&periodo=128" target=_blank>8° Reunión - 4° Sesión Ordinaria Especial cont. - (05/05/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=348&numVid=0&reunion=7&periodo=128" target=_blank>7° Reunión - 4° Sesión Ordinaria Especial - (04/05/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=347&numVid=0&reunion=6&periodo=128" target=_blank>6° Reunión - Expresiones en Minoría - (28/04/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=335&numVid=0&reunion=5&periodo=128" target=_blank>5° Reunión - 3° Sesión Ordinaria Especial - (21/04/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=330&numVid=0&reunion=4&periodo=128" target=_blank>4° Reunión - 2° Sesión Ordinaria Especial - (13/04/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=329&numVid=0&reunion=3&periodo=128" target=_blank>3° Reunión - Expresiones en Minoría - (07/04/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=328&numVid=0&reunion=2&periodo=128" target=_blank>2° Reunión - 1° Sesión Ordinaria  - (17/03/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=927&numVid=0&reunion=1&periodo=128" target=_blank>1° Reunión - Expresiones en Minoría - (10/03/2010)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=327&numVid=0&reunion=1&periodo=128" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2010)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 127 (01/03/2009 - 28/02/2010)
+</button><ul>
+<li>
+<a href="sesion.html?id=324&numVid=0&reunion=20&periodo=127" target=_blank>20° Reunión - Sesión De Prórroga Preparatoria - (03/12/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=322&numVid=0&reunion=19&periodo=127" target=_blank>19° Reunión - 13° Sesión Ordinaria  - (25/11/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=320&numVid=0&reunion=18&periodo=127" target=_blank>18° Reunión - 12° Sesión Ordinaria  - (18/11/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=317&numVid=0&reunion=17&periodo=127" target=_blank>17° Reunión - 11° Sesión Ordinaria  - (11/11/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=316&numVid=0&reunion=16&periodo=127" target=_blank>16° Reunión - 10° Sesión Ordinaria Informativa - (11/11/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=315&numVid=0&reunion=15&periodo=127" target=_blank>15° Reunión - 9° Sesión Ordinaria  - (04/11/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=314&numVid=0&reunion=14&periodo=127" target=_blank>14° Reunión - 8° Sesión Ordinaria  - (28/10/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=313&numVid=0&reunion=13&periodo=127" target=_blank>13° Reunión - Expresiones en Minoría - (22/10/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=310&numVid=0&reunion=12&periodo=127" target=_blank>12° Reunión - 7° Sesión Ordinaria Especial - (14/10/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=309&numVid=0&reunion=11&periodo=127" target=_blank>11° Reunión - Expresiones en Minoría - (07/10/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=305&numVid=0&reunion=10&periodo=127" target=_blank>10° Reunión - 6° Sesión Ordinaria Especial - (16/09/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=304&numVid=0&reunion=9&periodo=127" target=_blank>9° Reunión - Expresiones en Minoría - (27/08/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=302&numVid=0&reunion=8&periodo=127" target=_blank>8° Reunión - 5° Sesión Ordinaria Especial - (12/08/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=300&numVid=0&reunion=7&periodo=127" target=_blank>7° Reunión - 4° Sesión Ordinaria  - (05/08/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=298&numVid=0&reunion=6&periodo=127" target=_blank>6° Reunión - 3° Sesión Ordinaria  - (20/05/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=296&numVid=0&reunion=5&periodo=127" target=_blank>5° Reunión - Expresiones en Minoría - (15/04/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=293&numVid=0&reunion=4&periodo=127" target=_blank>4° Reunión - Expresiones en Minoría - (19/03/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=292&numVid=0&reunion=3&periodo=127" target=_blank>3° Reunión - 2° Sesión Ordinaria Especial - (18/03/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=291&numVid=0&reunion=2&periodo=127" target=_blank>2° Reunión - Expresiones en Minoría - (17/03/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=290&numVid=0&reunion=1&periodo=127" target=_blank>1° Reunión - 1° Sesión Ordinaria  - (11/03/2009)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=288&numVid=0&reunion=1&periodo=127" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2009)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 126 (01/03/2008 - 28/02/2009)
+</button><ul>
+<li>
+<a href="sesion.html?id=284&numVid=0&reunion=41&periodo=126" target=_blank>41° Reunión - Expresiones en Minoría - (18/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=283&numVid=0&reunion=40&periodo=126" target=_blank>40° Reunión - Expresiones en Minoría - (18/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=281&numVid=0&reunion=39&periodo=126" target=_blank>39° Reunión - 4° Sesión De Prórroga  cont. - (17/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=280&numVid=0&reunion=38&periodo=126" target=_blank>38° Reunión - 5° Sesión Ordinaria De Prórroga Especial - (17/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=277&numVid=0&reunion=37&periodo=126" target=_blank>37° Reunión - 4° Sesión De Prórroga  - (10/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=276&numVid=0&reunion=36&periodo=126" target=_blank>36° Reunión - 3° Sesión De Prórroga Especial de Homenaje - (10/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=275&numVid=0&reunion=35&periodo=126" target=_blank>35° Reunión - 2° Sesión De Prórroga  - (03/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=274&numVid=0&reunion=34&periodo=126" target=_blank>34° Reunión - 1° Sesión Ordinaria De Prórroga Especial - (03/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=273&numVid=0&reunion=33&periodo=126" target=_blank>33° Reunión - Sesión De Prórroga Preparatoria - (03/12/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=271&numVid=0&reunion=32&periodo=126" target=_blank>32° Reunión - Expresiones en Minoría - (27/11/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=270&numVid=0&reunion=31&periodo=126" target=_blank>31° Reunión - 16° Sesión Ordinaria Especial - (26/11/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=269&numVid=0&reunion=2&periodo=126" target=_blank>Asamblea Legislativa - Pte Mexico Calderon - (25/11/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=268&numVid=0&reunion=30&periodo=126" target=_blank>30° Reunión - Expresiones en Minoría - (20/11/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=266&numVid=0&reunion=29&periodo=126" target=_blank>29° Reunión - Expresiones en Minoría - (11/11/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=265&numVid=0&reunion=28&periodo=126" target=_blank>28° Reunión - 15° Sesión Ordinaria Especial - (06/11/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=264&numVid=0&reunion=27&periodo=126" target=_blank>27° Reunión - Expresiones en Minoría - (30/10/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=261&numVid=0&reunion=26&periodo=126" target=_blank>26° Reunión - 14° Sesión Ordinaria Especial - (15/10/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=260&numVid=0&reunion=25&periodo=126" target=_blank>25° Reunión - Expresiones en Minoría - (14/10/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=259&numVid=0&reunion=24&periodo=126" target=_blank>24° Reunión - 13° Sesión Ordinaria Informativa - (01/10/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=257&numVid=0&reunion=23&periodo=126" target=_blank>23° Reunión - 12° Sesión Ordinaria Especial - (01/10/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=255&numVid=0&reunion=22&periodo=126" target=_blank>22° Reunión - Expresiones en Minoría - (23/09/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=252&numVid=0&reunion=21&periodo=126" target=_blank>21° Reunión - 11° Sesión Ordinaria  - (03/09/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=251&numVid=0&reunion=20&periodo=126" target=_blank>20° Reunión - 10° Sesión Ordinaria  - (27/08/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=250&numVid=0&reunion=19&periodo=126" target=_blank>19° Reunión - 9° Sesión Ordinaria Especial - (21/08/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=249&numVid=0&reunion=18&periodo=126" target=_blank>18° Reunión - 8° Sesión Ordinaria  - (20/08/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=245&numVid=0&reunion=17&periodo=126" target=_blank>17° Reunión - 7° Sesión Ordinaria Especial - (04/07/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=243&numVid=0&reunion=16&periodo=126" target=_blank>16° Reunión - Expresiones en Minoría - (17/06/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=241&numVid=0&reunion=15&periodo=126" target=_blank>15° Reunión - 6° Sesión Ordinaria  - (11/06/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=242&numVid=0&reunion=14&periodo=126" target=_blank>14° Reunión - Expresiones en Minoría - (10/06/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=240&numVid=0&reunion=13&periodo=126" target=_blank>13° Reunión - 5° Sesión Ordinaria  cont. - (04/06/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=239&numVid=0&reunion=12&periodo=126" target=_blank>12° Reunión - Expresiones en Minoría - (03/06/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=237&numVid=0&reunion=11&periodo=126" target=_blank>11° Reunión - Expresiones en Minoría - (28/05/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=235&numVid=0&reunion=10&periodo=126" target=_blank>10° Reunión - 5° Sesión Ordinaria  - (21/05/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=234&numVid=0&reunion=9&periodo=126" target=_blank>9° Reunión - Expresiones en Minoría - (20/05/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=232&numVid=0&reunion=8&periodo=126" target=_blank>8° Reunión - 4° Sesión Ordinaria  - (07/05/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=231&numVid=0&reunion=7&periodo=126" target=_blank>7° Reunión - 3° Sesión Ordinaria  cont. - (07/05/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=229&numVid=0&reunion=6&periodo=126" target=_blank>6° Reunión - 3° Sesión Ordinaria  - (23/04/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=227&numVid=0&reunion=5&periodo=126" target=_blank>5° Reunión - 2° Sesión Ordinaria  - (09/04/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=226&numVid=0&reunion=4&periodo=126" target=_blank>4° Reunión - 1° Sesión Ordinaria  cont. - (09/04/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=221&numVid=0&reunion=3&periodo=126" target=_blank>3° Reunión - 1° Sesión Ordinaria  cont. - (26/03/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=220&numVid=0&reunion=2&periodo=126" target=_blank>2° Reunión - Expresiones en Minoría - (25/03/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=219&numVid=0&reunion=1&periodo=126" target=_blank>1° Reunión - 1° Sesión Ordinaria  - (12/03/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=224&numVid=0&reunion=1&periodo=126" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2008)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 125 (01/03/2007 - 29/02/2008)
+</button><ul>
+<li>
+<a href="sesion.html?id=217&numVid=0&reunion=35&periodo=125" target=_blank>35° Reunión - 1° Sesión Extraordinaria - (28/02/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=223&numVid=0&reunion=4&periodo=125" target=_blank>Asamblea Legislativa - Pte. Lula (Brasi) - (22/02/2008)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=212&numVid=0&reunion=34&periodo=125" target=_blank>34° Reunión - 2° Sesión De Prórroga  - (26/12/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=210&numVid=0&reunion=33&periodo=125" target=_blank>33° Reunión - 1° Sesión Ordinaria De Prórroga Especial - (19/12/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=207&numVid=0&reunion=3&periodo=125" target=_blank>Asamblea Legislativa - Juramento Presidente Fernandez de Kirchner - (10/12/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=204&numVid=0&reunion=32&periodo=125" target=_blank>32° Reunión - Sesión De Prórroga Preparatoria - (05/12/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=381&numVid=0&reunion=31&periodo=125" target=_blank>31° Reunión - 17° Sesión De Prórroga  cont. - (04/12/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=382&numVid=0&reunion=30&periodo=125" target=_blank>30° Reunión - Sesión Ordinaria Informativa - (29/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=379&numVid=0&reunion=29&periodo=125" target=_blank>29° Reunión - 17° Sesión Ordinaria  - (28/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=380&numVid=0&reunion=28&periodo=125" target=_blank>28° Reunión - 16° Sesión Ordinaria  cont. - (28/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=376&numVid=0&reunion=27&periodo=125" target=_blank>27° Reunión - 16° Sesión Ordinaria  cont. - (22/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1022&numVid=0&reunion=26&periodo=125" target=_blank>26° Reunión - 16° Sesión Ordinaria  - (21/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1021&numVid=0&reunion=25&periodo=125" target=_blank>25° Reunión - 15° Sesión Ordinaria  cont. - (21/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=206&numVid=0&reunion=2&periodo=125" target=_blank>Asamblea Legislativa - Proclamación Presidente y Vice - (21/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1019&numVid=0&reunion=24&periodo=125" target=_blank>24° Reunión - 15° Sesión Ordinaria  - (14/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1018&numVid=0&reunion=23&periodo=125" target=_blank>23° Reunión - 14° Sesión Ordinaria  cont. - (14/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1016&numVid=0&reunion=22&periodo=125" target=_blank>22° Reunión - 14° Sesión Ordinaria  - (07/11/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1015&numVid=0&reunion=21&periodo=125" target=_blank>21° Reunión - 13° Sesión Ordinaria  - (05/09/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1011&numVid=0&reunion=20&periodo=125" target=_blank>20° Reunión - 13° Sesión Ordinaria  - (15/08/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1012&numVid=0&reunion=19&periodo=125" target=_blank>19° Reunión - 12° Sesión Ordinaria  cont. - (15/08/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1350&numVid=0&reunion=18&periodo=125" target=_blank>18° Reunión - 12° Sesión Ordinaria  - (08/08/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1349&numVid=0&reunion=17&periodo=125" target=_blank>17° Reunión - Expresiones en Minoría - (01/08/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1347&numVid=0&reunion=16&periodo=125" target=_blank>16° Reunión - 11° Sesión Ordinaria  - (18/07/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1348&numVid=0&reunion=15&periodo=125" target=_blank>15° Reunión - Expresiones en Minoría - (11/07/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1344&numVid=0&reunion=14&periodo=125" target=_blank>14° Reunión - 10° Sesión Ordinaria  cont. - (27/06/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1343&numVid=0&reunion=13&periodo=125" target=_blank>13° Reunión - 10° Sesión Ordinaria  - (13/06/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1341&numVid=0&reunion=12&periodo=125" target=_blank>12° Reunión - 9° Sesión Ordinaria  - (06/06/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1340&numVid=0&reunion=11&periodo=125" target=_blank>11° Reunión - Expresiones en Minoría - (23/05/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1339&numVid=0&reunion=10&periodo=125" target=_blank>10° Reunión - Expresiones en Minoría - (22/05/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1337&numVid=0&reunion=9&periodo=125" target=_blank>9° Reunión - 8° Sesión Ordinaria  - (09/05/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1334&numVid=0&reunion=8&periodo=125" target=_blank>8° Reunión - 7° Sesión Ordinaria  - (25/04/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1333&numVid=0&reunion=7&periodo=125" target=_blank>7° Reunión - 6° Sesión Ordinaria Informativa - (25/04/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1169&numVid=0&reunion=6&periodo=125" target=_blank>6° Reunión - 5° Sesión Ordinaria  - (11/04/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1167&numVid=0&reunion=5&periodo=125" target=_blank>5° Reunión - 4° Sesión Ordinaria  - (28/03/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1166&numVid=0&reunion=4&periodo=125" target=_blank>4° Reunión - 3° Sesión Ordinaria  - (28/03/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1165&numVid=0&reunion=3&periodo=125" target=_blank>3° Reunión - 2° Sesión Ordinaria Especial - (28/03/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1164&numVid=0&reunion=2&periodo=125" target=_blank>2° Reunión - Expresiones en Minoría - (21/03/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=738&numVid=0&reunion=1&periodo=125" target=_blank>1° Reunión - 1° Sesión Ordinaria  - (14/03/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1161&numVid=0&reunion=1&periodo=125" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2007)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 124 (01/03/2006 - 28/02/2007)
+</button><ul>
+<li>
+<a href="sesion.html?id=1157&numVid=0&reunion=58&periodo=124" target=_blank>58° Reunión - 2° Sesión Extraordinaria Especial - (27/02/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1155&numVid=0&reunion=57&periodo=124" target=_blank>57° Reunión - 1° Sesión Extraordinaria Especial - (13/02/2007)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1154&numVid=0&reunion=56&periodo=124" target=_blank>56° Reunión - 4° Sesión De Prórroga  - (20/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1151&numVid=0&reunion=55&periodo=124" target=_blank>55° Reunión - 2° Sesión De Prórroga  cont. - (14/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1150&numVid=0&reunion=54&periodo=124" target=_blank>54° Reunión - 3° Sesión De Prórroga  - (14/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1149&numVid=0&reunion=53&periodo=124" target=_blank>53° Reunión - 2° Sesión De Prórroga  cont. - (14/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1148&numVid=0&reunion=52&periodo=124" target=_blank>52° Reunión - 2° Sesión De Prórroga  - (13/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1146&numVid=0&reunion=51&periodo=124" target=_blank>51° Reunión - 1° Sesión De Prórroga  cont. - (13/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1147&numVid=0&reunion=50&periodo=124" target=_blank>50° Reunión - Expresiones en Minoría - (13/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1144&numVid=0&reunion=49&periodo=124" target=_blank>49° Reunión - 1° Sesión De Prórroga  - (06/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1145&numVid=0&reunion=48&periodo=124" target=_blank>48° Reunión - 31° Sesión De Prórroga  cont. - (06/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1009&numVid=0&reunion=47&periodo=124" target=_blank>47° Reunión - Sesión De Prórroga Preparatoria - (06/12/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1006&numVid=0&reunion=46&periodo=124" target=_blank>46° Reunión - 31° Sesión Ordinaria  - (29/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1005&numVid=0&reunion=45&periodo=124" target=_blank>45° Reunión - 30° Sesión Ordinaria  cont. - (29/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1004&numVid=0&reunion=44&periodo=124" target=_blank>44° Reunión - 30° Sesión Ordinaria  cont. - (23/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=736&numVid=0&reunion=43&periodo=124" target=_blank>43° Reunión - 30° Sesión Ordinaria  - (22/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=735&numVid=0&reunion=42&periodo=124" target=_blank>42° Reunión - 29° Sesión Ordinaria  cont. - (22/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=734&numVid=0&reunion=41&periodo=124" target=_blank>41° Reunión - 29° Sesión Ordinaria  - (15/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=733&numVid=0&reunion=40&periodo=124" target=_blank>40° Reunión - Expresiones en Minoría - (15/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=731&numVid=0&reunion=39&periodo=124" target=_blank>39° Reunión - 28° Sesión Ordinaria  - (08/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=730&numVid=0&reunion=38&periodo=124" target=_blank>38° Reunión - 27° Sesión Ordinaria  cont. - (08/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=728&numVid=0&reunion=37&periodo=124" target=_blank>37° Reunión - 27° Sesión Ordinaria  - (01/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=727&numVid=0&reunion=36&periodo=124" target=_blank>36° Reunión - 26° Sesión Ordinaria  cont. - (01/11/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=726&numVid=0&reunion=35&periodo=124" target=_blank>35° Reunión - 26° Sesión Ordinaria  - (25/10/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=725&numVid=0&reunion=34&periodo=124" target=_blank>34° Reunión - 25° Sesión Ordinaria  - (11/10/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=722&numVid=0&reunion=33&periodo=124" target=_blank>33° Reunión - 24° Sesión Ordinaria  - (04/10/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=721&numVid=0&reunion=32&periodo=124" target=_blank>32° Reunión - 23° Sesión Ordinaria  - (27/09/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1172&numVid=0&reunion=31&periodo=124" target=_blank>31° Reunión - 22° Sesión Ordinaria  cont. - (27/09/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1329&numVid=0&reunion=30&periodo=124" target=_blank>30° Reunión - 22° Sesión Ordinaria  - (13/09/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1327&numVid=0&reunion=29&periodo=124" target=_blank>29° Reunión - 21° Sesión Ordinaria  - (06/09/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1326&numVid=0&reunion=28&periodo=124" target=_blank>28° Reunión - 19° Sesión Ordinaria  cont. - (30/08/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1325&numVid=0&reunion=27&periodo=124" target=_blank>27° Reunión - 20° Sesión Ordinaria Informativa - (30/08/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1322&numVid=0&reunion=26&periodo=124" target=_blank>26° Reunión - 19° Sesión Ordinaria  - (16/08/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1320&numVid=0&reunion=25&periodo=124" target=_blank>25° Reunión - 18° Sesión Ordinaria  - (09/08/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1318&numVid=0&reunion=24&periodo=124" target=_blank>24° Reunión - 17° Sesión Ordinaria  - (02/08/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1317&numVid=0&reunion=23&periodo=124" target=_blank>23° Reunión - 16° Sesión Ordinaria  - (20/07/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1316&numVid=0&reunion=22&periodo=124" target=_blank>22° Reunión - 15° Sesión Ordinaria  - (19/07/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1313&numVid=0&reunion=21&periodo=124" target=_blank>21° Reunión - 14° Sesión Ordinaria  - (05/07/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1310&numVid=0&reunion=20&periodo=124" target=_blank>20° Reunión - 13° Sesión Ordinaria  - (28/06/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1309&numVid=0&reunion=19&periodo=124" target=_blank>19° Reunión - 12° Sesión Ordinaria  cont. - (21/06/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1307&numVid=0&reunion=18&periodo=124" target=_blank>18° Reunión - 12° Sesión Ordinaria  - (14/06/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1305&numVid=0&reunion=17&periodo=124" target=_blank>17° Reunión - 11° Sesión Ordinaria  - (07/06/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1304&numVid=0&reunion=16&periodo=124" target=_blank>16° Reunión - 9° Sesión Ordinaria  cont. - (07/06/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1301&numVid=0&reunion=15&periodo=124" target=_blank>15° Reunión - 9° Sesión Ordinaria  cont. - (31/05/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1302&numVid=0&reunion=14&periodo=124" target=_blank>14° Reunión - 10° Sesión Ordinaria Especial - (23/05/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1300&numVid=0&reunion=13&periodo=124" target=_blank>13° Reunión - Expresiones en Minoría - (23/05/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1298&numVid=0&reunion=12&periodo=124" target=_blank>12° Reunión - 9° Sesión Ordinaria  - (17/05/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1297&numVid=0&reunion=11&periodo=124" target=_blank>11° Reunión - 8° Sesión Ordinaria  - (10/05/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1295&numVid=0&reunion=10&periodo=124" target=_blank>10° Reunión - Expresiones en Minoría - (10/05/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1294&numVid=0&reunion=9&periodo=124" target=_blank>9° Reunión - 7° Sesión Ordinaria Informativa - (03/05/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1290&numVid=0&reunion=8&periodo=124" target=_blank>8° Reunión - 6° Sesión Ordinaria  - (19/04/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1288&numVid=0&reunion=7&periodo=124" target=_blank>7° Reunión - 5° Sesión Ordinaria  - (05/04/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1293&numVid=0&reunion=6&periodo=124" target=_blank>6° Reunión - Expresiones en Minoría - (04/04/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1287&numVid=0&reunion=5&periodo=124" target=_blank>5° Reunión - 4° Sesión Ordinaria  - (29/03/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1283&numVid=0&reunion=4&periodo=124" target=_blank>4° Reunión - 3° Sesión Ordinaria Especial - (22/03/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1282&numVid=0&reunion=3&periodo=124" target=_blank>3° Reunión - 2° Sesión Ordinaria  cont. - (22/03/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1286&numVid=0&reunion=2&periodo=124" target=_blank>Asamblea Legislativa - Pte. Bachelet Chile - (22/03/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1280&numVid=0&reunion=2&periodo=124" target=_blank>2° Reunión - 2° Sesión Ordinaria  - (15/03/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=801&numVid=0&reunion=1&periodo=124" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (08/03/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1285&numVid=0&reunion=1&periodo=124" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2006)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 123 (01/03/2005 - 28/02/2006)
+</button><ul>
+<li>
+<a href="sesion.html?id=804&numVid=0&reunion=45&periodo=123" target=_blank>45° Reunión - 4° Sesión Extraordinaria Especial - (23/02/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=797&numVid=0&reunion=44&periodo=123" target=_blank>44° Reunión - 3° Sesión Extraordinaria - (22/02/2006)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=794&numVid=0&reunion=43&periodo=123" target=_blank>43° Reunión - 1° Sesión Extraordinaria cont. - (22/12/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=793&numVid=0&reunion=42&periodo=123" target=_blank>42° Reunión - 2° Sesión Extraordinaria Especial - (22/12/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=792&numVid=0&reunion=41&periodo=123" target=_blank>41° Reunión - 1° Sesión Extraordinaria cont. - (21/12/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=788&numVid=0&reunion=40&periodo=123" target=_blank>40° Reunión - 1° Sesión Extraordinaria cont. - (15/12/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=786&numVid=0&reunion=39&periodo=123" target=_blank>39° Reunión - 1° Sesión Extraordinaria - (14/12/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=787&numVid=0&reunion=38&periodo=123" target=_blank>38° Reunión - Sesión Extraordinaria Preparatoria - (06/12/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=790&numVid=0&reunion=37&periodo=123" target=_blank>37° Reunión - Expresiones en Minoría - (30/11/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=805&numVid=0&reunion=36&periodo=123" target=_blank>36° Reunión - Expresiones en Minoría - (02/11/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=783&numVid=0&reunion=35&periodo=123" target=_blank>35° Reunión - Expresiones en Minoría - (02/11/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=776&numVid=0&reunion=34&periodo=123" target=_blank>34° Reunión - Expresiones en Minoría - (12/10/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=775&numVid=0&reunion=33&periodo=123" target=_blank>33° Reunión - Expresiones en Minoría - (05/10/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=770&numVid=0&reunion=32&periodo=123" target=_blank>32° Reunión - 11° Sesión Ordinaria Especial - (28/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=769&numVid=0&reunion=31&periodo=123" target=_blank>31° Reunión - 10° Sesión Ordinaria Especial - (28/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=782&numVid=0&reunion=30&periodo=123" target=_blank>30° Reunión - Expresiones en Minoría - (28/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=768&numVid=0&reunion=29&periodo=123" target=_blank>29° Reunión - 9° Sesión Ordinaria  cont. - (14/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=767&numVid=0&reunion=28&periodo=123" target=_blank>28° Reunión - Expresiones en Minoría - (14/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=766&numVid=0&reunion=27&periodo=123" target=_blank>27° Reunión - Expresiones en Minoría - (14/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1278&numVid=0&reunion=26&periodo=123" target=_blank>26° Reunión - Expresiones en Minoría - (14/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1277&numVid=0&reunion=25&periodo=123" target=_blank>25° Reunión - Expresiones en Minoría - (14/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1276&numVid=0&reunion=24&periodo=123" target=_blank>24° Reunión - Expresiones en Minoría - (14/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1275&numVid=0&reunion=23&periodo=123" target=_blank>23° Reunión - 9° Sesión Ordinaria  cont. - (07/09/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1272&numVid=0&reunion=22&periodo=123" target=_blank>22° Reunión - 9° Sesión Ordinaria  cont. - (31/08/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=755&numVid=0&reunion=21&periodo=123" target=_blank>21° Reunión - 9° Sesión Ordinaria  - (10/08/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=752&numVid=0&reunion=20&periodo=123" target=_blank>20° Reunión - 8° Sesión Ordinaria  - (07/07/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=751&numVid=0&reunion=19&periodo=123" target=_blank>19° Reunión - Expresiones en Minoría - (05/07/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=753&numVid=0&reunion=18&periodo=123" target=_blank>18° Reunión - Expresiones en Minoría - (21/06/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=754&numVid=0&reunion=17&periodo=123" target=_blank>17° Reunión - Expresiones en Minoría - (14/06/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=750&numVid=0&reunion=16&periodo=123" target=_blank>16° Reunión - Expresiones en Minoría - (09/06/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=747&numVid=0&reunion=15&periodo=123" target=_blank>15° Reunión - 7° Sesión Ordinaria  - (01/06/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1265&numVid=0&reunion=14&periodo=123" target=_blank>14° Reunión - Expresiones en Minoría - (24/05/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=745&numVid=0&reunion=13&periodo=123" target=_blank>13° Reunión - 6° Sesión Ordinaria  cont. - (18/05/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=743&numVid=0&reunion=12&periodo=123" target=_blank>12° Reunión - 6° Sesión Ordinaria  cont. - (11/05/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=742&numVid=0&reunion=11&periodo=123" target=_blank>11° Reunión - 6° Sesión Ordinaria  - (04/05/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1263&numVid=0&reunion=10&periodo=123" target=_blank>10° Reunión - 5° Sesión Ordinaria  - (20/04/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1259&numVid=0&reunion=9&periodo=123" target=_blank>9° Reunión - 4° Sesión Ordinaria  - (06/04/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1274&numVid=0&reunion=8&periodo=123" target=_blank>8° Reunión - Expresiones en Minoría - (05/04/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=739&numVid=0&reunion=7&periodo=123" target=_blank>7° Reunión - 3° Sesión Ordinaria Informativa - (30/03/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1003&numVid=0&reunion=6&periodo=123" target=_blank>6° Reunión - 2° Sesión Ordinaria  cont. - (30/03/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1273&numVid=0&reunion=5&periodo=123" target=_blank>5° Reunión - Expresiones en Minoría - (22/03/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1001&numVid=0&reunion=4&periodo=123" target=_blank>4° Reunión - 2° Sesión Ordinaria  - (16/03/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=375&numVid=0&reunion=3&periodo=123" target=_blank>3° Reunión - Expresiones en Minoría - (16/03/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=374&numVid=0&reunion=2&periodo=123" target=_blank>2° Reunión - 1° Sesión Ordinaria Especial - (16/03/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=373&numVid=0&reunion=1&periodo=123" target=_blank>1° Reunión - Expresiones en Minoría - (09/03/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1284&numVid=0&reunion=1&periodo=123" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2005)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 122 (01/03/2004 - 28/02/2005)
+</button><ul>
+<li>
+<a href="sesion.html?id=371&numVid=0&reunion=37&periodo=122" target=_blank>37° Reunión - 1° Sesión Extraordinaria - (09/02/2005)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=367&numVid=0&reunion=36&periodo=122" target=_blank>36° Reunión - 3° Sesión De Prórroga  - (16/12/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=366&numVid=0&reunion=35&periodo=122" target=_blank>35° Reunión - 2° Sesión Ordinaria De Prórroga Especial cont. - (15/12/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=365&numVid=0&reunion=34&periodo=122" target=_blank>34° Reunión - 2° Sesión Ordinaria De Prórroga Especial - (14/12/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1254&numVid=0&reunion=33&periodo=122" target=_blank>33° Reunión - 1° Sesión De Prórroga  - (01/12/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=760&numVid=0&reunion=32&periodo=122" target=_blank>32° Reunión - Sesión De Prórroga Preparatoria - (01/12/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=363&numVid=0&reunion=31&periodo=122" target=_blank>31° Reunión - 26° Sesión Ordinaria  - (24/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=361&numVid=0&reunion=30&periodo=122" target=_blank>30° Reunión - 25° Sesión Ordinaria  - (17/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1014&numVid=0&reunion=2&periodo=122" target=_blank>Asamblea Legislativa - Pres. China - (17/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=287&numVid=0&reunion=29&periodo=122" target=_blank>29° Reunión - Expresiones en Minoría - (16/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1251&numVid=0&reunion=28&periodo=122" target=_blank>28° Reunión - 24° Sesión Ordinaria  - (10/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=286&numVid=0&reunion=27&periodo=122" target=_blank>27° Reunión - Expresiones en Minoría - (09/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=360&numVid=0&reunion=26&periodo=122" target=_blank>26° Reunión - 23° Sesión Ordinaria  cont. - (04/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=359&numVid=0&reunion=25&periodo=122" target=_blank>25° Reunión - 23° Sesión Ordinaria  - (03/11/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1250&numVid=0&reunion=24&periodo=122" target=_blank>24° Reunión - 22° Sesión Ordinaria  - (20/10/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=683&numVid=0&reunion=23&periodo=122" target=_blank>23° Reunión - 21° Sesión Ordinaria  - (06/10/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1240&numVid=0&reunion=22&periodo=122" target=_blank>22° Reunión - 20° Sesión Ordinaria  - (29/09/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1238&numVid=0&reunion=21&periodo=122" target=_blank>21° Reunión - 19° Sesión Ordinaria  - (22/09/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=681&numVid=0&reunion=20&periodo=122" target=_blank>20° Reunión - 18° Sesión Ordinaria  - (08/09/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=759&numVid=0&reunion=19&periodo=122" target=_blank>19° Reunión - 17° Sesión Ordinaria Informativa - (18/08/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=758&numVid=0&reunion=18&periodo=122" target=_blank>18° Reunión - 16° Sesión Ordinaria  - (18/08/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1236&numVid=0&reunion=17&periodo=122" target=_blank>17° Reunión - 15° Sesión Ordinaria  - (11/08/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=669&numVid=0&reunion=16&periodo=122" target=_blank>16° Reunión - 14° Sesión Ordinaria  - (04/08/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=668&numVid=0&reunion=15&periodo=122" target=_blank>15° Reunión - 13° Sesión Ordinaria  - (07/07/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1234&numVid=0&reunion=14&periodo=122" target=_blank>14° Reunión - 12° Sesión Ordinaria  - (30/06/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=679&numVid=0&reunion=13&periodo=122" target=_blank>13° Reunión - 11° Sesión Ordinaria  - (16/06/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=666&numVid=0&reunion=12&periodo=122" target=_blank>12° Reunión - 10° Sesión Ordinaria  - (09/06/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1230&numVid=0&reunion=11&periodo=122" target=_blank>11° Reunión - 9° Sesión Ordinaria  - (12/05/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1228&numVid=0&reunion=10&periodo=122" target=_blank>10° Reunión - 8° Sesión Ordinaria Especial - (29/04/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1229&numVid=0&reunion=9&periodo=122" target=_blank>9° Reunión - 7° Sesión Ordinaria  - (28/04/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1225&numVid=0&reunion=8&periodo=122" target=_blank>8° Reunión - 6° Sesión Ordinaria  - (21/04/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1224&numVid=0&reunion=7&periodo=122" target=_blank>7° Reunión - Expresiones en Minoría - (20/04/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1226&numVid=0&reunion=6&periodo=122" target=_blank>6° Reunión - 5° Sesión Ordinaria Informativa - (14/04/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=661&numVid=0&reunion=5&periodo=122" target=_blank>5° Reunión - 4° Sesión Ordinaria Especial - (07/04/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1222&numVid=0&reunion=4&periodo=122" target=_blank>4° Reunión - 3° Sesión Ordinaria  - (31/03/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=285&numVid=0&reunion=3&periodo=122" target=_blank>3° Reunión - Expresiones en Minoría - (30/03/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1221&numVid=0&reunion=2&periodo=122" target=_blank>2° Reunión - 2° Sesión Ordinaria Especial - (23/03/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1218&numVid=0&reunion=1&periodo=122" target=_blank>1° Reunión - 1° Sesión Ordinaria Especial - (02/03/2004)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=659&numVid=0&reunion=1&periodo=122" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2004)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 121 (01/03/2003 - 29/02/2004)
+</button><ul>
+<li>
+<a href="sesion.html?id=1217&numVid=0&reunion=29&periodo=121" target=_blank>29° Reunión - 1° Sesión De Prórroga  - (17/12/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1215&numVid=0&reunion=28&periodo=121" target=_blank>28° Reunión - 10° Sesión De Prórroga  cont. - (04/12/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=644&numVid=0&reunion=27&periodo=121" target=_blank>27° Reunión - 10° Sesión De Prórroga  cont. - (03/12/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=643&numVid=0&reunion=26&periodo=121" target=_blank>26° Reunión - Sesión De Prórroga Preparatoria - (03/12/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=756&numVid=0&reunion=25&periodo=121" target=_blank>25° Reunión - 10° Sesión Ordinaria  - (26/11/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=640&numVid=0&reunion=24&periodo=121" target=_blank>24° Reunión - 9° Sesión Ordinaria  cont. - (13/11/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=639&numVid=0&reunion=23&periodo=121" target=_blank>23° Reunión - 9° Sesión Ordinaria  - (12/11/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=637&numVid=0&reunion=22&periodo=121" target=_blank>22° Reunión - 8° Sesión Ordinaria  - (05/11/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=636&numVid=0&reunion=21&periodo=121" target=_blank>21° Reunión - Expresiones en Minoría - (04/11/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=635&numVid=0&reunion=20&periodo=121" target=_blank>20° Reunión - Expresiones en Minoría - (28/10/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1158&numVid=0&reunion=5&periodo=121" target=_blank>Asamblea Legislativa - Pte. Lula (Brasil) - (16/10/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=634&numVid=0&reunion=19&periodo=121" target=_blank>19° Reunión - Expresiones en Minoría - (15/10/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=633&numVid=0&reunion=18&periodo=121" target=_blank>18° Reunión - Expresiones en Minoría - (08/10/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=630&numVid=0&reunion=17&periodo=121" target=_blank>17° Reunión - 7° Sesión Ordinaria  - (01/10/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=629&numVid=0&reunion=16&periodo=121" target=_blank>16° Reunión - Expresiones en Minoría - (16/09/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=674&numVid=0&reunion=15&periodo=121" target=_blank>15° Reunión - 6° Sesión Ordinaria  cont. - (03/09/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=658&numVid=0&reunion=4&periodo=121" target=_blank>Asamblea Legislativa - Pte. Lagos (Chile) - (28/08/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=627&numVid=0&reunion=14&periodo=121" target=_blank>14° Reunión - 6° Sesión Ordinaria  - (27/08/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=625&numVid=0&reunion=13&periodo=121" target=_blank>13° Reunión - 5° Sesión Ordinaria  - (13/08/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=624&numVid=0&reunion=12&periodo=121" target=_blank>12° Reunión - 4° Sesión Ordinaria Especial - (12/08/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=621&numVid=0&reunion=11&periodo=121" target=_blank>11° Reunión - 3° Sesión Ordinaria  - (16/07/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=619&numVid=0&reunion=10&periodo=121" target=_blank>10° Reunión - 2° Sesión Ordinaria  cont. - (19/06/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=618&numVid=0&reunion=9&periodo=121" target=_blank>9° Reunión - 2° Sesión Ordinaria  cont. - (04/06/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=607&numVid=0&reunion=8&periodo=121" target=_blank>8° Reunión - 2° Sesión Ordinaria  cont. - (28/05/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=657&numVid=0&reunion=3&periodo=121" target=_blank>Asamblea Legislativa - Juramento Presidente Kirchner - (25/05/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=606&numVid=0&reunion=7&periodo=121" target=_blank>7° Reunión - Expresiones en Minoría - (22/05/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=612&numVid=0&reunion=6&periodo=121" target=_blank>6° Reunión - 2° Sesión Ordinaria  - (08/05/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=656&numVid=0&reunion=2&periodo=121" target=_blank>Asamblea Legislativa - Resultado elecciones - (08/05/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1248&numVid=0&reunion=5&periodo=121" target=_blank>5° Reunión - Expresiones en Minoría - (23/04/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1247&numVid=0&reunion=4&periodo=121" target=_blank>4° Reunión - Expresiones en Minoría - (26/03/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1246&numVid=0&reunion=3&periodo=121" target=_blank>3° Reunión - Expresiones en Minoría - (18/03/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=602&numVid=0&reunion=2&periodo=121" target=_blank>2° Reunión - 1° Sesión Ordinaria  - (12/03/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=601&numVid=0&reunion=1&periodo=121" target=_blank>1° Reunión - Expresiones en Minoría - (12/03/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=655&numVid=0&reunion=1&periodo=121" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2003)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 120 (01/03/2002 - 28/02/2003)
+</button><ul>
+<li>
+<a href="sesion.html?id=600&numVid=0&reunion=40&periodo=120" target=_blank>40° Reunión - 1° Sesión Extraordinaria Especial cont. - (01/03/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=579&numVid=0&reunion=39&periodo=120" target=_blank>39° Reunión - 2° Sesión Extraordinaria - (26/02/2003)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=577&numVid=0&reunion=38&periodo=120" target=_blank>38° Reunión - 1° Sesión Extraordinaria Especial - (18/12/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=356&numVid=0&reunion=37&periodo=120" target=_blank>37° Reunión - Sesión Extraordinaria Preparatoria - (04/12/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=596&numVid=0&reunion=36&periodo=120" target=_blank>36° Reunión - 17° Sesión Ordinaria  - (28/11/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=574&numVid=0&reunion=35&periodo=120" target=_blank>35° Reunión - Expresiones en Minoría - (27/11/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=355&numVid=0&reunion=34&periodo=120" target=_blank>34° Reunión - Expresiones en Minoría - (20/11/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=354&numVid=0&reunion=33&periodo=120" target=_blank>33° Reunión - Expresiones en Minoría - (13/11/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=696&numVid=0&reunion=32&periodo=120" target=_blank>32° Reunión - Expresiones en Minoría - (06/11/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=568&numVid=0&reunion=31&periodo=120" target=_blank>31° Reunión - 16° Sesión Ordinaria  cont. - (10/10/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=594&numVid=0&reunion=30&periodo=120" target=_blank>30° Reunión - 16° Sesión Ordinaria  - (09/10/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=567&numVid=0&reunion=29&periodo=120" target=_blank>29° Reunión - 15° Sesión Ordinaria Especial - (09/10/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=695&numVid=0&reunion=28&periodo=120" target=_blank>28° Reunión - Expresiones en Minoría - (02/10/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=694&numVid=0&reunion=27&periodo=120" target=_blank>27° Reunión - 14° Sesión Ordinaria  cont. - (25/09/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=592&numVid=0&reunion=26&periodo=120" target=_blank>26° Reunión - 14° Sesión Ordinaria  - (18/09/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=693&numVid=0&reunion=25&periodo=120" target=_blank>25° Reunión - Expresiones en Minoría - (18/09/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=692&numVid=0&reunion=24&periodo=120" target=_blank>24° Reunión - Expresiones en Minoría - (17/09/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=691&numVid=0&reunion=23&periodo=120" target=_blank>23° Reunión - Expresiones en Minoría - (17/09/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=690&numVid=0&reunion=22&periodo=120" target=_blank>22° Reunión - Expresiones en Minoría - (05/09/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=591&numVid=0&reunion=21&periodo=120" target=_blank>21° Reunión - 13° Sesión Ordinaria  - (28/08/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=562&numVid=0&reunion=20&periodo=120" target=_blank>20° Reunión - 12° Sesión Ordinaria Informativa - (28/08/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=561&numVid=0&reunion=19&periodo=120" target=_blank>19° Reunión - 11° Sesión Ordinaria  cont. - (21/08/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=590&numVid=0&reunion=18&periodo=120" target=_blank>18° Reunión - 11° Sesión Ordinaria  cont. - (14/08/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=559&numVid=0&reunion=17&periodo=120" target=_blank>17° Reunión - 11° Sesión Ordinaria  - (08/08/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=558&numVid=0&reunion=16&periodo=120" target=_blank>16° Reunión - 10° Sesión Ordinaria  - (31/07/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=588&numVid=0&reunion=15&periodo=120" target=_blank>15° Reunión - 9° Sesión Ordinaria  - (17/07/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=587&numVid=0&reunion=14&periodo=120" target=_blank>14° Reunión - 8° Sesión Ordinaria  cont. - (19/06/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=586&numVid=0&reunion=13&periodo=120" target=_blank>13° Reunión - 8° Sesión Ordinaria  - (12/06/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=689&numVid=0&reunion=12&periodo=120" target=_blank>12° Reunión - Expresiones en Minoría - (06/06/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=688&numVid=0&reunion=11&periodo=120" target=_blank>11° Reunión - 7° Sesión Ordinaria Informativa - (05/06/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=553&numVid=0&reunion=10&periodo=120" target=_blank>10° Reunión - 6° Sesión Ordinaria  - (23/05/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=554&numVid=0&reunion=9&periodo=120" target=_blank>9° Reunión - 5° Sesión Ordinaria  - (22/05/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=584&numVid=0&reunion=8&periodo=120" target=_blank>8° Reunión - 4° Sesión Ordinaria  - (09/05/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=550&numVid=0&reunion=7&periodo=120" target=_blank>7° Reunión - 2° Sesión Ordinaria  cont. - (24/04/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=549&numVid=0&reunion=6&periodo=120" target=_blank>6° Reunión - 2° Sesión Ordinaria  cont. - (17/04/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=687&numVid=0&reunion=5&periodo=120" target=_blank>5° Reunión - 3° Sesión Ordinaria Especial - (11/04/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=547&numVid=0&reunion=4&periodo=120" target=_blank>4° Reunión - 2° Sesión Ordinaria  - (10/04/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1249&numVid=0&reunion=3&periodo=120" target=_blank>3° Reunión - Expresiones en Minoría - (04/04/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=686&numVid=0&reunion=2&periodo=120" target=_blank>2° Reunión - Expresiones en Minoría - (19/03/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=546&numVid=0&reunion=1&periodo=120" target=_blank>1° Reunión - 1° Sesión Ordinaria  - (13/03/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=654&numVid=0&reunion=1&periodo=120" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2002)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 119 (01/03/2001 - 28/02/2002)
+</button><ul>
+<li>
+<a href="sesion.html?id=533&numVid=0&reunion=50&periodo=119" target=_blank>50° Reunión - 5° Sesión Ordinaria De Prórroga Especial - (28/02/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=531&numVid=0&reunion=49&periodo=119" target=_blank>49° Reunión - 4° Sesión Ordinaria De Prórroga Especial - (30/01/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=544&numVid=0&reunion=48&periodo=119" target=_blank>48° Reunión - 3° Sesión Ordinaria De Prórroga Especial - (23/01/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=543&numVid=0&reunion=47&periodo=119" target=_blank>47° Reunión - 2° Sesión Ordinaria De Prórroga Especial - (05/01/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=653&numVid=0&reunion=5&periodo=119" target=_blank>Asamblea Legislativa - Juramento Presidente Duhalde - (01/01/2002)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1220&numVid=0&reunion=4&periodo=119" target=_blank>Asamblea Legislativa - Juramento Presidente Rodriguez Saa - (22/12/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=677&numVid=0&reunion=3&periodo=119" target=_blank>Asamblea Legislativa - Renuncia Presidente de la Rua - (21/12/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=526&numVid=0&reunion=46&periodo=119" target=_blank>46° Reunión - 1° Sesión Ordinaria De Prórroga Especial - (19/12/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=542&numVid=0&reunion=45&periodo=119" target=_blank>45° Reunión - Sesión Extraordinaria Preparatoria - (05/12/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=523&numVid=0&reunion=44&periodo=119" target=_blank>44° Reunión - 12° Sesión Ordinaria Especial cont. - (29/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=540&numVid=0&reunion=43&periodo=119" target=_blank>43° Reunión - 12° Sesión Ordinaria Especial cont. - (28/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=522&numVid=0&reunion=42&periodo=119" target=_blank>42° Reunión - 12° Sesión Ordinaria Especial - (27/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=539&numVid=0&reunion=41&periodo=119" target=_blank>41° Reunión - Expresiones en Minoría - (27/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=521&numVid=0&reunion=40&periodo=119" target=_blank>40° Reunión - Expresiones en Minoría - (27/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=538&numVid=0&reunion=39&periodo=119" target=_blank>39° Reunión - Expresiones en Minoría - (14/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=520&numVid=0&reunion=38&periodo=119" target=_blank>38° Reunión - Expresiones en Minoría - (13/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=536&numVid=0&reunion=37&periodo=119" target=_blank>37° Reunión - 11° Sesión Ordinaria  cont. - (07/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1141&numVid=0&reunion=36&periodo=119" target=_blank>36° Reunión - Expresiones en Minoría - (06/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1140&numVid=0&reunion=35&periodo=119" target=_blank>35° Reunión - Expresiones en Minoría - (06/11/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=516&numVid=0&reunion=34&periodo=119" target=_blank>34° Reunión - 11° Sesión Ordinaria  cont. - (31/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1139&numVid=0&reunion=33&periodo=119" target=_blank>33° Reunión - Expresiones en Minoría - (30/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1138&numVid=0&reunion=32&periodo=119" target=_blank>32° Reunión - Expresiones en Minoría - (30/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1137&numVid=0&reunion=31&periodo=119" target=_blank>31° Reunión - Expresiones en Minoría - (30/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=515&numVid=0&reunion=30&periodo=119" target=_blank>30° Reunión - 11° Sesión Ordinaria  - (24/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1136&numVid=0&reunion=29&periodo=119" target=_blank>29° Reunión - Expresiones en Minoría - (23/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1135&numVid=0&reunion=28&periodo=119" target=_blank>28° Reunión - Expresiones en Minoría - (23/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1134&numVid=0&reunion=27&periodo=119" target=_blank>27° Reunión - Expresiones en Minoría - (03/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1133&numVid=0&reunion=26&periodo=119" target=_blank>26° Reunión - Expresiones en Minoría - (02/10/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=509&numVid=0&reunion=25&periodo=119" target=_blank>25° Reunión - 10° Sesión Ordinaria  cont. - (12/09/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1132&numVid=0&reunion=24&periodo=119" target=_blank>24° Reunión - 10° Sesión Ordinaria  cont. - (05/09/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1131&numVid=0&reunion=23&periodo=119" target=_blank>23° Reunión - 10° Sesión Ordinaria  cont. - (29/08/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=506&numVid=0&reunion=22&periodo=119" target=_blank>22° Reunión - 10° Sesión Ordinaria  cont. - (22/08/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=481&numVid=0&reunion=21&periodo=119" target=_blank>21° Reunión - 10° Sesión Ordinaria  - (15/08/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1130&numVid=0&reunion=20&periodo=119" target=_blank>20° Reunión - Expresiones en Minoría - (08/08/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1129&numVid=0&reunion=19&periodo=119" target=_blank>19° Reunión - Expresiones en Minoría - (31/07/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=502&numVid=0&reunion=18&periodo=119" target=_blank>18° Reunión - 9° Sesión Ordinaria Especial - (20/07/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=178&numVid=0&reunion=17&periodo=119" target=_blank>17° Reunión - 8° Sesión Ordinaria  cont. - (11/07/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=177&numVid=0&reunion=16&periodo=119" target=_blank>16° Reunión - 8° Sesión Ordinaria  - (04/07/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=174&numVid=0&reunion=15&periodo=119" target=_blank>15° Reunión - 7° Sesión Ordinaria  - (20/06/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1128&numVid=0&reunion=14&periodo=119" target=_blank>14° Reunión - Expresiones en Minoría - (13/06/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=170&numVid=0&reunion=13&periodo=119" target=_blank>13° Reunión - 6° Sesión Ordinaria  cont. - (30/05/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=168&numVid=0&reunion=12&periodo=119" target=_blank>12° Reunión - 6° Sesión Ordinaria  cont. - (23/05/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=167&numVid=0&reunion=11&periodo=119" target=_blank>11° Reunión - 6° Sesión Ordinaria  - (16/05/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=166&numVid=0&reunion=10&periodo=119" target=_blank>10° Reunión - 5° Sesión Ordinaria  cont. - (09/05/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=160&numVid=0&reunion=9&periodo=119" target=_blank>9° Reunión - 5° Sesión Ordinaria  - (02/05/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=157&numVid=0&reunion=8&periodo=119" target=_blank>8° Reunión - 4° Sesión Ordinaria  - (18/04/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=152&numVid=0&reunion=7&periodo=119" target=_blank>7° Reunión - 3° Sesión Ordinaria Especial cont. - (27/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=151&numVid=0&reunion=6&periodo=119" target=_blank>6° Reunión - 3° Sesión Ordinaria Especial cont. - (26/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=487&numVid=0&reunion=5&periodo=119" target=_blank>5° Reunión - 3° Sesión Ordinaria Especial - (25/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=486&numVid=0&reunion=4&periodo=119" target=_blank>4° Reunión - 2° Sesión Ordinaria  - (22/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1219&numVid=0&reunion=2&periodo=119" target=_blank>Asamblea Legislativa - Pte. Ciampi (Italia) - (15/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=148&numVid=0&reunion=3&periodo=119" target=_blank>3° Reunión - 1° Sesión Ordinaria  cont. - (14/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=147&numVid=0&reunion=2&periodo=119" target=_blank>2° Reunión - 1° Sesión Ordinaria  - (07/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=652&numVid=0&reunion=1&periodo=119" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/03/2001)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1124&numVid=0&reunion=1&periodo=119" target=_blank>1° Reunión - Sesión Ordinaria Preparatoria - (28/02/2001)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 107 (01/05/1989 - 30/04/1990)
+</button><ul>
+<li>
+<a href="sesion.html?id=2937&numVid=0&reunion=59&periodo=107" target=_blank>59° Reunión - 10° Sesión Extraordinaria Especial - (25/04/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2936&numVid=0&reunion=58&periodo=107" target=_blank>58° Reunión - 9° Sesión Extraordinaria Especial - (04/04/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2935&numVid=0&reunion=57&periodo=107" target=_blank>57° Reunión - Expresiones en Minoría - (29/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2934&numVid=0&reunion=56&periodo=107" target=_blank>56° Reunión - 8° Sesión Extraordinaria Especial - (28/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2932&numVid=0&reunion=6&periodo=107" target=_blank>Asamblea Legislativa - Pte Costa Rica - (22/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2933&numVid=0&reunion=55&periodo=107" target=_blank>55° Reunión - Expresiones en Minoría - (21/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2931&numVid=0&reunion=54&periodo=107" target=_blank>54° Reunión - Expresiones en Minoría - (21/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2930&numVid=0&reunion=53&periodo=107" target=_blank>53° Reunión - Expresiones en Minoría - (21/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2929&numVid=0&reunion=52&periodo=107" target=_blank>52° Reunión - Expresiones en Minoría - (15/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2928&numVid=0&reunion=51&periodo=107" target=_blank>51° Reunión - Expresiones en Minoría - (15/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2927&numVid=0&reunion=50&periodo=107" target=_blank>50° Reunión - 7° Sesión Extraordinaria Especial - (14/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2910&numVid=0&reunion=5&periodo=107" target=_blank>Asamblea Legislativa - Pte. Italia, Pertini - (13/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2926&numVid=0&reunion=49&periodo=107" target=_blank>49° Reunión - Expresiones en Minoría - (07/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2925&numVid=0&reunion=48&periodo=107" target=_blank>48° Reunión - 6° Sesión Extraordinaria - (01/03/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2924&numVid=0&reunion=47&periodo=107" target=_blank>47° Reunión - Expresiones en Minoría - (22/02/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2923&numVid=0&reunion=46&periodo=107" target=_blank>46° Reunión - Expresiones en Minoría - (15/02/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2922&numVid=0&reunion=45&periodo=107" target=_blank>45° Reunión - 5° Sesión Extraordinaria cont. - (25/01/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2921&numVid=0&reunion=44&periodo=107" target=_blank>44° Reunión - 5° Sesión Extraordinaria - (24/01/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2920&numVid=0&reunion=43&periodo=107" target=_blank>43° Reunión - Expresiones en Minoría - (17/01/1990)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2919&numVid=0&reunion=42&periodo=107" target=_blank>42° Reunión - 4° Sesión Extraordinaria - (27/12/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2918&numVid=0&reunion=41&periodo=107" target=_blank>41° Reunión - 3° Sesión Extraordinaria Especial - (19/12/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2917&numVid=0&reunion=40&periodo=107" target=_blank>40° Reunión - 2° Sesión Extraordinaria - (06/12/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2892&numVid=0&reunion=4&periodo=107" target=_blank>Asamblea Legislativa - Pte. Israel, Herzog - (06/12/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2916&numVid=0&reunion=39&periodo=107" target=_blank>39° Reunión - 1° Sesión Extraordinaria cont. - (30/11/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2915&numVid=0&reunion=38&periodo=107" target=_blank>38° Reunión - 1° Sesión Extraordinaria cont. - (29/11/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2914&numVid=0&reunion=37&periodo=107" target=_blank>37° Reunión - Sesión Extraordinaria Preparatoria - (29/11/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2913&numVid=0&reunion=36&periodo=107" target=_blank>36° Reunión - 1° Sesión Extraordinaria cont. - (28/11/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2912&numVid=0&reunion=35&periodo=107" target=_blank>35° Reunión - 1° Sesión Extraordinaria - (23/11/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2911&numVid=0&reunion=34&periodo=107" target=_blank>34° Reunión - Expresiones en Minoría - (08/11/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2909&numVid=0&reunion=33&periodo=107" target=_blank>33° Reunión - 8° Sesión Ordinaria  cont. - (29/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2908&numVid=0&reunion=32&periodo=107" target=_blank>32° Reunión - 8° Sesión Ordinaria  cont. - (28/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2907&numVid=0&reunion=31&periodo=107" target=_blank>31° Reunión - 8° Sesión Ordinaria  - (27/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2906&numVid=0&reunion=30&periodo=107" target=_blank>30° Reunión - 7° Sesión Ordinaria  cont. - (21/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2905&numVid=0&reunion=29&periodo=107" target=_blank>29° Reunión - 7° Sesión Ordinaria  - (20/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2904&numVid=0&reunion=28&periodo=107" target=_blank>28° Reunión - Expresiones en Minoría - (20/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2903&numVid=0&reunion=27&periodo=107" target=_blank>27° Reunión - 6° Sesión Ordinaria  cont. - (14/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2902&numVid=0&reunion=26&periodo=107" target=_blank>26° Reunión - 6° Sesión Ordinaria  - (13/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2873&numVid=0&reunion=6&periodo=107" target=_blank>6° Reunión - 2° Sesión Ordinaria  cont. - (08/09/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2901&numVid=0&reunion=25&periodo=107" target=_blank>25° Reunión - 5° Sesión Ordinaria  cont. - (31/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2900&numVid=0&reunion=24&periodo=107" target=_blank>24° Reunión - Expresiones en Minoría - (31/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2899&numVid=0&reunion=23&periodo=107" target=_blank>23° Reunión - 5° Sesión Ordinaria  cont. - (30/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2889&numVid=0&reunion=22&periodo=107" target=_blank>22° Reunión - 5° Sesión Ordinaria  cont. - (29/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2888&numVid=0&reunion=21&periodo=107" target=_blank>21° Reunión - 5° Sesión Ordinaria  cont. - (25/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2887&numVid=0&reunion=20&periodo=107" target=_blank>20° Reunión - 5° Sesión Ordinaria  cont. - (24/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2886&numVid=0&reunion=19&periodo=107" target=_blank>19° Reunión - 5° Sesión Ordinaria  cont. - (23/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2885&numVid=0&reunion=18&periodo=107" target=_blank>18° Reunión - Expresiones en Minoría - (22/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2884&numVid=0&reunion=17&periodo=107" target=_blank>17° Reunión - 5° Sesión Ordinaria  cont. - (16/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2883&numVid=0&reunion=16&periodo=107" target=_blank>16° Reunión - 5° Sesión Ordinaria  cont. - (10/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2882&numVid=0&reunion=15&periodo=107" target=_blank>15° Reunión - 5° Sesión Ordinaria  cont. - (09/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2881&numVid=0&reunion=14&periodo=107" target=_blank>14° Reunión - 5° Sesión Ordinaria  cont. - (08/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2880&numVid=0&reunion=13&periodo=107" target=_blank>13° Reunión - 5° Sesión Ordinaria  - (03/08/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2879&numVid=0&reunion=12&periodo=107" target=_blank>12° Reunión - Expresiones en Minoría - (27/07/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2878&numVid=0&reunion=11&periodo=107" target=_blank>11° Reunión - Expresiones en Minoría - (26/07/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2877&numVid=0&reunion=10&periodo=107" target=_blank>10° Reunión - Expresiones en Minoría - (20/07/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2876&numVid=0&reunion=9&periodo=107" target=_blank>9° Reunión - 4° Sesión Ordinaria  - (19/07/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2891&numVid=0&reunion=3&periodo=107" target=_blank>Asamblea Legislativa - Juramento Presidente Menem - (08/07/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2890&numVid=0&reunion=2&periodo=107" target=_blank>Asamblea Legislativa - Resultado elecciones - (07/07/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2875&numVid=0&reunion=8&periodo=107" target=_blank>8° Reunión - 3° Sesión Ordinaria Especial - (06/07/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2874&numVid=0&reunion=7&periodo=107" target=_blank>7° Reunión - 2° Sesión Ordinaria  cont. - (14/06/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2872&numVid=0&reunion=5&periodo=107" target=_blank>5° Reunión - 2° Sesión Ordinaria  cont. - (07/06/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2871&numVid=0&reunion=4&periodo=107" target=_blank>4° Reunión - 2° Sesión Ordinaria  - (01/06/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2870&numVid=0&reunion=3&periodo=107" target=_blank>3° Reunión - 1° Sesión Ordinaria Especial - (31/05/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2869&numVid=0&reunion=2&periodo=107" target=_blank>2° Reunión - Expresiones en Minoría - (24/05/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1931&numVid=0&reunion=1&periodo=107" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/05/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2868&numVid=0&reunion=1&periodo=107" target=_blank>1° Reunión - Sesión Ordinaria Preparatoria - (26/04/1989)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 106 (01/05/1988 - 30/04/1989)
+</button><ul>
+<li>
+<a href="sesion.html?id=2423&numVid=0&reunion=71&periodo=106" target=_blank>71° Reunión - 6° Sesión Extraordinaria Especial cont. - (27/04/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2422&numVid=0&reunion=70&periodo=106" target=_blank>70° Reunión - 6° Sesión Extraordinaria Especial - (26/04/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2421&numVid=0&reunion=69&periodo=106" target=_blank>69° Reunión - 5° Sesión Extraordinaria Especial - (26/04/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2420&numVid=0&reunion=68&periodo=106" target=_blank>68° Reunión - 4° Sesión Extraordinaria Especial cont. - (30/03/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2419&numVid=0&reunion=67&periodo=106" target=_blank>67° Reunión - 4° Sesión Extraordinaria Especial cont. - (29/03/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2418&numVid=0&reunion=66&periodo=106" target=_blank>66° Reunión - Expresiones en Minoría - (29/03/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2417&numVid=0&reunion=65&periodo=106" target=_blank>65° Reunión - 4° Sesión Extraordinaria Especial cont. - (15/03/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2416&numVid=0&reunion=64&periodo=106" target=_blank>64° Reunión - 4° Sesión Extraordinaria Especial cont. - (09/03/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2415&numVid=0&reunion=63&periodo=106" target=_blank>63° Reunión - 4° Sesión Extraordinaria Especial cont. - (08/03/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2414&numVid=0&reunion=62&periodo=106" target=_blank>62° Reunión - 4° Sesión Extraordinaria Especial cont. - (01/03/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2413&numVid=0&reunion=61&periodo=106" target=_blank>61° Reunión - 4° Sesión Extraordinaria Especial - (22/02/1989)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2552&numVid=0&reunion=60&periodo=106" target=_blank>60° Reunión - 3° Sesión Extraordinaria Especial cont. - (29/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2551&numVid=0&reunion=59&periodo=106" target=_blank>59° Reunión - 3° Sesión Extraordinaria Especial - (28/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2550&numVid=0&reunion=58&periodo=106" target=_blank>58° Reunión - Expresiones en Minoría - (28/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2549&numVid=0&reunion=57&periodo=106" target=_blank>57° Reunión - Expresiones en Minoría - (27/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2548&numVid=0&reunion=56&periodo=106" target=_blank>56° Reunión - Expresiones en Minoría - (22/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2542&numVid=0&reunion=55&periodo=106" target=_blank>55° Reunión - 2° Sesión Extraordinaria Especial cont. - (21/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2078&numVid=0&reunion=2&periodo=106" target=_blank>Asamblea Legislativa - Sublevación Militar - (21/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2541&numVid=0&reunion=54&periodo=106" target=_blank>54° Reunión - 2° Sesión Extraordinaria Especial cont. - (20/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2540&numVid=0&reunion=53&periodo=106" target=_blank>53° Reunión - 2° Sesión Extraordinaria Especial cont. - (19/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2539&numVid=0&reunion=52&periodo=106" target=_blank>52° Reunión - 2° Sesión Extraordinaria Especial cont. - (15/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2538&numVid=0&reunion=51&periodo=106" target=_blank>51° Reunión - 2° Sesión Extraordinaria Especial cont. - (14/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2537&numVid=0&reunion=50&periodo=106" target=_blank>50° Reunión - 2° Sesión Extraordinaria Especial cont. - (07/12/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2536&numVid=0&reunion=49&periodo=106" target=_blank>49° Reunión - 2° Sesión Extraordinaria Especial cont. - (30/11/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2535&numVid=0&reunion=48&periodo=106" target=_blank>48° Reunión - Sesión Extraordinaria Preparatoria cont. - (30/11/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2534&numVid=0&reunion=47&periodo=106" target=_blank>47° Reunión - Sesión Extraordinaria Preparatoria - (29/11/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2533&numVid=0&reunion=46&periodo=106" target=_blank>46° Reunión - 2° Sesión Extraordinaria Especial cont. - (24/11/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2532&numVid=0&reunion=45&periodo=106" target=_blank>45° Reunión - 2° Sesión Extraordinaria Especial - (23/11/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2531&numVid=0&reunion=44&periodo=106" target=_blank>44° Reunión - 1° Sesión Extraordinaria - (19/10/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2530&numVid=0&reunion=43&periodo=106" target=_blank>43° Reunión - 14° Sesión Ordinaria  cont. - (30/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2529&numVid=0&reunion=42&periodo=106" target=_blank>42° Reunión - 14° Sesión Ordinaria  cont. - (29/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2528&numVid=0&reunion=41&periodo=106" target=_blank>41° Reunión - 14° Sesión Ordinaria  cont. - (28/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2527&numVid=0&reunion=40&periodo=106" target=_blank>40° Reunión - Expresiones en Minoría - (28/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2526&numVid=0&reunion=39&periodo=106" target=_blank>39° Reunión - 14° Sesión Ordinaria  cont. - (28/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2525&numVid=0&reunion=38&periodo=106" target=_blank>38° Reunión - 14° Sesión Ordinaria  cont. - (22/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2524&numVid=0&reunion=37&periodo=106" target=_blank>37° Reunión - 14° Sesión Ordinaria  - (21/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2523&numVid=0&reunion=36&periodo=106" target=_blank>36° Reunión - 13° Sesión Ordinaria  - (07/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2522&numVid=0&reunion=35&periodo=106" target=_blank>35° Reunión - Expresiones en Minoría - (07/09/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2521&numVid=0&reunion=34&periodo=106" target=_blank>34° Reunión - 12° Sesión Ordinaria  - (31/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2520&numVid=0&reunion=33&periodo=106" target=_blank>33° Reunión - Expresiones en Minoría - (31/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2519&numVid=0&reunion=32&periodo=106" target=_blank>32° Reunión - 11° Sesión Ordinaria  cont. - (25/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2518&numVid=0&reunion=31&periodo=106" target=_blank>31° Reunión - Expresiones en Minoría - (25/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2517&numVid=0&reunion=30&periodo=106" target=_blank>30° Reunión - 11° Sesión Ordinaria  cont. - (24/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2516&numVid=0&reunion=29&periodo=106" target=_blank>29° Reunión - Expresiones en Minoría - (24/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2515&numVid=0&reunion=28&periodo=106" target=_blank>28° Reunión - 11° Sesión Ordinaria  - (17/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2514&numVid=0&reunion=27&periodo=106" target=_blank>27° Reunión - Expresiones en Minoría - (17/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2513&numVid=0&reunion=26&periodo=106" target=_blank>26° Reunión - Expresiones en Minoría - (11/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2512&numVid=0&reunion=25&periodo=106" target=_blank>25° Reunión - 10° Sesión Ordinaria  cont. - (11/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2511&numVid=0&reunion=24&periodo=106" target=_blank>24° Reunión - 10° Sesión Ordinaria  cont. - (10/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2510&numVid=0&reunion=23&periodo=106" target=_blank>23° Reunión - Expresiones en Minoría - (10/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2509&numVid=0&reunion=22&periodo=106" target=_blank>22° Reunión - Expresiones en Minoría - (04/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2508&numVid=0&reunion=21&periodo=106" target=_blank>21° Reunión - 10° Sesión Ordinaria  - (03/08/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2507&numVid=0&reunion=20&periodo=106" target=_blank>20° Reunión - 9° Sesión Ordinaria  - (28/07/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2412&numVid=0&reunion=19&periodo=106" target=_blank>19° Reunión - 8° Sesión Ordinaria  - (20/07/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2411&numVid=0&reunion=18&periodo=106" target=_blank>18° Reunión - 7° Sesión Ordinaria Especial - (28/06/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2410&numVid=0&reunion=17&periodo=106" target=_blank>17° Reunión - Expresiones en Minoría - (16/06/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2409&numVid=0&reunion=16&periodo=106" target=_blank>16° Reunión - 6° Sesión Ordinaria  - (15/06/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2408&numVid=0&reunion=15&periodo=106" target=_blank>15° Reunión - 5° Sesión Ordinaria  - (09/06/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2407&numVid=0&reunion=14&periodo=106" target=_blank>14° Reunión - 4° Sesión Ordinaria Especial - (08/06/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2406&numVid=0&reunion=13&periodo=106" target=_blank>13° Reunión - Expresiones en Minoría - (01/06/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2312&numVid=0&reunion=12&periodo=106" target=_blank>12° Reunión - Expresiones en Minoría - (01/06/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2311&numVid=0&reunion=11&periodo=106" target=_blank>11° Reunión - Expresiones en Minoría - (19/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2310&numVid=0&reunion=10&periodo=106" target=_blank>10° Reunión - 3° Sesión Ordinaria  - (18/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2309&numVid=0&reunion=9&periodo=106" target=_blank>9° Reunión - 1° Sesión Ordinaria Especial cont. - (17/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2308&numVid=0&reunion=8&periodo=106" target=_blank>8° Reunión - 2° Sesión Ordinaria Especial cont. - (12/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2307&numVid=0&reunion=7&periodo=106" target=_blank>7° Reunión - Expresiones en Minoría - (12/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2306&numVid=0&reunion=6&periodo=106" target=_blank>6° Reunión - 1° Sesión Ordinaria Especial cont. - (12/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2305&numVid=0&reunion=5&periodo=106" target=_blank>5° Reunión - 2° Sesión Ordinaria Especial - (11/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2304&numVid=0&reunion=4&periodo=106" target=_blank>4° Reunión - 1° Sesión Ordinaria Especial - (10/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2303&numVid=0&reunion=3&periodo=106" target=_blank>3° Reunión - Expresiones en Minoría - (05/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2302&numVid=0&reunion=2&periodo=106" target=_blank>2° Reunión - Expresiones en Minoría - (04/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2569&numVid=0&reunion=1&periodo=106" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/05/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2301&numVid=0&reunion=1&periodo=106" target=_blank>1° Reunión - Sesión Ordinaria Preparatoria - (26/04/1988)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 105 (01/05/1987 - 30/04/1988)
+</button><ul>
+<li>
+<a href="sesion.html?id=2867&numVid=0&reunion=59&periodo=105" target=_blank>59° Reunión - 11° Sesión Extraordinaria Especial cont. - (29/04/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2866&numVid=0&reunion=58&periodo=105" target=_blank>58° Reunión - 12° Sesión Extraordinaria - (28/04/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2865&numVid=0&reunion=57&periodo=105" target=_blank>57° Reunión - 11° Sesión Extraordinaria Especial cont. - (28/04/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2864&numVid=0&reunion=56&periodo=105" target=_blank>56° Reunión - 11° Sesión Extraordinaria Especial - (27/04/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2863&numVid=0&reunion=55&periodo=105" target=_blank>55° Reunión - 10° Sesión Extraordinaria cont. - (06/04/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2862&numVid=0&reunion=54&periodo=105" target=_blank>54° Reunión - 10° Sesión Extraordinaria - (23/03/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2861&numVid=0&reunion=53&periodo=105" target=_blank>53° Reunión - 9° Sesión Extraordinaria cont. - (16/03/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2860&numVid=0&reunion=52&periodo=105" target=_blank>52° Reunión - 9° Sesión Extraordinaria - (09/03/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2859&numVid=0&reunion=51&periodo=105" target=_blank>51° Reunión - 8° Sesión Extraordinaria - (03/03/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2858&numVid=0&reunion=50&periodo=105" target=_blank>50° Reunión - Expresiones en Minoría - (02/03/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2857&numVid=0&reunion=49&periodo=105" target=_blank>49° Reunión - 6° Sesión Extraordinaria Especial cont. - (24/02/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2856&numVid=0&reunion=48&periodo=105" target=_blank>48° Reunión - 7° Sesión Extraordinaria - (17/02/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2855&numVid=0&reunion=47&periodo=105" target=_blank>47° Reunión - 6° Sesión Extraordinaria Especial - (17/02/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2854&numVid=0&reunion=46&periodo=105" target=_blank>46° Reunión - Expresiones en Minoría - (07/01/1988)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2853&numVid=0&reunion=45&periodo=105" target=_blank>45° Reunión - 5° Sesión Extraordinaria Especial cont. - (29/12/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2852&numVid=0&reunion=44&periodo=105" target=_blank>44° Reunión - 5° Sesión Extraordinaria Especial cont. - (28/12/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2851&numVid=0&reunion=43&periodo=105" target=_blank>43° Reunión - 5° Sesión Extraordinaria Especial cont. - (22/12/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2850&numVid=0&reunion=42&periodo=105" target=_blank>42° Reunión - 5° Sesión Extraordinaria Especial - (21/12/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2849&numVid=0&reunion=41&periodo=105" target=_blank>41° Reunión - 4° Sesión Extraordinaria - (17/12/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2848&numVid=0&reunion=40&periodo=105" target=_blank>40° Reunión - Sesión Extraordinaria Preparatoria - (27/11/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2847&numVid=0&reunion=39&periodo=105" target=_blank>39° Reunión - 3° Sesión Extraordinaria - (26/11/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2846&numVid=0&reunion=38&periodo=105" target=_blank>38° Reunión - 2° Sesión Extraordinaria cont. - (18/11/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2845&numVid=0&reunion=37&periodo=105" target=_blank>37° Reunión - 2° Sesión Extraordinaria - (11/11/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2844&numVid=0&reunion=36&periodo=105" target=_blank>36° Reunión - 1° Sesión Extraordinaria - (05/11/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2843&numVid=0&reunion=35&periodo=105" target=_blank>35° Reunión - Expresiones en Minoría - (29/10/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2503&numVid=0&reunion=4&periodo=105" target=_blank>Asamblea Legislativa - Pte. España Gonzalez - (29/10/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2502&numVid=0&reunion=3&periodo=105" target=_blank>Asamblea Legislativa - Pte. Francia Mitterrand - (07/10/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2842&numVid=0&reunion=34&periodo=105" target=_blank>34° Reunión - 12° Sesión Ordinaria  - (30/09/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2506&numVid=0&reunion=33&periodo=105" target=_blank>33° Reunión - Expresiones en Minoría - (30/09/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2505&numVid=0&reunion=32&periodo=105" target=_blank>32° Reunión - Expresiones en Minoría - (30/09/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2504&numVid=0&reunion=31&periodo=105" target=_blank>31° Reunión - Expresiones en Minoría - (29/09/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2500&numVid=0&reunion=30&periodo=105" target=_blank>30° Reunión - Expresiones en Minoría - (23/09/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2501&numVid=0&reunion=2&periodo=105" target=_blank>Asamblea Legislativa - Pte. Uruguay Sanguinetti - (14/09/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2499&numVid=0&reunion=29&periodo=105" target=_blank>29° Reunión - 10° Sesión Ordinaria  cont. - (22/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2498&numVid=0&reunion=28&periodo=105" target=_blank>28° Reunión - Expresiones en Minoría - (21/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2497&numVid=0&reunion=27&periodo=105" target=_blank>27° Reunión - 10° Sesión Ordinaria  cont. - (16/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2496&numVid=0&reunion=26&periodo=105" target=_blank>26° Reunión - 8° Sesión Ordinaria  cont. - (15/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2495&numVid=0&reunion=25&periodo=105" target=_blank>25° Reunión - 11° Sesión Ordinaria Especial cont. - (15/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2494&numVid=0&reunion=24&periodo=105" target=_blank>24° Reunión - 11° Sesión Ordinaria Especial cont. - (14/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2493&numVid=0&reunion=23&periodo=105" target=_blank>23° Reunión - 11° Sesión Ordinaria Especial - (07/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2492&numVid=0&reunion=22&periodo=105" target=_blank>22° Reunión - 10° Sesión Ordinaria  - (02/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2491&numVid=0&reunion=21&periodo=105" target=_blank>21° Reunión - 9° Sesión Ordinaria  cont. - (02/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2466&numVid=0&reunion=20&periodo=105" target=_blank>20° Reunión - 8° Sesión Ordinaria  cont. - (01/07/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2465&numVid=0&reunion=19&periodo=105" target=_blank>19° Reunión - 9° Sesión Ordinaria  - (25/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2464&numVid=0&reunion=18&periodo=105" target=_blank>18° Reunión - Expresiones en Minoría - (25/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2463&numVid=0&reunion=17&periodo=105" target=_blank>17° Reunión - 8° Sesión Ordinaria  cont. - (25/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2462&numVid=0&reunion=16&periodo=105" target=_blank>16° Reunión - 8° Sesión Ordinaria  cont. - (24/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2461&numVid=0&reunion=15&periodo=105" target=_blank>15° Reunión - 8° Sesión Ordinaria  - (18/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2460&numVid=0&reunion=14&periodo=105" target=_blank>14° Reunión - Expresiones en Minoría - (17/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2459&numVid=0&reunion=13&periodo=105" target=_blank>13° Reunión - 7° Sesión Ordinaria  - (04/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2458&numVid=0&reunion=12&periodo=105" target=_blank>12° Reunión - 6° Sesión Ordinaria  - (03/06/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2457&numVid=0&reunion=11&periodo=105" target=_blank>11° Reunión - 2° Sesión Ordinaria  cont. - (27/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2456&numVid=0&reunion=10&periodo=105" target=_blank>10° Reunión - 2° Sesión Ordinaria  cont. - (21/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2455&numVid=0&reunion=9&periodo=105" target=_blank>9° Reunión - 2° Sesión Ordinaria  cont. - (20/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2454&numVid=0&reunion=8&periodo=105" target=_blank>8° Reunión - 5° Sesión Ordinaria  - (15/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2453&numVid=0&reunion=7&periodo=105" target=_blank>7° Reunión - 4° Sesión Ordinaria  - (14/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2452&numVid=0&reunion=6&periodo=105" target=_blank>6° Reunión - 3° Sesión Ordinaria  - (13/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2451&numVid=0&reunion=5&periodo=105" target=_blank>5° Reunión - 2° Sesión Ordinaria  cont. - (13/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2450&numVid=0&reunion=4&periodo=105" target=_blank>4° Reunión - 2° Sesión Ordinaria  cont. - (07/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2449&numVid=0&reunion=3&periodo=105" target=_blank>3° Reunión - 2° Sesión Ordinaria  - (06/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2448&numVid=0&reunion=2&periodo=105" target=_blank>2° Reunión - 1° Sesión Ordinaria Especial - (05/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1665&numVid=0&reunion=1&periodo=105" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/05/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2447&numVid=0&reunion=1&periodo=105" target=_blank>1° Reunión - Sesión Ordinaria Preparatoria - (28/04/1987)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 104 (01/05/1986 - 30/04/1987)
+</button><ul>
+<li>
+<a href="sesion.html?id=2300&numVid=0&reunion=70&periodo=104" target=_blank>70° Reunión - 6° Sesión Extraordinaria Especial cont. - (30/04/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2299&numVid=0&reunion=69&periodo=104" target=_blank>69° Reunión - 6° Sesión Extraordinaria Especial cont. - (29/04/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2298&numVid=0&reunion=68&periodo=104" target=_blank>68° Reunión - 6° Sesión Extraordinaria Especial - (28/04/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2297&numVid=0&reunion=67&periodo=104" target=_blank>67° Reunión - 5° Sesión Extraordinaria Especial - (21/04/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2296&numVid=0&reunion=66&periodo=104" target=_blank>66° Reunión - 4° Sesión Extraordinaria - (19/03/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2295&numVid=0&reunion=65&periodo=104" target=_blank>65° Reunión - Expresiones en Minoría - (12/03/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2294&numVid=0&reunion=64&periodo=104" target=_blank>64° Reunión - 3° Sesión Extraordinaria - (04/02/1987)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2293&numVid=0&reunion=63&periodo=104" target=_blank>63° Reunión - 2° Sesión Extraordinaria Especial - (23/12/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2292&numVid=0&reunion=62&periodo=104" target=_blank>62° Reunión - 1° Sesión Extraordinaria - (17/12/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2291&numVid=0&reunion=61&periodo=104" target=_blank>61° Reunión - Sesión Extraordinaria Preparatoria - (27/11/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2290&numVid=0&reunion=60&periodo=104" target=_blank>60° Reunión - 3° Sesión De Prórroga  cont. - (31/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2289&numVid=0&reunion=59&periodo=104" target=_blank>59° Reunión - 4° Sesión Ordinaria De Prórroga Especial cont. - (31/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2288&numVid=0&reunion=58&periodo=104" target=_blank>58° Reunión - 3° Sesión De Prórroga  cont. - (30/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2287&numVid=0&reunion=57&periodo=104" target=_blank>57° Reunión - 4° Sesión Ordinaria De Prórroga Especial cont. - (30/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2286&numVid=0&reunion=56&periodo=104" target=_blank>56° Reunión - Expresiones en Minoría - (30/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2285&numVid=0&reunion=55&periodo=104" target=_blank>55° Reunión - 3° Sesión De Prórroga  cont. - (29/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2284&numVid=0&reunion=54&periodo=104" target=_blank>54° Reunión - 4° Sesión Ordinaria De Prórroga Especial cont. - (29/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2283&numVid=0&reunion=53&periodo=104" target=_blank>53° Reunión - 3° Sesión De Prórroga  cont. - (28/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2282&numVid=0&reunion=52&periodo=104" target=_blank>52° Reunión - 2° Sesión Ordinaria De Prórroga Especial cont. - (28/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2281&numVid=0&reunion=51&periodo=104" target=_blank>51° Reunión - 3° Sesión De Prórroga  cont. - (23/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2280&numVid=0&reunion=50&periodo=104" target=_blank>50° Reunión - 4° Sesión Ordinaria De Prórroga Especial - (23/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2279&numVid=0&reunion=49&periodo=104" target=_blank>49° Reunión - 3° Sesión De Prórroga  - (22/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1824&numVid=0&reunion=48&periodo=104" target=_blank>48° Reunión - 2° Sesión Ordinaria De Prórroga Especial cont. - (21/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1823&numVid=0&reunion=47&periodo=104" target=_blank>47° Reunión - 1° Sesión De Prórroga  cont. - (15/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1671&numVid=0&reunion=46&periodo=104" target=_blank>46° Reunión - 2° Sesión Ordinaria De Prórroga Especial - (14/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1670&numVid=0&reunion=45&periodo=104" target=_blank>45° Reunión - 1° Sesión De Prórroga  cont. - (08/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1669&numVid=0&reunion=44&periodo=104" target=_blank>44° Reunión - 1° Sesión De Prórroga  - (02/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1668&numVid=0&reunion=43&periodo=104" target=_blank>43° Reunión - 16° Sesión Ordinaria Especial cont. - (01/10/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1666&numVid=0&reunion=42&periodo=104" target=_blank>42° Reunión - 16° Sesión Ordinaria Especial cont. - (30/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1664&numVid=0&reunion=41&periodo=104" target=_blank>41° Reunión - 16° Sesión Ordinaria Especial - (26/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1663&numVid=0&reunion=40&periodo=104" target=_blank>40° Reunión - 15° Sesión Ordinaria  - (25/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1662&numVid=0&reunion=39&periodo=104" target=_blank>39° Reunión - 14° Sesión Ordinaria  - (24/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1661&numVid=0&reunion=38&periodo=104" target=_blank>38° Reunión - 13° Sesión Ordinaria  cont. - (18/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1660&numVid=0&reunion=37&periodo=104" target=_blank>37° Reunión - 13° Sesión Ordinaria  cont. - (17/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2405&numVid=0&reunion=36&periodo=104" target=_blank>36° Reunión - 13° Sesión Ordinaria  - (11/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2404&numVid=0&reunion=35&periodo=104" target=_blank>35° Reunión - 12° Sesión Ordinaria  - (10/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2403&numVid=0&reunion=34&periodo=104" target=_blank>34° Reunión - 11° Sesión Ordinaria  cont. - (10/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2402&numVid=0&reunion=33&periodo=104" target=_blank>33° Reunión - 11° Sesión Ordinaria  - (04/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2401&numVid=0&reunion=32&periodo=104" target=_blank>32° Reunión - 10° Sesión Ordinaria  - (03/09/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2400&numVid=0&reunion=31&periodo=104" target=_blank>31° Reunión - 9° Sesión Ordinaria  - (28/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2399&numVid=0&reunion=30&periodo=104" target=_blank>30° Reunión - 8° Sesión Ordinaria  - (27/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2398&numVid=0&reunion=29&periodo=104" target=_blank>29° Reunión - 7° Sesión Ordinaria Especial cont. - (21/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2397&numVid=0&reunion=28&periodo=104" target=_blank>28° Reunión - 7° Sesión Ordinaria Especial cont. - (20/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2396&numVid=0&reunion=27&periodo=104" target=_blank>27° Reunión - 7° Sesión Ordinaria Especial cont. - (19/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2395&numVid=0&reunion=26&periodo=104" target=_blank>26° Reunión - 7° Sesión Ordinaria Especial cont. - (14/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2394&numVid=0&reunion=25&periodo=104" target=_blank>25° Reunión - 7° Sesión Ordinaria Especial - (13/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2393&numVid=0&reunion=24&periodo=104" target=_blank>24° Reunión - 6° Sesión Ordinaria  - (07/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2392&numVid=0&reunion=23&periodo=104" target=_blank>23° Reunión - 5° Sesión Ordinaria  cont. - (07/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2391&numVid=0&reunion=22&periodo=104" target=_blank>22° Reunión - 5° Sesión Ordinaria  - (06/08/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2390&numVid=0&reunion=21&periodo=104" target=_blank>21° Reunión - 4° Sesión Ordinaria  cont. - (31/07/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1659&numVid=0&reunion=20&periodo=104" target=_blank>20° Reunión - 4° Sesión Ordinaria  cont. - (30/07/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2278&numVid=0&reunion=3&periodo=104" target=_blank>Asamblea Legislativa - Pte. Brasil Sarney - (29/07/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1658&numVid=0&reunion=19&periodo=104" target=_blank>19° Reunión - 4° Sesión Ordinaria  cont. - (23/07/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1657&numVid=0&reunion=18&periodo=104" target=_blank>18° Reunión - 4° Sesión Ordinaria  - (03/07/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2032&numVid=0&reunion=17&periodo=104" target=_blank>17° Reunión - 3° Sesión Ordinaria  cont. - (02/07/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2031&numVid=0&reunion=16&periodo=104" target=_blank>16° Reunión - 3° Sesión Ordinaria  cont. - (26/06/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2030&numVid=0&reunion=15&periodo=104" target=_blank>15° Reunión - 3° Sesión Ordinaria  cont. - (25/06/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2029&numVid=0&reunion=14&periodo=104" target=_blank>14° Reunión - 3° Sesión Ordinaria  cont. - (18/06/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2028&numVid=0&reunion=13&periodo=104" target=_blank>13° Reunión - 3° Sesión Ordinaria  - (11/06/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2027&numVid=0&reunion=12&periodo=104" target=_blank>12° Reunión - 2° Sesión Ordinaria  - (05/06/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2026&numVid=0&reunion=11&periodo=104" target=_blank>11° Reunión - 1° Sesión Ordinaria  cont. - (04/06/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2025&numVid=0&reunion=10&periodo=104" target=_blank>10° Reunión - 1° Sesión Ordinaria  cont. - (29/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2024&numVid=0&reunion=9&periodo=104" target=_blank>9° Reunión - 1° Sesión Ordinaria  cont. - (28/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2023&numVid=0&reunion=8&periodo=104" target=_blank>8° Reunión - 1° Sesión Ordinaria  cont. - (22/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2022&numVid=0&reunion=7&periodo=104" target=_blank>7° Reunión - 1° Sesión Ordinaria  cont. - (21/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2021&numVid=0&reunion=6&periodo=104" target=_blank>6° Reunión - 1° Sesión Ordinaria  cont. - (15/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2054&numVid=0&reunion=2&periodo=104" target=_blank>Asamblea Legislativa - Pte El Salvador  - (15/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2020&numVid=0&reunion=5&periodo=104" target=_blank>5° Reunión - 1° Sesión Ordinaria  cont. - (14/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2019&numVid=0&reunion=4&periodo=104" target=_blank>4° Reunión - 1° Sesión Ordinaria  cont. - (08/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2257&numVid=0&reunion=3&periodo=104" target=_blank>3° Reunión - 1° Sesión Ordinaria  - (07/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2277&numVid=0&reunion=1&periodo=104" target=_blank>Asamblea Legislativa - Apertura Ordinarias - (01/05/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2256&numVid=0&reunion=2&periodo=104" target=_blank>2° Reunión - Sesión Ordinaria Preparatoria - (30/04/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=1822&numVid=0&reunion=1&periodo=104" target=_blank>1° Reunión - Expresiones en Minoría - (25/04/1986)</a>
+		
+		</li>
+</ul>
+</div><div class="js-accordion__panel"><button class="js-accordion__header">PERIODO 103 (01/05/1985 - 30/04/1986)
+</button><ul>
+<li>
+<a href="sesion.html?id=2446&numVid=0&reunion=48&periodo=103" target=_blank>48° Reunión - 5° Sesión Extraordinaria - (30/04/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2445&numVid=0&reunion=47&periodo=103" target=_blank>47° Reunión - 4° Sesión Extraordinaria Especial - (23/04/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2444&numVid=0&reunion=46&periodo=103" target=_blank>46° Reunión - 3° Sesión Extraordinaria - (17/04/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2276&numVid=0&reunion=3&periodo=103" target=_blank>Asamblea Legislativa - (11/04/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2443&numVid=0&reunion=45&periodo=103" target=_blank>45° Reunión - 1° Sesión Extraordinaria cont. - (03/04/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2442&numVid=0&reunion=44&periodo=103" target=_blank>44° Reunión - 1° Sesión Extraordinaria cont. - (20/03/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2441&numVid=0&reunion=43&periodo=103" target=_blank>43° Reunión - 1° Sesión Extraordinaria cont. - (19/03/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2275&numVid=0&reunion=2&periodo=103" target=_blank>Asamblea Legislativa - Pte. Perú García - (14/03/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2440&numVid=0&reunion=42&periodo=103" target=_blank>42° Reunión - 1° Sesión Extraordinaria cont. - (13/03/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2439&numVid=0&reunion=41&periodo=103" target=_blank>41° Reunión - 1° Sesión Extraordinaria cont. - (12/03/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2438&numVid=0&reunion=40&periodo=103" target=_blank>40° Reunión - 2° Sesión Extraordinaria Especial - (12/03/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2437&numVid=0&reunion=39&periodo=103" target=_blank>39° Reunión - 1° Sesión Extraordinaria - (06/03/1986)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2436&numVid=0&reunion=38&periodo=103" target=_blank>38° Reunión - Sesión Extraordinaria Preparatoria - (29/11/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2435&numVid=0&reunion=37&periodo=103" target=_blank>37° Reunión - 19° Sesión Ordinaria  cont. - (30/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2434&numVid=0&reunion=36&periodo=103" target=_blank>36° Reunión - 18° Sesión Ordinaria Especial cont. - (30/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2433&numVid=0&reunion=35&periodo=103" target=_blank>35° Reunión - 19° Sesión Ordinaria  cont. - (27/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2432&numVid=0&reunion=34&periodo=103" target=_blank>34° Reunión - 19° Sesión Ordinaria  cont. - (26/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2431&numVid=0&reunion=33&periodo=103" target=_blank>33° Reunión - 19° Sesión Ordinaria  - (25/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2430&numVid=0&reunion=32&periodo=103" target=_blank>32° Reunión - 18° Sesión Ordinaria Especial - (25/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2429&numVid=0&reunion=31&periodo=103" target=_blank>31° Reunión - 17° Sesión Ordinaria  - (19/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2428&numVid=0&reunion=30&periodo=103" target=_blank>30° Reunión - 16° Sesión Ordinaria  - (18/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2427&numVid=0&reunion=29&periodo=103" target=_blank>29° Reunión - 15° Sesión Ordinaria  - (12/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2426&numVid=0&reunion=28&periodo=103" target=_blank>28° Reunión - Expresiones en Minoría - (11/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2425&numVid=0&reunion=27&periodo=103" target=_blank>27° Reunión - 14° Sesión Ordinaria  cont. - (04/09/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2424&numVid=0&reunion=26&periodo=103" target=_blank>26° Reunión - 14° Sesión Ordinaria  cont. - (28/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2490&numVid=0&reunion=25&periodo=103" target=_blank>25° Reunión - 14° Sesión Ordinaria  cont. - (23/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2489&numVid=0&reunion=24&periodo=103" target=_blank>24° Reunión - 14° Sesión Ordinaria  - (22/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2488&numVid=0&reunion=23&periodo=103" target=_blank>23° Reunión - 13° Sesión Ordinaria  cont. - (21/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2487&numVid=0&reunion=22&periodo=103" target=_blank>22° Reunión - 13° Sesión Ordinaria  cont. - (15/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2486&numVid=0&reunion=21&periodo=103" target=_blank>21° Reunión - 13° Sesión Ordinaria  - (14/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2485&numVid=0&reunion=20&periodo=103" target=_blank>20° Reunión - 12° Sesión Ordinaria  cont. - (08/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2484&numVid=0&reunion=19&periodo=103" target=_blank>19° Reunión - 12° Sesión Ordinaria  - (07/08/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2483&numVid=0&reunion=18&periodo=103" target=_blank>18° Reunión - 11° Sesión Ordinaria  - (31/07/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2482&numVid=0&reunion=17&periodo=103" target=_blank>17° Reunión - 10° Sesión Ordinaria  - (25/07/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2481&numVid=0&reunion=16&periodo=103" target=_blank>16° Reunión - Expresiones en Minoría - (04/07/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2480&numVid=0&reunion=15&periodo=103" target=_blank>15° Reunión - 9° Sesión Ordinaria  - (03/07/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2479&numVid=0&reunion=14&periodo=103" target=_blank>14° Reunión - 8° Sesión Ordinaria  cont. - (27/06/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2478&numVid=0&reunion=13&periodo=103" target=_blank>13° Reunión - 8° Sesión Ordinaria  - (26/06/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2477&numVid=0&reunion=12&periodo=103" target=_blank>12° Reunión - Expresiones en Minoría - (19/06/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2476&numVid=0&reunion=11&periodo=103" target=_blank>11° Reunión - 7° Sesión Ordinaria  - (13/06/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2475&numVid=0&reunion=10&periodo=103" target=_blank>10° Reunión - Expresiones en Minoría - (12/06/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2474&numVid=0&reunion=9&periodo=103" target=_blank>9° Reunión - Expresiones en Minoría - (06/06/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?id=2473&numVid=0&reunion=8&periodo=103" target=_blank>8° Reunión - 6° Sesión Ordinaria  - (05/06/1985)</a>
+		
+		</li>
+<li>
+<a href="sesion.html?i

@@ -1,46 +1,50 @@
-// ETL de votaciones — vigilante de nuevas actas y del dataset nominal.
+// ETL de votaciones — vigilante de nuevas sesiones y del dataset nominal.
 //
 // Principio: este script NUNCA inventa datos. Las posiciones de bloque de cada votación
 // son contenido curado con fuentes citadas; lo que se automatiza es la DETECCIÓN:
-//  1. ¿Aparecieron actas nuevas en votaciones.hcdn.gob.ar posteriores a la última cargada?
-//     → se registran en data/pendientes.json para curaduría (con link al acta).
+//  1. ¿Hubo sesiones posteriores al último voto cargado que aún no están en el dataset?
+//     → se registran en data/pendientes.json para curaduría.
 //  2. ¿El dataset `votaciones_nominales` de datos.hcdn.gob.ar ya cubre el período dic-2025+?
 //     → se registra en el log: es el disparador para pasar del índice provisional al nominal.
 import fs from "node:fs";
 import path from "node:path";
-import { appendLog, DATA, fetchJson, fetchText, readJson, ROOT } from "./etl-lib.mjs";
+import { appendLog, DATA, fetchJson, fetchText, readJson, ROOT, todayIso } from "./etl-lib.mjs";
+import { parseSesiones, uncoveredSessions } from "./etl-votaciones-parse.mjs";
 
 const PENDIENTES = path.join(ROOT, "data", "pendientes.json");
 
 const vot = readJson(path.join(DATA, "votaciones.json"));
-const lastLoaded = vot.votaciones.map((v) => v.fecha).sort().at(-1);
+const loadedDates = vot.votaciones.map((v) => v.fecha).sort();
+const lastLoaded = loadedDates.at(-1);
 
-const result = { script: "etl-votaciones", nuevasActas: 0, nominalDisponible: false, errores: [] };
+const result = { script: "etl-votaciones", nuevasSesiones: 0, nominalDisponible: false, errores: [] };
 
-// ---- 1. actas nuevas en la plataforma de votaciones ----
+// ---- 1. sesiones nuevas según el listado oficial de la HCDN ----
+// Fuente primaria: el listado oficial de sesiones (vivo y autoritativo). La plataforma
+// votaciones.hcdn.gob.ar sufre caídas prolongadas, así que se usa como respaldo.
 try {
-  // La plataforma expone las votaciones por año en HTML; buscamos filas con fechas
-  // posteriores a la última votación cargada. El host principal sufre caídas
-  // intermitentes, así que se intenta también el espejo institucional.
-  const year = new Date().getFullYear();
-  const HOSTS = [`https://votaciones.hcdn.gob.ar/votaciones/${year}`, `https://votaciones.diputados.gob.ar/votaciones/${year}`];
+  const SOURCES = [
+    "https://www.diputados.gov.ar/sesiones/",
+    "https://www.hcdn.gob.ar/sesiones/",
+    `https://votaciones.hcdn.gob.ar/votaciones/${new Date().getFullYear()}`,
+  ];
   let html = null;
-  for (const url of HOSTS) {
+  for (const url of SOURCES) {
     try {
-      html = await fetchText(url, { retries: 2, timeoutMs: 25000 });
-      result.fuenteActas = url;
+      html = await fetchText(url, { retries: 2, timeoutMs: 45000 });
+      result.fuenteSesiones = url;
       break;
     } catch (e) {
       result.errores.push(url + ": " + e.message);
     }
   }
-  if (html == null) throw new Error("ningún host de la plataforma de votaciones respondió");
-  // fechas en formato dd/mm/yyyy dentro de la tabla de actas
-  const fechas = [...html.matchAll(/(\d{2})\/(\d{2})\/(\d{4})/g)]
-    .map((m) => `${m[3]}-${m[2]}-${m[1]}`)
-    .filter((f) => f > lastLoaded);
-  const unicas = [...new Set(fechas)].sort();
-  if (unicas.length) {
+  if (html == null) throw new Error("ninguna fuente de sesiones respondió");
+
+  // Sesiones no cubiertas: posteriores al último voto y sin una votación cargada a ±1 día
+  // (el listado usa la fecha de inicio de sesión; el voto suele caer en la madrugada siguiente).
+  const nuevas = uncoveredSessions(parseSesiones(html), loadedDates, { after: lastLoaded, until: todayIso() });
+
+  if (nuevas.length) {
     let pend = [];
     try {
       pend = readJson(PENDIENTES);
@@ -48,23 +52,24 @@ try {
       /* primera corrida */
     }
     const conocidas = new Set(pend.map((p) => p.fecha));
-    for (const f of unicas) {
+    for (const f of nuevas) {
       if (!conocidas.has(f)) {
         pend.push({
           fecha: f,
-          detectado: new Date().toISOString(),
-          fuente: `https://votaciones.hcdn.gob.ar/votaciones/${year}`,
+          detectado: todayIso(),
+          fuente: result.fuenteSesiones,
           estado: "pendiente de curaduría",
-          nota: "Sesión con votaciones posteriores al último corte. Revisar actas y cargar posiciones documentadas con fuentes.",
+          nota: "Sesión posterior al último voto cargado. Verificar si tuvo votaciones nominales y, de haberlas, cargar las posiciones documentadas con fuentes.",
         });
       }
     }
     fs.mkdirSync(path.dirname(PENDIENTES), { recursive: true });
     fs.writeFileSync(PENDIENTES, JSON.stringify(pend, null, 1));
-    result.nuevasActas = unicas.length;
+    result.nuevasSesiones = nuevas.length;
+    result.fechasNuevas = nuevas;
   }
 } catch (e) {
-  result.errores.push("votaciones.hcdn.gob.ar: " + e.message);
+  result.errores.push("listado de sesiones: " + e.message);
 }
 
 // ---- 2. dataset nominal en datos abiertos (CKAN) ----
