@@ -100,9 +100,10 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, h
             key={d.id}
             className="dt-seatg"
             transform={`translate(${pos.x.toFixed(1)},${pos.y.toFixed(1)})`}
-            opacity={atenuada && !isHov ? 0.15 : 1}
-            style={{ transition: "transform 700ms cubic-bezier(.4,0,.2,1), opacity 300ms ease", animationDelay: ((d.id * 7) % 430) + "ms" }}
+            style={{ transition: "transform 700ms cubic-bezier(.4,0,.2,1)", animationDelay: ((d.id * 7) % 430) + "ms" }}
           >
+            {/* grupo interno SIN la animación dtSeatIn: su fill-mode pisaría esta opacidad */}
+            <g opacity={atenuada && !isHov ? 0.15 : 1} style={{ transition: "opacity 300ms ease" }}>
             {flag && <circle r={12.5} fill="none" stroke="#1C1A17" strokeWidth={1.5} opacity={0.85} />}
             <circle
               className="dt-seat"
@@ -144,6 +145,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, h
                 }
               }}
             />
+            </g>
           </g>
         );
       })}
