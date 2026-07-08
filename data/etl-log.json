@@ -109,5 +109,15 @@
   "errores": [],
   "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
   "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-07-08T01:05:24.650Z",
+  "script": "etl-agenda",
+  "proximas": 0,
+  "recientes": 4,
+  "comisiones": 2,
+  "temariosDetectados": 150,
+  "errores": [],
+  "nota": "datos actualizados"
  }
 ]

@@ -1,9 +1,12 @@
 "use client";
-// Controlador central de DipuTracker — port fiel del componente del prototipo
-// (design/DipuTracker-Publicable.dc.html). Toda la lógica de estado, routing por hash
-// y cómputo de valores de presentación vive acá; las vistas son funciones puras de V.
+// Controlador central de DipuTracker — base: port del prototipo v1
+// (design/DipuTracker-Publicable.dc.html); evoluciones documentadas en docs/DESIGN.md.
+// Toda la lógica de estado, routing por hash y cómputo de valores de presentación vive
+// acá; las vistas son funciones puras de V. El cómputo pesado vive en lib/ (puro).
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CtxFile, DipFile, DTData, ITab, Mode, Periodo, SimPos, View, VotFile } from "@/lib/types";
+import { type AgendaData, type AgendaFile, AGENDA_VACIA, normalizeAgenda } from "@/lib/agenda";
+import { buildFeed, type FeedTipo, parseFeedParams, serializeFeedParams } from "@/lib/feed";
 import {
   applyPeriod,
   displayName,
@@ -17,6 +20,7 @@ import {
   voteView,
 } from "@/lib/compute";
 import { shareCardDep, shareCardVot } from "@/lib/share-cards";
+import { prepBreak, prepDumbbell, prepRecord, prepStrip, prepTiles } from "@/lib/charts";
 import { downloadCsv } from "@/lib/csv";
 import { useFailedPhotos } from "@/lib/useFailedPhotos";
 import CountUp from "@/components/CountUp";
@@ -68,6 +72,7 @@ interface State {
   ixBloc: string;
   ixSort: "desc" | "asc" | "az";
   csvDone: boolean;
+  feed: { tipos: FeedTipo[]; bloc: string; dist: string };
 }
 
 const PAGE_SIZE = 30;
@@ -97,12 +102,14 @@ export default function DipuTracker() {
     ixBloc: "",
     ixSort: "desc",
     csvDone: false,
+    feed: { tipos: ["vot", "ses", "mov"], bloc: "", dist: "" },
   });
   const setS = useCallback((patch: Partial<State> | ((s: State) => Partial<State>)) => {
     setSFull((s) => ({ ...s, ...(typeof patch === "function" ? patch(s) : patch) }));
   }, []);
 
   const Dref = useRef<DTData | null>(null);
+  const agendaRef = useRef<AgendaData>(AGENDA_VACIA);
   const Pref = useRef<number[]>([]);
   const silentRef = useRef(false);
   const lastResRef = useRef<DTData["deps"]>([]);
@@ -131,7 +138,10 @@ export default function DipuTracker() {
     const D = Dref.current;
     if (!D) return;
     const h = (location.hash || "").replace(/^#\/?/, "");
-    const p = h.split("/");
+    // query-in-hash (#/panel?per=ord&bloc=lla): el path se separa ANTES del split por
+    // segmentos, así las rutas existentes (que nunca llevan "?") se parsean idéntico
+    const [path, query = ""] = h.split("?");
+    const p = path.split("/");
     if (p[0] === "diputado" && p[1] != null) {
       const id = parseInt(p[1], 10);
       if (D.byId[id]) {
@@ -177,9 +187,27 @@ export default function DipuTracker() {
       return;
     }
     if (p[0] === "panel" || p[0] === "") {
-      setS({ view: "home", fichaId: null });
+      // filtros del feed desde la URL (#/panel?per=ord&bloc=lla&feed=vot,ses)
+      const fp = parseFeedParams(query);
+      const bloc = D.blocMap[fp.bloc] ? fp.bloc : ""; // validación final contra bloques reales
+      if (fp.per !== stateRef.current.periodo) Pref.current = applyPeriod(D, fp.per);
+      setS({ view: "home", fichaId: null, periodo: fp.per, feed: { tipos: fp.tipos, bloc, dist: fp.dist } });
     }
   }, [setS]);
+
+  // hash del panel con los filtros vigentes serializados (URLs limpias: solo no-defaults)
+  const panelHash = useCallback((over: Partial<State["feed"] & { per: Periodo }> = {}) => {
+    const st = stateRef.current;
+    return (
+      "/panel" +
+      serializeFeedParams({
+        per: over.per ?? st.periodo,
+        tipos: over.tipos ?? st.feed.tipos,
+        bloc: over.bloc ?? st.feed.bloc,
+        dist: over.dist ?? st.feed.dist,
+      })
+    );
+  }, []);
 
   // ---------- carga de datos ----------
   useEffect(() => {
@@ -188,10 +216,18 @@ export default function DipuTracker() {
       fetch("/data/diputados.json").then((r) => r.json() as Promise<DipFile>),
       fetch("/data/votaciones.json").then((r) => r.json() as Promise<VotFile>),
       fetch("/data/contexto.json").then((r) => r.json() as Promise<CtxFile>),
+      // agenda.json es el único dataset OPCIONAL: si falta (deploy de UI antes que el de
+      // datos), si el 404 de Vercel devuelve HTML, o si viene malformado, la app funciona
+      // igual con agenda vacía. Triple tolerancia: r.ok cubre el 404, el catch cubre red
+      // y JSON inválido. loadError queda reservado a los 3 datasets críticos.
+      fetch("/data/agenda.json")
+        .then((r) => (r.ok ? (r.json() as Promise<AgendaFile>) : null))
+        .catch((): AgendaFile | null => null),
     ])
-      .then(([dip, vot, ctx]) => {
+      .then(([dip, vot, ctx, agendaRaw]) => {
         if (!alive) return;
         Dref.current = processData(dip, vot, ctx);
+        agendaRef.current = normalizeAgenda(agendaRaw, new Date().toISOString().slice(0, 10));
         Pref.current = applyPeriod(Dref.current, "todo");
         setS({ loading: false });
         setTimeout(() => applyHash(), 0);
@@ -265,7 +301,8 @@ export default function DipuTracker() {
         ? "/votacion/" + D.votaciones[st.selLaw].id
         : st.view === "comparador"
           ? compHash(st.compare)
-          : ({ mov: "/movimientos", simulador: "/simulador", indices: "/indices", patrimonio: "/patrimonio" } as Record<string, string>)[st.view] || "/panel"
+          : ({ mov: "/movimientos", simulador: "/simulador", indices: "/indices", patrimonio: "/patrimonio" } as Record<string, string>)[st.view] ||
+            panelHash() // preserva los filtros del feed al cerrar la ficha
     );
   };
   const addToCompare = (id: number): number[] => {
@@ -319,7 +356,7 @@ export default function DipuTracker() {
       isSimulador: S.view === "simulador",
       isIndices: S.view === "indices",
       isPatrimonio: S.view === "patrimonio",
-      goHome: () => setView("home", "/panel"),
+      goHome: () => setView("home", panelHash()),
       goVotacion: () => setView("votacion", "/votacion/" + (Dref.current ? Dref.current.votaciones[S.selLaw].id : "")),
       goComparador: () => setView("comparador", "/comparador"),
       goMov: () => setView("mov", "/movimientos"),
@@ -373,9 +410,14 @@ export default function DipuTracker() {
     const perBg = (k: Periodo) => (S.periodo === k ? "#1C1A17" : "#FFFFFF");
     const perFg = (k: Periodo) => (S.periodo === k ? "#FAFAF9" : "#57534E");
     const perBd = (k: Periodo) => (S.periodo === k ? "#1C1A17" : "#E0DBD0");
-    out.perTodo = () => setPeriodo("todo");
-    out.perExt = () => setPeriodo("ext");
-    out.perOrd = () => setPeriodo("ord");
+    const cambiarPeriodo = (p: Periodo) => {
+      setPeriodo(p);
+      // el período vive también en la URL cuando estamos en el panel (link compartible)
+      if (stateRef.current.view === "home") setHash(panelHash({ per: p }));
+    };
+    out.perTodo = () => cambiarPeriodo("todo");
+    out.perExt = () => cambiarPeriodo("ext");
+    out.perOrd = () => cambiarPeriodo("ord");
     out.perTodoBg = perBg("todo");
     out.perTodoFg = perFg("todo");
     out.perTodoBorder = perBd("todo");
@@ -480,6 +522,8 @@ export default function DipuTracker() {
         ]);
     }
 
+    // filtro de bloque activo → el hemiciclo atenúa las bancas no coincidentes
+    const highlightSet = S.feed.bloc && D.blocMap[S.feed.bloc] ? new Set(D.deps.filter((d) => d.b === S.feed.bloc).map((d) => d.id)) : null;
     out.hemicycle = (
       <Hemicycle
         D={D}
@@ -487,6 +531,7 @@ export default function DipuTracker() {
         hoverId={S.hoverId}
         daltonico={MODO_DALTONICO}
         failedPhotos={failedPhotos}
+        highlightSet={highlightSet}
         onHover={(id) => setS({ hoverId: id })}
         onOpen={(id) => openFicha(id)}
       />
@@ -554,6 +599,70 @@ export default function DipuTracker() {
       titulo: m.a ? displayName(m.a) + (m.alta ? " — alta de banca" : " — cambio de bloque") : "Recomposición de bloques",
       nota: m.nota,
     }));
+
+    // ---- FEED (crónica del período) + AHORA (glue mínimo: el cómputo vive en lib/feed.ts) ----
+    out.feed = buildFeed(D, agendaRef.current, { per: S.periodo, tipos: S.feed.tipos, bloc: S.feed.bloc, dist: S.feed.dist }, corte);
+    // "verificado hoy hh:mm" solo si la corrida fue HOY en hora argentina; si no, la fecha real
+    out.verificadoHm = null;
+    if (agendaRef.current.consultado) {
+      const ts = new Date(agendaRef.current.consultado);
+      const art = (o: Intl.DateTimeFormatOptions) => ts.toLocaleString("es-AR", { ...o, timeZone: "America/Argentina/Buenos_Aires" });
+      const hm = art({ hour: "2-digit", minute: "2-digit", hour12: false });
+      const fechaArt = ts.toLocaleDateString("en-CA", { timeZone: "America/Argentina/Buenos_Aires" });
+      const hoyArt = new Date().toLocaleDateString("en-CA", { timeZone: "America/Argentina/Buenos_Aires" });
+      out.verificadoHm = (fechaArt === hoyArt ? "hoy" : fdate(fechaArt)) + " · " + hm;
+    }
+    out.agendaFuenteU = agendaRef.current.fuentes[0]?.u || "https://www.diputados.gov.ar/sesiones/";
+    const ultimaVot = D.votaciones[D.votaciones.length - 1];
+    out.ahoraUltima = ultimaVot
+      ? {
+          fecha: fdate(ultimaVot.fecha),
+          corto: ultimaVot.corto,
+          resultado: ultimaVot.resultado,
+          totales: ultimaVot.af + "-" + ultimaVot.neg + "-" + ultimaVot.abs,
+          onOpen: () => {
+            setS({ view: "votacion", selLaw: D.votaciones.length - 1, fichaId: null });
+            setHash("/votacion/" + ultimaVot.id);
+            window.scrollTo(0, 0);
+          },
+        }
+      : null;
+    out.ahoraProxima = agendaRef.current.proximas[0] || null;
+    out.comisiones = agendaRef.current.comisiones;
+    out.feedTipos = S.feed.tipos;
+    out.feedBloc = S.feed.bloc;
+    out.feedBlocLabel = S.feed.bloc ? D.blocMap[S.feed.bloc]?.corto || "" : "";
+    out.feedBlocInfo = D.blocMap;
+    const setFeed = (patch: Partial<State["feed"]>) => {
+      const next = { ...stateRef.current.feed, ...patch };
+      setS({ feed: next });
+      setHash("/panel" + serializeFeedParams({ per: stateRef.current.periodo, ...next }));
+    };
+    out.feedSetBloc = (k: string) => setFeed({ bloc: D.blocMap[k] ? k : "" });
+    out.feedToggleTipo = (t: FeedTipo) => {
+      const cur = stateRef.current.feed.tipos;
+      const next = cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t];
+      if (next.length) setFeed({ tipos: next }); // siempre queda al menos un tipo activo
+    };
+    const blocSizes = new Map<string, number>();
+    D.deps.forEach((d) => blocSizes.set(d.b, (blocSizes.get(d.b) || 0) + 1));
+    const blocsTop = D.bloques
+      .slice()
+      .sort((a, b) => (blocSizes.get(b.k) || 0) - (blocSizes.get(a.k) || 0))
+      .slice(0, 6);
+    if (S.feed.bloc && !blocsTop.some((b) => b.k === S.feed.bloc) && D.blocMap[S.feed.bloc]) blocsTop.push(D.blocMap[S.feed.bloc]);
+    out.feedBlocChips = blocsTop.map((b) => ({ k: b.k, corto: b.corto, chip: b.chip, sel: S.feed.bloc === b.k }));
+    out.feedBlocOptions = D.bloques.map((b) => ({ value: b.k, label: b.corto }));
+    out.feedOpenVot = (i: number) => {
+      setS({ view: "votacion", selLaw: i, fichaId: null });
+      setHash("/votacion/" + D.votaciones[i].id);
+      window.scrollTo(0, 0);
+    };
+    // strip plot condensado de la home (⑧ Cinco lecturas) — respeta el filtro de bloque
+    out.stripHome = prepStrip(D.deps, { bloc: S.feed.bloc });
+    out.homeChartChips = [PER_LABEL[S.periodo]].concat(S.feed.bloc && D.blocMap[S.feed.bloc] ? [D.blocMap[S.feed.bloc].corto] : []);
+    out.daltonico = MODO_DALTONICO;
+    out.stripOpen = (id: number) => openFicha(id);
 
     // comparador teaser
     const findByName = (n: string) => D.deps.find((d) => d.a === n);
@@ -860,8 +969,14 @@ export default function DipuTracker() {
       out.ixQue = ex.que;
       out.ixComo = ex.como;
       out.ixLim = ex.lim;
+      // chips de filtros aplicados para las cards capturables de los gráficos
+      out.chartChips = [PER_LABEL[S.periodo]].concat(S.ixBloc && S.iTab === "ali" ? [D.blocMap[S.ixBloc]?.corto || S.ixBloc] : []);
+      out.daltonico = MODO_DALTONICO;
 
       if (S.iTab === "ali") {
+        // gráfico: strip plot de las bancas (respeta el filtro de bloque de la tab)
+        out.stripData = prepStrip(D.deps, { bloc: S.ixBloc });
+        out.stripOpen = (id: number) => openFicha(id);
         const withIdx = D.deps.filter((d) => d.indice != null);
         out.ixProm = num(Math.round(withIdx.reduce((a, d) => a + (d.indice as number), 0) / withIdx.length));
         out.ixCob = num(withIdx.length);
@@ -916,6 +1031,14 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "dis") {
+        // gráfico: tira de registro cronológico por bloque
+        out.recordData = prepRecord(D, P);
+        out.recordOpenVot = (ci: number) => {
+          const vi = P[ci];
+          setS({ view: "votacion", selLaw: vi, fichaId: null });
+          setHash("/votacion/" + D.votaciones[vi].id);
+          window.scrollTo(0, 0);
+        };
         const rows = D.bloques
           .map((b) => {
             const size = D.deps.filter((d) => d.b === b.k).length;
@@ -951,6 +1074,8 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "pow") {
+        // gráfico: dumbbell poder vs bancas
+        out.dumbbellRows = prepDumbbell(D.power.list, D.blocMap);
         const maxP = Math.max(...D.power.list.map((p) => p.power));
         const fmt1 = (x: number) => x.toFixed(1).replace(".", ",");
         out.ixPowerRows = D.power.list
@@ -973,6 +1098,8 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "rup") {
+        // gráfico: matriz banca × votación de rupturas
+        out.breakData = prepBreak(D, P);
         const rupDeps = D.deps.filter((d) => d.hasExc);
         out.ixRupCount = rupDeps.length + (rupDeps.length === 1 ? " registro" : " registros");
         out.ixRupList = rupDeps.map((d, ii) => {
@@ -997,6 +1124,12 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "ter") {
+        // gráfico: mapa de mosaico de los 24 distritos
+        out.tileData = prepTiles(D.deps);
+        out.tileOpen = (name: string) => {
+          setS({ iTab: "ali", ixQ: name, ixBloc: "" });
+          setHash("/indices/alineamiento");
+        };
         const dm: Record<string, DTData["deps"]> = {};
         D.deps.forEach((d) => {
           (dm[d.d] = dm[d.d] || []).push(d);

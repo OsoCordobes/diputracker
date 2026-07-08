@@ -9,11 +9,14 @@ interface Props {
   hoverId: number | null;
   daltonico: boolean;
   failedPhotos?: Set<string>;
+  // filtro de bloque activo: las bancas fuera del set se atenúan (no desaparecen —
+  // el contexto de la Cámara completa siempre se ve)
+  highlightSet?: Set<number> | null;
   onHover: (id: number | null) => void;
   onOpen: (id: number) => void;
 }
 
-export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, onHover, onOpen }: Props) {
+export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, highlightSet, onHover, onOpen }: Props) {
   const g = D.geo;
   const svgRef = useRef<SVGSVGElement>(null);
   // Roving tabindex: una sola parada de Tab; las flechas recorren las bancas en orden
@@ -91,6 +94,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, o
         } else fill = d.indice == null ? "#D8D3C8" : ramp(d.indice / 100, daltonico);
         const isHov = hoverId === d.id;
         const flag = mode === "disidencia" && d.hasExc;
+        const atenuada = highlightSet != null && !highlightSet.has(d.id);
         return (
           <g
             key={d.id}
@@ -98,6 +102,8 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, o
             transform={`translate(${pos.x.toFixed(1)},${pos.y.toFixed(1)})`}
             style={{ transition: "transform 700ms cubic-bezier(.4,0,.2,1)", animationDelay: ((d.id * 7) % 430) + "ms" }}
           >
+            {/* grupo interno SIN la animación dtSeatIn: su fill-mode pisaría esta opacidad */}
+            <g opacity={atenuada && !isHov ? 0.15 : 1} style={{ transition: "opacity 300ms ease" }}>
             {flag && <circle r={12.5} fill="none" stroke="#1C1A17" strokeWidth={1.5} opacity={0.85} />}
             <circle
               className="dt-seat"
@@ -139,6 +145,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, o
                 }
               }}
             />
+            </g>
           </g>
         );
       })}

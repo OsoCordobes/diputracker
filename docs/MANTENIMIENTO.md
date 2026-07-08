@@ -119,8 +119,30 @@ No requiere acción manual.
 2. `scripts/etl-votaciones.mjs` — detecta sesiones nuevas contra el **listado oficial vivo**
    (`diputados.gov.ar/sesiones`, con tolerancia ±1 día porque el listado usa fecha de inicio
    de sesión y el voto cae en la madrugada). Las que no están cubiertas → `data/pendientes.json`.
-3. `scripts/validate-data.mjs` — valida invariantes. **Si falla, no se commitea nada.**
-4. Commit + push solo si hubo cambios → Vercel redeploya.
+3. `scripts/etl-agenda.mjs` — sincroniza `agenda.json`: sesiones **CITADAS a futuro** y
+   desenlaces recientes del mismo listado, links al temario del **Plan de Labor**
+   (`/secparl/dclp/plan_de_labor/plt.html`) y reuniones de la **agenda de comisiones**
+   (`/comisiones/agenda/`). Si un parser detecta que el HTML cambió de forma, LANZA y no
+   escribe (los datos previos quedan; el error va al log).
+4. `scripts/validate-data.mjs` — valida invariantes (incluida la agenda: una "citada" con
+   fecha pasada es ilegal, el array vacío es VÁLIDO). **Si falla, no se commitea nada.**
+5. Commit + push solo si hubo cambios → Vercel redeploya.
+
+### Curar los temas del Plan de Labor (agenda)
+
+Cuando aparece una **sesión citada**, el ETL publica fecha, título y (si existe) el link al
+temario oficial. El contenido del temario es un documento embebido **no parseable**: los
+`temas[]` se curan a mano, igual que las votaciones — título textual del documento oficial,
+`expediente`/`estadoTramite` solo si la fuente los publica, y **siempre** con `fuentes[]`.
+Editar `public/data/agenda.json` **y** `data/seed/agenda.json` (idénticos), correr
+`npm run validate && npm test`, commitear. El ETL preserva los temas curados mientras la
+sesión siga citada; al pasar la fecha, el propio listado dicta la transición
+(efectuada / no efectuada / fracasada) y la curaduría sigue por `pendientes.json`.
+
+**Señal operativa**: si `data/etl-log.json` acumula errores de `etl-agenda` en varias
+corridas seguidas ("forma desconocida…"), el HTML oficial cambió → recapturar el fixture
+(`tests/fixtures/plan-de-labor-hcdn.html` / `agenda-comisiones-hcdn.html` /
+`sesiones-hcdn.html`) y ajustar el parser en `scripts/etl-agenda-parse.mjs` con sus tests.
 
 ### Si una fuente muere
 El ETL está diseñado para degradar con gracia: prueba fuentes en orden (primaria viva,

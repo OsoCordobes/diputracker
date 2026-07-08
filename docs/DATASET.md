@@ -12,7 +12,8 @@ oficiales de la HCDN y son de dominio público; se solicita **citar la fuente**.
   (ver [§ Actualización y trazabilidad](#actualización-y-trazabilidad)).
 
 Índice: [diputados.json](#diputadosjson) · [votaciones.json](#votacionesjson) ·
-[contexto.json](#contextojson) · [Códigos de posición](#códigos-de-posición) ·
+[contexto.json](#contextojson) · [agenda.json](#agendajson) ·
+[Códigos de posición](#códigos-de-posición) ·
 [Metodología del índice](#metodología-del-índice-de-alineamiento) ·
 [Consumir la API](#consumir-la-api) · [Cómo citar](#cómo-citar)
 
@@ -145,6 +146,70 @@ Interbloques, autoridades, dieta, guía de DDJJ, movimientos de bloque y fuentes
 
 ---
 
+## `agenda.json`
+
+Agenda parlamentaria: sesiones **citadas a futuro**, desenlaces recientes del listado
+oficial y reuniones de comisión próximas. Regla dura del dataset: solo se publica lo que
+las fuentes oficiales publican — fecha y estado de citación, link al temario, texto
+verbatim de las citaciones. **Nunca predicciones de resultado ni posiciones anticipadas.**
+
+```jsonc
+{
+  "meta": {
+    "nota": "…",
+    "ventanaDias": 60,                       // horizonte hacia adelante
+    "consultado": "2026-07-08T01:05:20Z",    // última corrida (ISO con hora)
+    "fuentes": [ { "n": "…", "u": "https://…", "consultado": "…", "ok": true } ]  // frescura POR FUENTE
+  },
+  "proximas": [ /* … */ ],     // [] es el estado común y honesto (sin citaciones publicadas)
+  "recientes": [ /* … */ ],
+  "comisiones": [ /* … */ ]
+}
+```
+
+### `proximas[]` — sesiones de Cámara citadas a futuro
+
+| Campo      | Tipo   | Req. | Descripción                                                       |
+|------------|--------|------|--------------------------------------------------------------------|
+| `fecha`    | string | sí   | Fecha ISO de la citación (siempre ≥ fecha de corte).               |
+| `titulo`   | string | sí   | Texto del listado oficial (p. ej. `"Sesión Ordinaria Especial CITADA"`). |
+| `estado`   | string | sí   | Siempre `"citada"` — el único hecho que la fuente publica a futuro. |
+| `idSesion` | number | sí   | Id estable del listado oficial (`sesion.html?id=N`).               |
+| `fuenteU`  | string | sí   | URL de la fuente (listado de sesiones HCDN).                       |
+| `temarioU` | string | no   | Link al temario oficial del Plan de Labor, si está publicado.      |
+| `temas`    | array  | sí   | Temas del Plan de Labor, **curados a mano** con fuentes (el documento oficial no es parseable). `[]` si no está publicado o aún no se curó. Cada tema: `{ titulo, expediente?, estadoTramite?, fuentes[] }`. |
+
+### `recientes[]` — desenlaces de los últimos ≤60 días
+
+| Campo         | Tipo   | Req. | Descripción                                                     |
+|---------------|--------|------|------------------------------------------------------------------|
+| `fecha`       | string | sí   | Fecha ISO de la sesión.                                         |
+| `titulo`      | string | sí   | Texto del listado oficial.                                      |
+| `estado`      | string | sí   | `"efectuada"` \| `"no_efectuada"` \| `"fracasada"` — textual de la fuente. |
+| `idSesion`    | number | sí   | Id del listado oficial.                                         |
+| `votacionIds` | array  | no   | Ids de `votaciones[].id` producidas por esa sesión (cruce por fecha exacta, +1 día para no reclamadas — el voto cae en la madrugada siguiente). |
+| `curaduria`   | string | no   | `"pendiente"` si la sesión efectuada figura en la cola de curaduría y aún no tiene votación cargada. |
+| `fuenteU`     | string | sí   | URL de la fuente.                                               |
+
+### `comisiones[]` — reuniones de comisión próximas
+
+| Campo       | Tipo   | Req. | Descripción                                            |
+|-------------|--------|------|--------------------------------------------------------|
+| `fecha`     | string | sí   | Fecha ISO de la reunión.                               |
+| `hora`      | string | no   | `"HH:MM"` si la citación la publica.                   |
+| `comision`  | string | sí   | Nombre oficial de la comisión, verbatim.               |
+| `lugar`     | string | no   | Sala/edificio, verbatim.                               |
+| `temas`     | string | no   | Resumen textual de la citación, verbatim (jamás resumido por el ETL). |
+| `citacionU` | string | no   | Link a la citación oficial (PDF).                      |
+
+**Ciclo de vida**: una citación entra a `proximas` cuando el listado oficial la publica;
+pasada la fecha, el propio listado dicta la transición a `recientes` (`efectuada` /
+`no_efectuada` / `fracasada`). Una "citada" vencida sin desenlace publicado simplemente
+sale de `proximas` — no se le inventa destino. Los `temas[]` curados nunca los borra el
+ETL mientras la sesión siga citada.
+
+---
+
 ## Códigos de posición
 
 En `votaciones[].lineas` (posición **del bloque**):
@@ -188,12 +253,13 @@ y está cubierta por [tests de regresión](../tests/compute.test.ts).
 
 ## Consumir la API
 
-Los tres archivos se sirven como endpoints públicos con **CORS abierto**:
+Los cuatro archivos se sirven como endpoints públicos con **CORS abierto**:
 
 ```
 https://diputracker.vercel.app/data/diputados.json
 https://diputracker.vercel.app/data/votaciones.json
 https://diputracker.vercel.app/data/contexto.json
+https://diputracker.vercel.app/data/agenda.json
 ```
 
 - **CORS**: `Access-Control-Allow-Origin: *` — se pueden consumir desde el navegador.

@@ -10,6 +10,7 @@ const DATA = path.join(__dirname, "..", "public", "data");
 const dip = JSON.parse(fs.readFileSync(path.join(DATA, "diputados.json"), "utf8"));
 const vot = JSON.parse(fs.readFileSync(path.join(DATA, "votaciones.json"), "utf8"));
 const ctx = JSON.parse(fs.readFileSync(path.join(DATA, "contexto.json"), "utf8"));
+const agenda = JSON.parse(fs.readFileSync(path.join(DATA, "agenda.json"), "utf8"));
 
 const keys = (o: object) => Object.keys(o).sort();
 
@@ -51,6 +52,30 @@ test("contexto.json: forma documentada", () => {
   }
 });
 
+test("agenda.json: forma documentada y dominios de valores", () => {
+  assert.deepEqual(keys(agenda), ["comisiones", "meta", "proximas", "recientes"]);
+  assert.deepEqual(keys(agenda.meta), ["consultado", "fuentes", "nota", "ventanaDias"]);
+  for (const f of agenda.meta.fuentes) assert.deepEqual(keys(f), ["consultado", "n", "ok", "u"]);
+  for (const p of agenda.proximas) {
+    for (const req of ["fecha", "titulo", "estado", "idSesion", "fuenteU", "temas"]) assert.ok(req in p, `próxima sin ${req}`);
+    for (const k of Object.keys(p)) assert.ok(["fecha", "titulo", "estado", "idSesion", "fuenteU", "temarioU", "temas"].includes(k), `próxima con campo no documentado: ${k}`);
+    assert.equal(p.estado, "citada", "a futuro solo existe el estado que la fuente publica");
+    for (const t of p.temas) {
+      for (const k of Object.keys(t)) assert.ok(["titulo", "expediente", "estadoTramite", "fuentes"].includes(k), `tema con campo no documentado: ${k}`);
+      assert.ok(t.fuentes.length >= 1, "tema curado sin fuente");
+    }
+  }
+  for (const r of agenda.recientes) {
+    for (const req of ["fecha", "titulo", "estado", "idSesion", "fuenteU"]) assert.ok(req in r, `reciente sin ${req}`);
+    for (const k of Object.keys(r)) assert.ok(["fecha", "titulo", "estado", "idSesion", "votacionIds", "curaduria", "fuenteU"].includes(k), `reciente con campo no documentado: ${k}`);
+    assert.ok(["efectuada", "no_efectuada", "fracasada"].includes(r.estado), `estado inválido: ${r.estado}`);
+  }
+  for (const c of agenda.comisiones) {
+    for (const req of ["fecha", "comision"]) assert.ok(req in c, `comisión sin ${req}`);
+    for (const k of Object.keys(c)) assert.ok(["fecha", "hora", "comision", "lugar", "temas", "citacionU"].includes(k), `comisión con campo no documentado: ${k}`);
+  }
+});
+
 test("integridad referencial entre datasets", () => {
   const blocKeys = new Set(dip.bloques.map((b: { k: string }) => b.k));
   const names = new Set(dip.diputados.map((d: { a: string }) => d.a));
@@ -61,4 +86,6 @@ test("integridad referencial entre datasets", () => {
   }
   for (const ib of ctx.interbloques.lista) for (const k of ib.bloques) assert.ok(blocKeys.has(k), `interbloque con bloque inexistente: ${ib.nombre} → ${k}`);
   for (const m of ctx.movimientos) if (m.a) assert.ok(names.has(m.a), `movimiento con diputado inexistente: ${m.a}`);
+  const votIds = new Set(vot.votaciones.map((v: { id: string }) => v.id));
+  for (const r of agenda.recientes) for (const vid of r.votacionIds || []) assert.ok(votIds.has(vid), `agenda con votacionId inexistente: ${vid}`);
 });
