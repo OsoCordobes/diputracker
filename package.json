@@ -10,6 +10,7 @@
     "lint": "next lint",
     "etl:nomina": "node scripts/etl-nomina.mjs",
     "etl:votaciones": "node scripts/etl-votaciones.mjs",
+    "etl:agenda": "node scripts/etl-agenda.mjs",
     "validate": "node scripts/validate-data.mjs",
     "test": "tsx --test tests/*.test.ts",
     "e2e": "playwright test"
