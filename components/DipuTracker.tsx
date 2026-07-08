@@ -1,7 +1,8 @@
 "use client";
-// Controlador central de DipuTracker — port fiel del componente del prototipo
-// (design/DipuTracker-Publicable.dc.html). Toda la lógica de estado, routing por hash
-// y cómputo de valores de presentación vive acá; las vistas son funciones puras de V.
+// Controlador central de DipuTracker — base: port del prototipo v1
+// (design/DipuTracker-Publicable.dc.html); evoluciones documentadas en docs/DESIGN.md.
+// Toda la lógica de estado, routing por hash y cómputo de valores de presentación vive
+// acá; las vistas son funciones puras de V. El cómputo pesado vive en lib/ (puro).
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CtxFile, DipFile, DTData, ITab, Mode, Periodo, SimPos, View, VotFile } from "@/lib/types";
 import { type AgendaData, type AgendaFile, AGENDA_VACIA, normalizeAgenda } from "@/lib/agenda";
@@ -19,7 +20,7 @@ import {
   voteView,
 } from "@/lib/compute";
 import { shareCardDep, shareCardVot } from "@/lib/share-cards";
-import { prepDumbbell, prepStrip, prepTiles } from "@/lib/charts";
+import { prepBreak, prepDumbbell, prepRecord, prepStrip, prepTiles } from "@/lib/charts";
 import { downloadCsv } from "@/lib/csv";
 import { useFailedPhotos } from "@/lib/useFailedPhotos";
 import CountUp from "@/components/CountUp";
@@ -521,6 +522,8 @@ export default function DipuTracker() {
         ]);
     }
 
+    // filtro de bloque activo → el hemiciclo atenúa las bancas no coincidentes
+    const highlightSet = S.feed.bloc && D.blocMap[S.feed.bloc] ? new Set(D.deps.filter((d) => d.b === S.feed.bloc).map((d) => d.id)) : null;
     out.hemicycle = (
       <Hemicycle
         D={D}
@@ -528,6 +531,7 @@ export default function DipuTracker() {
         hoverId={S.hoverId}
         daltonico={MODO_DALTONICO}
         failedPhotos={failedPhotos}
+        highlightSet={highlightSet}
         onHover={(id) => setS({ hoverId: id })}
         onOpen={(id) => openFicha(id)}
       />
@@ -624,6 +628,7 @@ export default function DipuTracker() {
         }
       : null;
     out.ahoraProxima = agendaRef.current.proximas[0] || null;
+    out.comisiones = agendaRef.current.comisiones;
     out.feedTipos = S.feed.tipos;
     out.feedBloc = S.feed.bloc;
     out.feedBlocLabel = S.feed.bloc ? D.blocMap[S.feed.bloc]?.corto || "" : "";
@@ -1026,6 +1031,14 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "dis") {
+        // gráfico: tira de registro cronológico por bloque
+        out.recordData = prepRecord(D, P);
+        out.recordOpenVot = (ci: number) => {
+          const vi = P[ci];
+          setS({ view: "votacion", selLaw: vi, fichaId: null });
+          setHash("/votacion/" + D.votaciones[vi].id);
+          window.scrollTo(0, 0);
+        };
         const rows = D.bloques
           .map((b) => {
             const size = D.deps.filter((d) => d.b === b.k).length;
@@ -1085,6 +1098,8 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "rup") {
+        // gráfico: matriz banca × votación de rupturas
+        out.breakData = prepBreak(D, P);
         const rupDeps = D.deps.filter((d) => d.hasExc);
         out.ixRupCount = rupDeps.length + (rupDeps.length === 1 ? " registro" : " registros");
         out.ixRupList = rupDeps.map((d, ii) => {

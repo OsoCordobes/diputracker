@@ -4,6 +4,8 @@ import CardFrame from "@/components/views/ui/CardFrame";
 import StripPlot from "@/components/svg/StripPlot";
 import DumbbellPower from "@/components/svg/DumbbellPower";
 import TileMapAr from "@/components/svg/TileMapAr";
+import RecordStrip from "@/components/svg/RecordStrip";
+import BreakMatrix from "@/components/svg/BreakMatrix";
 
 export default function IndicesView({ V }: { V: DTVals }) {
   return (
@@ -114,6 +116,18 @@ export default function IndicesView({ V }: { V: DTVals }) {
       {/* TAB DISCIPLINA */}
       {V.tabIsDis && (
         <>
+          <div style={{ marginTop: "22px" }}>
+            <CardFrame
+              kicker="Cuándo se partió cada bloque"
+              title="Registro cronológico de líneas — votación por votación"
+              chips={V.chartChips}
+              meta="bloques de 3+ bancas"
+              corte={V.corte}
+            >
+              <RecordStrip rows={V.recordData.rows} votCortos={V.recordData.votCortos} onVotacion={V.recordOpenVot} />
+            </CardFrame>
+          </div>
+
           <div style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", padding: "20px 22px", marginTop: "22px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "4px", flexWrap: "wrap", gap: "8px" }}>
               <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#B45309" }}>Línea unificada por bloque · período seleccionado en el panel</div>
@@ -187,6 +201,21 @@ export default function IndicesView({ V }: { V: DTVals }) {
       {/* TAB RUPTURAS */}
       {V.tabIsRup && (
         <>
+          <div style={{ marginTop: "22px" }}>
+            <CardFrame
+              kicker="Quién rompe y en qué temas"
+              title="Matriz de rupturas — banca por votación"
+              chips={V.chartChips}
+              meta={V.ixRupCount}
+              corte={V.corte}
+            >
+              <BreakMatrix rows={V.breakData.rows} votCortos={V.breakData.votCortos} onOpen={V.stripOpen} />
+              <div style={{ fontSize: "11.5px", color: "#A8A296", lineHeight: 1.5, marginTop: "12px" }}>
+                Solo rupturas documentadas en actas y prensa parlamentaria; la detección estadística llega con el voto nominal.
+              </div>
+            </CardFrame>
+          </div>
+
           <div style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", padding: "20px 22px", marginTop: "22px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "14px" }}>
               <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#B45309" }}>Disidencias y ausencias documentadas</div>

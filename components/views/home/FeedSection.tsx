@@ -161,6 +161,38 @@ export default function FeedSection({ V }: { V: DTVals }) {
           </Rail>
         )}
 
+        {/* ---- actividad de comisiones próxima (colapsable, texto verbatim de la citación) ---- */}
+        {V.feedTipos.includes("ses") && V.comisiones.length > 0 && (
+          <Rail hueco>
+            <details style={{ border: `1.5px dashed ${C.borderDashed}`, background: C.cream, borderRadius: "14px", padding: "12px 18px", maxWidth: "720px" }}>
+              <summary style={{ cursor: "pointer", fontSize: "13.5px", fontWeight: 600, color: C.inkSoft }}>
+                Actividad de comisiones próxima{" "}
+                <span className="dt-num" style={{ fontSize: "12px", color: C.ghost }}>
+                  · {V.comisiones.length} reunión{V.comisiones.length === 1 ? "" : "es"} citada{V.comisiones.length === 1 ? "" : "s"}
+                </span>
+              </summary>
+              <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "12px" }}>
+                {V.comisiones.map((c: { fecha: string; hora?: string; comision: string; lugar?: string; temas?: string; citacionU?: string }, i: number) => (
+                  <div key={i} style={{ borderTop: i ? `1px solid ${C.borderSoft}` : "none", paddingTop: i ? "10px" : 0 }}>
+                    <div className="dt-num" style={{ fontSize: "11.5px", color: C.ghost }}>
+                      {fdate(c.fecha)}
+                      {c.hora ? " · " + c.hora : ""}
+                      {c.lugar ? " · " + c.lugar : ""}
+                    </div>
+                    <div style={{ fontSize: "13px", fontWeight: 600, marginTop: "3px", lineHeight: 1.35 }}>{c.comision}</div>
+                    {c.temas && <div style={{ fontSize: "12px", color: C.muted, marginTop: "3px", lineHeight: 1.45 }}>{c.temas}</div>}
+                    {c.citacionU && (
+                      <a href={c.citacionU} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontSize: "11.5px", fontWeight: 600, textDecoration: "none", borderBottom: "1px solid #F0D9B8", marginTop: "4px" }}>
+                        ver citación oficial ↗
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </details>
+          </Rail>
+        )}
+
         {/* ---- divisor HOY ---- */}
         <Rail pulse>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>

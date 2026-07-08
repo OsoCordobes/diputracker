@@ -2,7 +2,7 @@
 // solo AGREGA/reorganiza campos ya computados por lib/compute.ts (d.indice, power,
 // hasExc) — jamás recalcula un índice. Las bancas con indice === null se manejan
 // explícitas (no se inventan en ningún bin ni promedio).
-import type { Bloque, Dep, PowerRow } from "@/lib/types";
+import type { Bloque, Dep, Linea, PosExc, PowerRow, Votacion } from "@/lib/types";
 import { TILE_POS, type TilePos } from "@/lib/tilemap-ar";
 
 // ---------- Strip plot de alineamiento (257 bancas) ----------
@@ -138,6 +138,69 @@ export function prepDumbbell(power: PowerRow[], blocMap: Record<string, Bloque>)
       ratio: p.ratio,
       color: colorRatio(p.ratio),
     }));
+}
+
+// ---------- Tira de registro por bloque (disciplina) ----------
+
+export interface RecordRow {
+  k: string;
+  nombre: string;
+  corto: string;
+  chip: string;
+  size: number;
+  celdas: Linea[]; // una por votación computada del período, orden cronológico
+  pct: number | null; // % de líneas unificadas sobre documentadas (misma semántica que la tab)
+}
+
+export function prepRecord(
+  D: { bloques: Bloque[]; deps: Dep[]; votaciones: Votacion[] },
+  P: number[]
+): { rows: RecordRow[]; votCortos: string[] } {
+  const votCortos = P.map((vi) => D.votaciones[vi].corto);
+  const rows = D.bloques
+    .map((b) => {
+      const size = D.deps.filter((d) => d.b === b.k).length;
+      if (size < 3) return null; // la "disciplina" de 1-2 bancas es trivial (regla de la tab)
+      const celdas = P.map((vi) => D.votaciones[vi].lineas[b.k] ?? null);
+      const doc = celdas.filter((l) => l != null).length;
+      const uni = celdas.filter((l) => l === "AF" || l === "NEG" || l === "ABS").length;
+      return { k: b.k, nombre: b.nombre, corto: b.corto, chip: b.chip, size, celdas, pct: doc ? Math.round((100 * uni) / doc) : null };
+    })
+    .filter((r): r is RecordRow => r != null)
+    .sort((a, b) => (b.pct == null ? -1 : b.pct) - (a.pct == null ? -1 : a.pct) || b.size - a.size);
+  return { rows, votCortos };
+}
+
+// ---------- Matriz banca × votación de rupturas (disidencias) ----------
+
+export interface BreakCell {
+  linea: Linea; // línea del bloque de la banca en esa votación (fondo tenue)
+  ruptura: boolean; // la banca tiene registro individual acá
+  v: PosExc | null;
+}
+
+export interface BreakRow {
+  id: number;
+  nombre: string;
+  blocShort: string;
+  chip: string;
+  celdas: BreakCell[];
+  rupturas: number;
+}
+
+export function prepBreak(D: { deps: Dep[]; votaciones: Votacion[] }, P: number[]): { rows: BreakRow[]; votCortos: string[] } {
+  const votCortos = P.map((vi) => D.votaciones[vi].corto);
+  const rows = D.deps
+    .filter((d) => d.hasExc)
+    .map((d) => {
+      const celdas = P.map((vi) => {
+        const voto = d.votes[vi];
+        return { linea: D.votaciones[vi].lineas[d.b] ?? null, ruptura: voto.src === "exc", v: voto.v };
+      });
+      return { id: d.id, nombre: d.a, blocShort: d.blocShort, chip: d.chip, celdas, rupturas: celdas.filter((c) => c.ruptura).length };
+    })
+    .sort((a, b) => b.rupturas - a.rupturas || a.nombre.localeCompare(b.nombre));
+  return { rows, votCortos };
 }
 
 // ---------- Mapa de mosaico de Argentina (24 distritos) ----------

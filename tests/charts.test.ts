@@ -4,7 +4,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { prepStrip, prepDumbbell, prepTiles, colorRatio, STRIP_CARRILES } from "../lib/charts";
+import { prepStrip, prepDumbbell, prepTiles, prepRecord, prepBreak, colorRatio, STRIP_CARRILES } from "../lib/charts";
 import { TILE_POS, TILE_COLS, TILE_ROWS } from "../lib/tilemap-ar";
 import { processData } from "../lib/compute";
 import type { CtxFile, DipFile, VotFile } from "../lib/types";
@@ -81,4 +81,33 @@ test("prepDumbbell: 20 bloques ordenados por ratio, colores por umbral existente
   assert.equal(colorRatio(1.2), "#B45309");
   assert.equal(colorRatio(0.8), "#0F766E");
   assert.equal(colorRatio(1.0), "#78736A");
+});
+
+const P_TODO = D.votaciones.map((_, i) => i);
+
+test("prepRecord: bloques 3+, una celda por votación, misma semántica de % que la tab", () => {
+  const { rows, votCortos } = prepRecord(D, P_TODO);
+  assert.equal(votCortos.length, D.votaciones.length);
+  assert.ok(rows.length >= 5 && rows.length < 20, "solo bloques de 3+ bancas");
+  for (const r of rows) {
+    assert.equal(r.celdas.length, votCortos.length);
+    assert.ok(r.size >= 3);
+    const doc = r.celdas.filter((l) => l != null).length;
+    const uni = r.celdas.filter((l) => l === "AF" || l === "NEG" || l === "ABS").length;
+    assert.equal(r.pct, doc ? Math.round((100 * uni) / doc) : null, `pct incoherente en ${r.k}`);
+  }
+  const pcts = rows.map((r) => (r.pct == null ? -1 : r.pct));
+  assert.deepEqual(pcts, [...pcts].sort((a, b) => b - a), "orden por % desc");
+});
+
+test("prepBreak: solo bancas con registro individual, celdas de ruptura coherentes", () => {
+  const { rows, votCortos } = prepBreak(D, P_TODO);
+  assert.ok(rows.length > 5, "hay bancas con registro individual en el dataset real");
+  for (const r of rows) {
+    assert.equal(r.celdas.length, votCortos.length);
+    assert.equal(r.rupturas, r.celdas.filter((c) => c.ruptura).length);
+    assert.ok(r.rupturas >= 1, "una fila sin rupturas no debería estar en la matriz");
+  }
+  const rupts = rows.map((r) => r.rupturas);
+  assert.deepEqual(rupts, [...rupts].sort((a, b) => b - a), "orden por cantidad de rupturas desc");
 });

@@ -41,6 +41,7 @@ test.describe("deep links: renderizan y no reescriben el hash", () => {
       "#/indices/disciplina",
       async (page) => {
         await expect(page.getByRole("button", { name: "Disciplina de bloque", exact: true, pressed: true })).toBeVisible();
+        await expect(page.locator('svg[aria-label*="Registro de líneas por bloque"]')).toBeVisible();
       },
     ],
     [
@@ -54,6 +55,7 @@ test.describe("deep links: renderizan y no reescriben el hash", () => {
       "#/indices/rupturas",
       async (page) => {
         await expect(page.getByRole("button", { name: "Disidencias", exact: true, pressed: true })).toBeVisible();
+        await expect(page.locator('svg[aria-label*="Matriz de rupturas"]')).toBeVisible();
       },
     ],
     [
