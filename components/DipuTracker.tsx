@@ -133,7 +133,11 @@ export default function DipuTracker() {
     const D = Dref.current;
     if (!D) return;
     const h = (location.hash || "").replace(/^#\/?/, "");
-    const p = h.split("/");
+    // query-in-hash (#/panel?per=ord&bloc=lla): el path se separa ANTES del split por
+    // segmentos, así las rutas existentes (que nunca llevan "?") se parsean idéntico
+    const [path, query = ""] = h.split("?");
+    const p = path.split("/");
+    void query; // consumida por la rama "panel" (filtros del feed) en fases siguientes
     if (p[0] === "diputado" && p[1] != null) {
       const id = parseInt(p[1], 10);
       if (D.byId[id]) {
