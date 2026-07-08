@@ -1,5 +1,9 @@
 "use client";
 import type { DTVals } from "@/components/DipuTracker";
+import CardFrame from "@/components/views/ui/CardFrame";
+import StripPlot from "@/components/svg/StripPlot";
+import DumbbellPower from "@/components/svg/DumbbellPower";
+import TileMapAr from "@/components/svg/TileMapAr";
 
 export default function IndicesView({ V }: { V: DTVals }) {
   return (
@@ -36,6 +40,18 @@ export default function IndicesView({ V }: { V: DTVals }) {
       {/* TAB ALINEAMIENTO */}
       {V.tabIsAli && (
         <>
+          <div style={{ marginTop: "22px" }}>
+            <CardFrame
+              kicker="La foto completa"
+              title="Alineamiento por banca — distribución de la Cámara"
+              chips={V.chartChips}
+              meta={V.ixCob + " de 257 con índice"}
+              corte={V.corte}
+            >
+              <StripPlot data={V.stripData} daltonico={V.daltonico} onOpen={V.stripOpen} />
+            </CardFrame>
+          </div>
+
           <div className="dt-g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "14px", marginTop: "22px" }}>
             <div style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", padding: "16px 20px" }}>
               <div className="dt-num" style={{ fontSize: "30px", fontWeight: 500 }}>{V.ixProm}</div>
@@ -126,6 +142,18 @@ export default function IndicesView({ V }: { V: DTVals }) {
       {/* TAB PODER */}
       {V.tabIsPow && (
         <>
+          <div style={{ marginTop: "22px" }}>
+            <CardFrame
+              kicker="La brecha es el mensaje"
+              title="Poder de decisión vs. tamaño — quién pesa más de lo que mide"
+              chips={V.chartChips}
+              meta="Banzhaf · umbral 129"
+              corte={V.corte}
+            >
+              <DumbbellPower rows={V.dumbbellRows} />
+            </CardFrame>
+          </div>
+
           <div style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", padding: "20px 22px", marginTop: "22px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "4px" }}>
               <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#B45309" }}>Poder de bisagra por bloque · índice de Banzhaf</div>
@@ -187,6 +215,18 @@ export default function IndicesView({ V }: { V: DTVals }) {
       {/* TAB TERRITORIO */}
       {V.tabIsTer && (
         <>
+          <div style={{ marginTop: "22px" }}>
+            <CardFrame
+              kicker="El país en la Cámara"
+              title="Mapa de mosaico — alineamiento promedio por distrito"
+              chips={V.chartChips}
+              meta={V.terCount}
+              corte={V.corte}
+            >
+              <TileMapAr tiles={V.tileData} daltonico={V.daltonico} onDistrito={V.tileOpen} />
+            </CardFrame>
+          </div>
+
           <div style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", padding: "20px 22px", marginTop: "22px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "4px", flexWrap: "wrap", gap: "8px" }}>
               <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#B45309" }}>Delegaciones por distrito · nómina oficial</div>

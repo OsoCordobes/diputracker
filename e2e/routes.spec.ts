@@ -34,6 +34,7 @@ test.describe("deep links: renderizan y no reescriben el hash", () => {
       async (page) => {
         await expect(page.getByRole("heading", { name: "Cinco lecturas de la misma Cámara" })).toBeVisible();
         await expect(page.getByRole("button", { name: "Alineamiento", exact: true, pressed: true })).toBeVisible();
+        await expect(page.locator('svg[aria-label*="Alineamiento por banca"]')).toBeVisible();
       },
     ],
     [
@@ -46,6 +47,7 @@ test.describe("deep links: renderizan y no reescriben el hash", () => {
       "#/indices/poder",
       async (page) => {
         await expect(page.getByRole("button", { name: "Poder de bisagra", exact: true, pressed: true })).toBeVisible();
+        await expect(page.locator('svg[aria-label*="Poder de bisagra vs bancas"]')).toBeVisible();
       },
     ],
     [
@@ -58,6 +60,7 @@ test.describe("deep links: renderizan y no reescriben el hash", () => {
       "#/indices/territorio",
       async (page) => {
         await expect(page.getByRole("button", { name: "Territorio", exact: true, pressed: true })).toBeVisible();
+        await expect(page.locator('svg[aria-label*="Mapa de mosaico"]')).toBeVisible();
       },
     ],
     [

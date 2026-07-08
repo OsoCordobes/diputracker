@@ -18,6 +18,7 @@ import {
   voteView,
 } from "@/lib/compute";
 import { shareCardDep, shareCardVot } from "@/lib/share-cards";
+import { prepDumbbell, prepStrip, prepTiles } from "@/lib/charts";
 import { downloadCsv } from "@/lib/csv";
 import { useFailedPhotos } from "@/lib/useFailedPhotos";
 import CountUp from "@/components/CountUp";
@@ -874,8 +875,14 @@ export default function DipuTracker() {
       out.ixQue = ex.que;
       out.ixComo = ex.como;
       out.ixLim = ex.lim;
+      // chips de filtros aplicados para las cards capturables de los gráficos
+      out.chartChips = [PER_LABEL[S.periodo]].concat(S.ixBloc && S.iTab === "ali" ? [D.blocMap[S.ixBloc]?.corto || S.ixBloc] : []);
+      out.daltonico = MODO_DALTONICO;
 
       if (S.iTab === "ali") {
+        // gráfico: strip plot de las bancas (respeta el filtro de bloque de la tab)
+        out.stripData = prepStrip(D.deps, { bloc: S.ixBloc });
+        out.stripOpen = (id: number) => openFicha(id);
         const withIdx = D.deps.filter((d) => d.indice != null);
         out.ixProm = num(Math.round(withIdx.reduce((a, d) => a + (d.indice as number), 0) / withIdx.length));
         out.ixCob = num(withIdx.length);
@@ -965,6 +972,8 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "pow") {
+        // gráfico: dumbbell poder vs bancas
+        out.dumbbellRows = prepDumbbell(D.power.list, D.blocMap);
         const maxP = Math.max(...D.power.list.map((p) => p.power));
         const fmt1 = (x: number) => x.toFixed(1).replace(".", ",");
         out.ixPowerRows = D.power.list
@@ -1011,6 +1020,12 @@ export default function DipuTracker() {
       }
 
       if (S.iTab === "ter") {
+        // gráfico: mapa de mosaico de los 24 distritos
+        out.tileData = prepTiles(D.deps);
+        out.tileOpen = (name: string) => {
+          setS({ iTab: "ali", ixQ: name, ixBloc: "" });
+          setHash("/indices/alineamiento");
+        };
         const dm: Record<string, DTData["deps"]> = {};
         D.deps.forEach((d) => {
           (dm[d.d] = dm[d.d] || []).push(d);
