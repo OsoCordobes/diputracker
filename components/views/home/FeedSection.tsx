@@ -12,7 +12,10 @@ import { C } from "@/lib/tokens";
 // REGLA DURA: los items futuros jamás llevan barras, porcentajes ni colores de
 // resultado — solo lo que la fuente oficial publica.
 
-const hoyLocalIso = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD local
+// El marco temporal del sitio es la hora argentina (el "hoy" del recinto, no el del
+// navegador de quien mira desde otra zona horaria).
+const TZ_AR = "America/Argentina/Buenos_Aires";
+const hoyLocalIso = () => new Date().toLocaleDateString("en-CA", { timeZone: TZ_AR }); // YYYY-MM-DD ART
 
 const diaHeader = (iso: string) => {
   const d = new Date(iso + "T12:00:00Z");
@@ -22,7 +25,7 @@ const diaHeader = (iso: string) => {
     .toUpperCase();
 };
 
-const hoyLargo = () => new Date().toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" });
+const hoyLargo = () => new Date().toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long", timeZone: TZ_AR });
 
 function Rail({ children, hueco = false, pulse = false }: { children: React.ReactNode; hueco?: boolean; pulse?: boolean }) {
   return (

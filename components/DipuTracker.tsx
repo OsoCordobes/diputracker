@@ -653,6 +653,11 @@ export default function DipuTracker() {
       setHash("/votacion/" + D.votaciones[i].id);
       window.scrollTo(0, 0);
     };
+    // strip plot condensado de la home (⑧ Cinco lecturas) — respeta el filtro de bloque
+    out.stripHome = prepStrip(D.deps, { bloc: S.feed.bloc });
+    out.homeChartChips = [PER_LABEL[S.periodo]].concat(S.feed.bloc && D.blocMap[S.feed.bloc] ? [D.blocMap[S.feed.bloc].corto] : []);
+    out.daltonico = MODO_DALTONICO;
+    out.stripOpen = (id: number) => openFicha(id);
 
     // comparador teaser
     const findByName = (n: string) => D.deps.find((d) => d.a === n);

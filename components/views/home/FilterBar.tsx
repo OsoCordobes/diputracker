@@ -31,6 +31,7 @@ const label = {
 export default function FilterBar({ V }: { V: DTVals }) {
   return (
     <div
+      className="dt-filterbar"
       style={{
         position: "sticky",
         top: "62px",

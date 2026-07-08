@@ -4,13 +4,16 @@ import { test, expect } from "@playwright/test";
 // las secciones: eso solo puede ocurrir a propósito (actualizando esta lista), nunca
 // por accidente. El diff de este archivo documenta cada cambio de jerarquía.
 
+// v5 (jul-2026): jerarquía "live post" — estado presente arriba (AHORA), hemiciclo,
+// crónica cronológica, análisis (cinco lecturas), herramientas, método.
 const ORDEN = [
   "Índice de alineamiento con el gobierno nacional", // hero
-  "Período computado", // chips de período
-  "Composición por bloque — oficial", // franja de composición
-  "votaciones del período", // grilla/feed de votaciones
-  "Movimientos registrados", // movimientos de bloque
-  "Comparar diputados", // teaser comparador
+  "Última sesión con votaciones", // AHORA — estado del recinto
+  "Período", // FilterBar global
+  "Composición por bloque — oficial", // fusionada al pie de la card del hemiciclo
+  "Crónica del período", // feed cronológico unificado
+  "Cinco lecturas de la Cámara", // análisis + strip plot
+  "Comparar diputados", // herramientas
   "Cómo se calcula", // método
 ];
 

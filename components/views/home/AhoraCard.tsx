@@ -16,7 +16,8 @@ export default function AhoraCard({ V }: { V: DTVals }) {
     const t = setInterval(() => setTick((x) => x + 1), 60_000);
     return () => clearInterval(t);
   }, []);
-  const hoy = new Date().toLocaleDateString("en-CA");
+  // marco temporal ART: el "hoy" del recinto, no el del navegador
+  const hoy = new Date().toLocaleDateString("en-CA", { timeZone: "America/Argentina/Buenos_Aires" });
 
   const u = V.ahoraUltima;
   const p = V.ahoraProxima;

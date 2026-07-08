@@ -38,6 +38,8 @@ a:hover{color:#8A3D06;}
   .dt-g2,.dt-g3,.dt-g4{grid-template-columns:1fr !important;}
   .dt-h1{font-size:33px !important;}
   .dt-hidem{display:none !important;}
+  /* en móvil la barra de filtros ocupa varias filas: sticky taparía media pantalla */
+  .dt-filterbar{position:static !important;}
 }
 @media (max-width:560px){
   .dt-rgrid{grid-template-columns:96px 1fr 88px !important;gap:8px !important;}
