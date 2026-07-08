@@ -2,8 +2,17 @@
 import type { DTVals } from "@/components/DipuTracker";
 
 export default function HomeView({ V }: { V: DTVals }) {
+  const nAprob = (V.votesHome || []).filter((v: any) => v.resLabel === "Aprobada").length;
+  const nRech = (V.votesHome || []).length - nAprob;
+  const blocSizes = (V.blocComp || []).map((b: any) => b.count as number);
+  const kpis = [
+    { n: 257, label: "Bancas en el recinto", sub: "nómina oficial HCDN, sin proyección" },
+    { n: V.nVots, label: "Votaciones computadas", sub: nAprob + (nAprob === 1 ? " aprobada" : " aprobadas") + " · " + nRech + (nRech === 1 ? " rechazada" : " rechazadas") },
+    { n: blocSizes.length, label: "Bloques oficiales", sub: blocSizes.length ? "del más grande (" + Math.max(...blocSizes) + ") al unipersonal" : "" },
+    { n: (V.disList || []).length, label: "Registros individuales", sub: "rupturas y ausencias con lectura política" },
+  ];
   return (
-    <div className="dt-view">
+    <div className="dt-view" style={{ background: "radial-gradient(1100px 420px at 82% -60px, rgba(253,186,116,0.16), transparent 62%), radial-gradient(900px 400px at 8% -120px, rgba(20,184,166,0.08), transparent 58%)" }}>
 
       <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "48px 28px 8px" }}>
         <div style={{ display: "flex", alignItems: "flex-end", gap: "14px", flexWrap: "wrap" }}>
@@ -20,6 +29,17 @@ export default function HomeView({ V }: { V: DTVals }) {
           <span className="dt-num dt-hidem" title="Se habilita al cargar las actas CSV del dataset votaciones_nominales" style={{ fontSize: "12px", border: "1px dashed #D8D3C8", color: "#B0AB9F", borderRadius: "20px", padding: "5px 13px", cursor: "not-allowed" }}>Fernández · 2019–23</span>
           <span className="dt-num dt-hidem" title="Se habilita al cargar las actas CSV del dataset votaciones_nominales" style={{ fontSize: "12px", border: "1px dashed #D8D3C8", color: "#B0AB9F", borderRadius: "20px", padding: "5px 13px", cursor: "not-allowed" }}>Macri · 2015–19</span>
         </div>
+      </div>
+
+      {/* KPI band */}
+      <div className="dt-g4" style={{ maxWidth: "1180px", margin: "0 auto", padding: "30px 28px 0", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "22px" }}>
+        {kpis.map((k, i) => (
+          <div key={i} className="dt-pop" style={{ borderTop: "2px solid #1C1A17", paddingTop: "12px", animationDelay: i * 60 + "ms" }}>
+            <div className="dt-num" style={{ fontSize: "32px", fontWeight: 500, lineHeight: 1, letterSpacing: "-0.02em" }}>{V.num(k.n)}</div>
+            <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#57534E", marginTop: "8px" }}>{k.label}</div>
+            <div style={{ fontSize: "12px", color: "#A8A296", marginTop: "3px", lineHeight: 1.45 }}>{k.sub}</div>
+          </div>
+        ))}
       </div>
 
       <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "26px 28px 0", display: "flex", alignItems: "center", gap: "18px", flexWrap: "wrap" }}>
@@ -154,23 +174,28 @@ export default function HomeView({ V }: { V: DTVals }) {
             <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#B45309" }}>Insumos del índice — actas reales</div>
             <h2 style={{ fontFamily: "var(--font-serif), Georgia, serif", fontWeight: 600, fontSize: "30px", letterSpacing: "-0.015em", margin: "6px 0 0" }}>Las {V.nVotsWord} votaciones del período</h2>
           </div>
-          <button onClick={V.goVotacion} style={{ background: "none", border: "none", color: "#1C1A17", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: "6px" }}>Abrir vista de votación →</button>
+          <button onClick={V.goVotacion} className="hov-arrow" style={{ background: "none", border: "none", color: "#1C1A17", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: "6px" }}>Abrir vista de votación <span className="dt-arrow">→</span></button>
         </div>
-        <div className="dt-g2" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "1px", background: "#E7E3DB", border: "1px solid #E7E3DB", borderRadius: "14px", overflow: "hidden", marginTop: "20px" }}>
-          {V.votesHome.map((v: any, i: number) => (
-            <div key={i} onClick={v.onOpen} className="hov-row" style={{ background: "#FFFFFF", padding: "20px 22px", cursor: "pointer", transition: "background .15s" }}>
+        <div className="dt-g2" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "14px", marginTop: "20px" }}>
+          {V.votesHome.map((v: any, i: number) => {
+            const ok = v.resLabel === "Aprobada";
+            return (
+            <div key={i} onClick={v.onOpen} className="hov-lift" style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", padding: "20px 22px", cursor: "pointer", boxShadow: "0 1px 2px rgba(28,26,23,0.03)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px" }}>
                 <div style={{ fontSize: "16px", fontWeight: 600, lineHeight: 1.25, letterSpacing: "-0.01em", maxWidth: "72%" }}>{v.corto}</div>
                 <div style={{ textAlign: "right", flexShrink: 0 }}><div className="dt-num" style={{ fontSize: "11.5px", color: "#A8A296", whiteSpace: "nowrap" }}>{v.fecha}</div><div className="dt-num" style={{ fontSize: "9px", letterSpacing: "0.08em", color: "#B0AB9F", marginTop: "3px" }}>{v.perLabel}</div></div>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "5px" }}>
-                <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.04em", color: v.resColor, textTransform: "uppercase" }}>{v.resLabel}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "9px", marginTop: "8px" }}>
+                <span style={{ fontSize: "10.5px", fontWeight: 600, letterSpacing: "0.05em", color: v.resColor, textTransform: "uppercase", background: ok ? "#EAF3EE" : "#F7E9E6", border: `1px solid ${ok ? "#BFE0CC" : "#E5C4BD"}`, borderRadius: "20px", padding: "2px 9px" }}>{v.resLabel}</span>
                 <span style={{ fontSize: "12px", color: "#8A857A" }}>{v.govLabel}</span>
               </div>
-              <div style={{ display: "flex", height: "9px", borderRadius: "5px", overflow: "hidden", marginTop: "13px", background: "#F0EDE6" }}>
-                <div style={{ width: v.afW, background: "#2F6F4E" }}></div>
-                <div style={{ width: v.negW, background: "#9B3022" }}></div>
-                <div style={{ width: v.absW, background: "#B8B2A6" }}></div>
+              <div style={{ position: "relative", marginTop: "14px" }}>
+                <div style={{ display: "flex", height: "9px", borderRadius: "5px", overflow: "hidden", background: "#F0EDE6" }}>
+                  <div style={{ width: v.afW, background: "#2F6F4E" }}></div>
+                  <div style={{ width: v.negW, background: "#9B3022" }}></div>
+                  <div style={{ width: v.absW, background: "#B8B2A6" }}></div>
+                </div>
+                <span title="129 · mayoría simple" style={{ position: "absolute", left: (100 * 129) / 257 + "%", top: "-3px", bottom: "-3px", width: "1.5px", background: "#1C1A17", opacity: 0.55 }}></span>
               </div>
               <div className="dt-num" style={{ display: "flex", gap: "16px", marginTop: "10px", fontSize: "12px", color: "#57534E" }}>
                 <span><span style={{ color: "#2F6F4E", fontWeight: 600 }}>{v.af}</span> afirm.</span>
@@ -179,7 +204,19 @@ export default function HomeView({ V }: { V: DTVals }) {
                 <span><span style={{ color: "#8A857A", fontWeight: 600 }}>{v.sv}</span> sin voto</span>
               </div>
             </div>
-          ))}
+          );})}
+          {V.votesHome.length % 2 === 1 && (
+            <div onClick={V.goVotacion} className="hov-lift-dark" role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); V.goVotacion(); } }} style={{ background: "#1C1A17", borderRadius: "14px", padding: "22px", cursor: "pointer", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "14px", transition: "transform .2s cubic-bezier(.22,.61,.36,1), box-shadow .2s ease" }}>
+              <div>
+                <div style={{ fontSize: "10.5px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FDBA74" }}>Banca por banca</div>
+                <div style={{ fontFamily: "var(--font-serif), Georgia, serif", fontSize: "21px", fontWeight: 600, color: "#FAFAF9", lineHeight: 1.25, marginTop: "8px", maxWidth: "300px" }}>Cómo votó cada diputado, con la fuente de cada posición</div>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontSize: "12.5px", color: "#B8B2A6" }}>Línea de bloque, registros individuales y actas citadas.</span>
+                <span aria-hidden="true" style={{ color: "#FDBA74", fontSize: "18px", flexShrink: 0, marginLeft: "12px" }}>→</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -202,7 +239,7 @@ export default function HomeView({ V }: { V: DTVals }) {
               </div>
             ))}
           </div>
-          <button onClick={V.goMov} style={{ background: "none", border: "none", color: "#1C1A17", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer" }}>Ver bloques, interbloques y movimientos →</button>
+          <button onClick={V.goMov} className="hov-arrow" style={{ background: "none", border: "none", color: "#1C1A17", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer" }}>Ver bloques, interbloques y movimientos <span className="dt-arrow">→</span></button>
         </div>
         <div>
           <div style={{ borderBottom: "1px solid #E7E3DB", paddingBottom: "14px" }}>
@@ -212,14 +249,14 @@ export default function HomeView({ V }: { V: DTVals }) {
           <p style={{ fontSize: "14px", color: "#78736A", lineHeight: 1.55, margin: "16px 0 0" }}>Hasta tres bancas reales lado a lado: índice provisional, posición en cada votación y ficha oficial.</p>
           <div style={{ display: "flex", gap: "12px", marginTop: "18px" }}>
             {V.compareTeaser.map((t: any, i: number) => (
-              <div key={i} onClick={t.onClick} className="hov-row" style={{ flex: 1, border: "1px solid #E7E3DB", borderRadius: "12px", padding: "14px", textAlign: "center", background: "#FFFFFF", cursor: "pointer" }}>
+              <div key={i} onClick={t.onClick} className="hov-lift" style={{ flex: 1, border: "1px solid #E7E3DB", borderRadius: "12px", padding: "14px", textAlign: "center", background: "#FFFFFF", cursor: "pointer", boxShadow: "0 1px 2px rgba(28,26,23,0.03)" }}>
                 <div className="dt-num" style={{ width: "44px", height: "44px", borderRadius: "50%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", fontWeight: 500, color: "#FFFFFF", background: `${t.swatch} center/cover`, backgroundImage: t.fotoCss }}>{t.initials}</div>
                 <div style={{ fontSize: "12.5px", fontWeight: 600, marginTop: "9px", lineHeight: 1.2 }}>{t.nombre}</div>
                 <div className="dt-num" style={{ fontSize: "22px", fontWeight: 500, marginTop: "6px" }}>{t.indice}</div>
               </div>
             ))}
           </div>
-          <button onClick={V.goComparador} style={{ marginTop: "16px", width: "100%", background: "#1C1A17", color: "#FAFAF9", border: "none", borderRadius: "10px", padding: "12px", fontFamily: "inherit", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>Abrir comparador →</button>
+          <button onClick={V.goComparador} className="hov-dark" style={{ marginTop: "16px", width: "100%", background: "#1C1A17", color: "#FAFAF9", border: "none", borderRadius: "10px", padding: "12px", fontFamily: "inherit", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "background .16s ease" }}>Abrir comparador <span className="dt-arrow">→</span></button>
         </div>
       </div>
 
@@ -228,7 +265,7 @@ export default function HomeView({ V }: { V: DTVals }) {
         <div className="dt-g2" style={{ borderTop: "1px solid #E7E3DB", paddingTop: "22px", display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: "40px" }}>
           <div>
             <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9A958A" }}>Cómo se calcula (versión provisional)</div>
-            <a href="#/indices" style={{ float: "right", fontSize: "12.5px", fontWeight: 600, textDecoration: "none", borderBottom: "1px solid #F0D9B8" }}>metodología completa →</a>
+            <a href="#/indices" className="hov-arrow" style={{ float: "right", fontSize: "12.5px", fontWeight: 600, textDecoration: "none", borderBottom: "1px solid #F0D9B8" }}>metodología completa <span className="dt-arrow">→</span></a>
             <p style={{ fontSize: "13.5px", color: "#57534E", lineHeight: 1.6, margin: "10px 0 0", maxWidth: "560px" }}>El índice es el porcentaje de posiciones coincidentes con la del gobierno sobre las votaciones computables de cada banca. Mientras no estén cargadas las actas nominales, a cada diputado se le asigna la <strong>posición mayoritaria documentada de su bloque</strong>; cuando el bloque votó dividido o no hay línea documentada, esa votación <strong>no computa</strong>. Las disidencias individuales y las ausencias con lectura política registradas por las actas y la prensa parlamentaria se aplican por encima de la línea de bloque. La <strong>ausencia es categoría propia</strong>: no computa como apoyo ni rechazo. La abstención sí integra el denominador. Los diputados que asumieron después de una votación no la computan.</p>
           </div>
           <div style={{ fontSize: "12px", color: "#A8A296", lineHeight: 1.7, borderLeft: "1px solid #E7E3DB", paddingLeft: "20px" }}>
