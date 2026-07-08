@@ -4,6 +4,7 @@
 // y cómputo de valores de presentación vive acá; las vistas son funciones puras de V.
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CtxFile, DipFile, DTData, ITab, Mode, Periodo, SimPos, View, VotFile } from "@/lib/types";
+import { type AgendaData, type AgendaFile, AGENDA_VACIA, normalizeAgenda } from "@/lib/agenda";
 import {
   applyPeriod,
   displayName,
@@ -103,6 +104,7 @@ export default function DipuTracker() {
   }, []);
 
   const Dref = useRef<DTData | null>(null);
+  const agendaRef = useRef<AgendaData>(AGENDA_VACIA);
   const Pref = useRef<number[]>([]);
   const silentRef = useRef(false);
   const lastResRef = useRef<DTData["deps"]>([]);
@@ -188,10 +190,18 @@ export default function DipuTracker() {
       fetch("/data/diputados.json").then((r) => r.json() as Promise<DipFile>),
       fetch("/data/votaciones.json").then((r) => r.json() as Promise<VotFile>),
       fetch("/data/contexto.json").then((r) => r.json() as Promise<CtxFile>),
+      // agenda.json es el único dataset OPCIONAL: si falta (deploy de UI antes que el de
+      // datos), si el 404 de Vercel devuelve HTML, o si viene malformado, la app funciona
+      // igual con agenda vacía. Triple tolerancia: r.ok cubre el 404, el catch cubre red
+      // y JSON inválido. loadError queda reservado a los 3 datasets críticos.
+      fetch("/data/agenda.json")
+        .then((r) => (r.ok ? (r.json() as Promise<AgendaFile>) : null))
+        .catch((): AgendaFile | null => null),
     ])
-      .then(([dip, vot, ctx]) => {
+      .then(([dip, vot, ctx, agendaRaw]) => {
         if (!alive) return;
         Dref.current = processData(dip, vot, ctx);
+        agendaRef.current = normalizeAgenda(agendaRaw, new Date().toISOString().slice(0, 10));
         Pref.current = applyPeriod(Dref.current, "todo");
         setS({ loading: false });
         setTimeout(() => applyHash(), 0);
