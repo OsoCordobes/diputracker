@@ -5,6 +5,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CtxFile, DipFile, DTData, ITab, Mode, Periodo, SimPos, View, VotFile } from "@/lib/types";
 import { type AgendaData, type AgendaFile, AGENDA_VACIA, normalizeAgenda } from "@/lib/agenda";
+import { buildFeed, type FeedTipo, parseFeedParams, serializeFeedParams } from "@/lib/feed";
 import {
   applyPeriod,
   displayName,
@@ -70,6 +71,7 @@ interface State {
   ixBloc: string;
   ixSort: "desc" | "asc" | "az";
   csvDone: boolean;
+  feed: { tipos: FeedTipo[]; bloc: string; dist: string };
 }
 
 const PAGE_SIZE = 30;
@@ -99,6 +101,7 @@ export default function DipuTracker() {
     ixBloc: "",
     ixSort: "desc",
     csvDone: false,
+    feed: { tipos: ["vot", "ses", "mov"], bloc: "", dist: "" },
   });
   const setS = useCallback((patch: Partial<State> | ((s: State) => Partial<State>)) => {
     setSFull((s) => ({ ...s, ...(typeof patch === "function" ? patch(s) : patch) }));
@@ -138,7 +141,6 @@ export default function DipuTracker() {
     // segmentos, así las rutas existentes (que nunca llevan "?") se parsean idéntico
     const [path, query = ""] = h.split("?");
     const p = path.split("/");
-    void query; // consumida por la rama "panel" (filtros del feed) en fases siguientes
     if (p[0] === "diputado" && p[1] != null) {
       const id = parseInt(p[1], 10);
       if (D.byId[id]) {
@@ -184,9 +186,27 @@ export default function DipuTracker() {
       return;
     }
     if (p[0] === "panel" || p[0] === "") {
-      setS({ view: "home", fichaId: null });
+      // filtros del feed desde la URL (#/panel?per=ord&bloc=lla&feed=vot,ses)
+      const fp = parseFeedParams(query);
+      const bloc = D.blocMap[fp.bloc] ? fp.bloc : ""; // validación final contra bloques reales
+      if (fp.per !== stateRef.current.periodo) Pref.current = applyPeriod(D, fp.per);
+      setS({ view: "home", fichaId: null, periodo: fp.per, feed: { tipos: fp.tipos, bloc, dist: fp.dist } });
     }
   }, [setS]);
+
+  // hash del panel con los filtros vigentes serializados (URLs limpias: solo no-defaults)
+  const panelHash = useCallback((over: Partial<State["feed"] & { per: Periodo }> = {}) => {
+    const st = stateRef.current;
+    return (
+      "/panel" +
+      serializeFeedParams({
+        per: over.per ?? st.periodo,
+        tipos: over.tipos ?? st.feed.tipos,
+        bloc: over.bloc ?? st.feed.bloc,
+        dist: over.dist ?? st.feed.dist,
+      })
+    );
+  }, []);
 
   // ---------- carga de datos ----------
   useEffect(() => {
@@ -280,7 +300,8 @@ export default function DipuTracker() {
         ? "/votacion/" + D.votaciones[st.selLaw].id
         : st.view === "comparador"
           ? compHash(st.compare)
-          : ({ mov: "/movimientos", simulador: "/simulador", indices: "/indices", patrimonio: "/patrimonio" } as Record<string, string>)[st.view] || "/panel"
+          : ({ mov: "/movimientos", simulador: "/simulador", indices: "/indices", patrimonio: "/patrimonio" } as Record<string, string>)[st.view] ||
+            panelHash() // preserva los filtros del feed al cerrar la ficha
     );
   };
   const addToCompare = (id: number): number[] => {
@@ -334,7 +355,7 @@ export default function DipuTracker() {
       isSimulador: S.view === "simulador",
       isIndices: S.view === "indices",
       isPatrimonio: S.view === "patrimonio",
-      goHome: () => setView("home", "/panel"),
+      goHome: () => setView("home", panelHash()),
       goVotacion: () => setView("votacion", "/votacion/" + (Dref.current ? Dref.current.votaciones[S.selLaw].id : "")),
       goComparador: () => setView("comparador", "/comparador"),
       goMov: () => setView("mov", "/movimientos"),
@@ -388,9 +409,14 @@ export default function DipuTracker() {
     const perBg = (k: Periodo) => (S.periodo === k ? "#1C1A17" : "#FFFFFF");
     const perFg = (k: Periodo) => (S.periodo === k ? "#FAFAF9" : "#57534E");
     const perBd = (k: Periodo) => (S.periodo === k ? "#1C1A17" : "#E0DBD0");
-    out.perTodo = () => setPeriodo("todo");
-    out.perExt = () => setPeriodo("ext");
-    out.perOrd = () => setPeriodo("ord");
+    const cambiarPeriodo = (p: Periodo) => {
+      setPeriodo(p);
+      // el período vive también en la URL cuando estamos en el panel (link compartible)
+      if (stateRef.current.view === "home") setHash(panelHash({ per: p }));
+    };
+    out.perTodo = () => cambiarPeriodo("todo");
+    out.perExt = () => cambiarPeriodo("ext");
+    out.perOrd = () => cambiarPeriodo("ord");
     out.perTodoBg = perBg("todo");
     out.perTodoFg = perFg("todo");
     out.perTodoBorder = perBd("todo");
@@ -569,6 +595,64 @@ export default function DipuTracker() {
       titulo: m.a ? displayName(m.a) + (m.alta ? " — alta de banca" : " — cambio de bloque") : "Recomposición de bloques",
       nota: m.nota,
     }));
+
+    // ---- FEED (crónica del período) + AHORA (glue mínimo: el cómputo vive en lib/feed.ts) ----
+    out.feed = buildFeed(D, agendaRef.current, { per: S.periodo, tipos: S.feed.tipos, bloc: S.feed.bloc, dist: S.feed.dist }, corte);
+    // "verificado hoy hh:mm" solo si la corrida fue HOY en hora argentina; si no, la fecha real
+    out.verificadoHm = null;
+    if (agendaRef.current.consultado) {
+      const ts = new Date(agendaRef.current.consultado);
+      const art = (o: Intl.DateTimeFormatOptions) => ts.toLocaleString("es-AR", { ...o, timeZone: "America/Argentina/Buenos_Aires" });
+      const hm = art({ hour: "2-digit", minute: "2-digit", hour12: false });
+      const fechaArt = ts.toLocaleDateString("en-CA", { timeZone: "America/Argentina/Buenos_Aires" });
+      const hoyArt = new Date().toLocaleDateString("en-CA", { timeZone: "America/Argentina/Buenos_Aires" });
+      out.verificadoHm = (fechaArt === hoyArt ? "hoy" : fdate(fechaArt)) + " · " + hm;
+    }
+    out.agendaFuenteU = agendaRef.current.fuentes[0]?.u || "https://www.diputados.gov.ar/sesiones/";
+    const ultimaVot = D.votaciones[D.votaciones.length - 1];
+    out.ahoraUltima = ultimaVot
+      ? {
+          fecha: fdate(ultimaVot.fecha),
+          corto: ultimaVot.corto,
+          resultado: ultimaVot.resultado,
+          totales: ultimaVot.af + "-" + ultimaVot.neg + "-" + ultimaVot.abs,
+          onOpen: () => {
+            setS({ view: "votacion", selLaw: D.votaciones.length - 1, fichaId: null });
+            setHash("/votacion/" + ultimaVot.id);
+            window.scrollTo(0, 0);
+          },
+        }
+      : null;
+    out.ahoraProxima = agendaRef.current.proximas[0] || null;
+    out.feedTipos = S.feed.tipos;
+    out.feedBloc = S.feed.bloc;
+    out.feedBlocLabel = S.feed.bloc ? D.blocMap[S.feed.bloc]?.corto || "" : "";
+    out.feedBlocInfo = D.blocMap;
+    const setFeed = (patch: Partial<State["feed"]>) => {
+      const next = { ...stateRef.current.feed, ...patch };
+      setS({ feed: next });
+      setHash("/panel" + serializeFeedParams({ per: stateRef.current.periodo, ...next }));
+    };
+    out.feedSetBloc = (k: string) => setFeed({ bloc: D.blocMap[k] ? k : "" });
+    out.feedToggleTipo = (t: FeedTipo) => {
+      const cur = stateRef.current.feed.tipos;
+      const next = cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t];
+      if (next.length) setFeed({ tipos: next }); // siempre queda al menos un tipo activo
+    };
+    const blocSizes = new Map<string, number>();
+    D.deps.forEach((d) => blocSizes.set(d.b, (blocSizes.get(d.b) || 0) + 1));
+    const blocsTop = D.bloques
+      .slice()
+      .sort((a, b) => (blocSizes.get(b.k) || 0) - (blocSizes.get(a.k) || 0))
+      .slice(0, 6);
+    if (S.feed.bloc && !blocsTop.some((b) => b.k === S.feed.bloc) && D.blocMap[S.feed.bloc]) blocsTop.push(D.blocMap[S.feed.bloc]);
+    out.feedBlocChips = blocsTop.map((b) => ({ k: b.k, corto: b.corto, chip: b.chip, sel: S.feed.bloc === b.k }));
+    out.feedBlocOptions = D.bloques.map((b) => ({ value: b.k, label: b.corto }));
+    out.feedOpenVot = (i: number) => {
+      setS({ view: "votacion", selLaw: i, fichaId: null });
+      setHash("/votacion/" + D.votaciones[i].id);
+      window.scrollTo(0, 0);
+    };
 
     // comparador teaser
     const findByName = (n: string) => D.deps.find((d) => d.a === n);

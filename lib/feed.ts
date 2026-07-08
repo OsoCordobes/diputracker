@@ -101,6 +101,18 @@ export function serializeFeedParams(p: FeedParams): string {
   return s ? "?" + s : "";
 }
 
+// ---- countdown honesto: días entre hoy y una fecha citada (nunca predice nada) ----
+export function countdownLabel(fechaIso: string, hoyIso: string, hora?: string): string {
+  const d = Date.parse(fechaIso + "T00:00:00Z");
+  const h = Date.parse(hoyIso + "T00:00:00Z");
+  if (Number.isNaN(d) || Number.isNaN(h)) return "";
+  const dias = Math.round((d - h) / 86400000);
+  if (dias < 0) return "";
+  if (dias === 0) return hora ? `hoy · ${hora}` : "hoy";
+  if (dias === 1) return "mañana";
+  return `en ${dias} días`;
+}
+
 // ---- items del feed (unión discriminada) ----
 export interface FeedVotItem {
   kind: "votacion";

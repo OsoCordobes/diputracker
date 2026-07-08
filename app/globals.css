@@ -17,6 +17,8 @@ a:hover{color:#8A3D06;}
 @keyframes dtFadeIn{from{opacity:0;}to{opacity:1;}}
 @keyframes dtPopIn{from{opacity:0;transform:translateY(8px) scale(0.985);}to{opacity:1;transform:none;}}
 @keyframes dtBarIn{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+@keyframes dtPulse{0%{box-shadow:0 0 0 0 rgba(180,83,9,0.35);}70%{box-shadow:0 0 0 9px rgba(180,83,9,0);}100%{box-shadow:0 0 0 0 rgba(180,83,9,0);}}
+.dt-pulse{animation:dtPulse 2s ease-out infinite;}
 .dt-view{animation:dtViewIn .5s cubic-bezier(.22,.61,.36,1) both;}
 .dt-row{animation:dtRowIn .45s cubic-bezier(.22,.61,.36,1) both;}
 .dt-seatg{animation:dtSeatIn .55s ease both;}
@@ -25,7 +27,7 @@ a:hover{color:#8A3D06;}
 .dt-pop{animation:dtPopIn .28s cubic-bezier(.22,.61,.36,1) both;}
 .dt-bar{transform-origin:left center;animation:dtBarIn .7s cubic-bezier(.22,.61,.36,1) both;}
 @media (prefers-reduced-motion:reduce){
-  .dt-view,.dt-row,.dt-seatg,.dt-drawer,.dt-fade,.dt-pop,.dt-bar{animation:none;}
+  .dt-view,.dt-row,.dt-seatg,.dt-drawer,.dt-fade,.dt-pop,.dt-bar,.dt-pulse{animation:none;}
   .dt-seat,.dt-seatg,.dt-bar{transition:none !important;}
 }
 @media (max-width:1120px){.dt-searchlabel{display:none;}.dt-g4{grid-template-columns:repeat(2,1fr) !important;}}

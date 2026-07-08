@@ -1,5 +1,12 @@
 "use client";
 import type { DTVals } from "@/components/DipuTracker";
+import AhoraCard from "@/components/views/home/AhoraCard";
+import FilterBar from "@/components/views/home/FilterBar";
+import FeedSection from "@/components/views/home/FeedSection";
+
+// Kill-switch del feed (mismo patrón que FOTOS_EN_LISTAS): un commit de una línea lo
+// desmonta si algo sale mal en producción. Se elimina al cerrar la fase v1.5.
+const FEED_EN_HOME = true;
 
 export default function HomeView({ V }: { V: DTVals }) {
   return (
@@ -222,6 +229,19 @@ export default function HomeView({ V }: { V: DTVals }) {
           <button onClick={V.goComparador} style={{ marginTop: "16px", width: "100%", background: "#1C1A17", color: "#FAFAF9", border: "none", borderRadius: "10px", padding: "12px", fontFamily: "inherit", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>Abrir comparador →</button>
         </div>
       </div>
+
+      {/* AHORA + CRÓNICA (montaje aditivo F5; el reordenamiento editorial llega en F6) */}
+      {FEED_EN_HOME && (
+        <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "58px 28px 0" }}>
+          <div style={{ borderBottom: "1px solid #E7E3DB", paddingBottom: "14px", marginBottom: "20px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#B45309" }}>Cobertura en curso</div>
+            <h2 style={{ fontFamily: "var(--font-serif), Georgia, serif", fontWeight: 600, fontSize: "30px", letterSpacing: "-0.015em", margin: "6px 0 0" }}>Crónica del período</h2>
+          </div>
+          <AhoraCard V={V} />
+          <FilterBar V={V} />
+          <FeedSection V={V} />
+        </div>
+      )}
 
       {/* METHOD */}
       <div style={{ maxWidth: "1180px", margin: "64px auto 0", padding: "0 28px 70px" }}>

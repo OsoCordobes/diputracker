@@ -50,6 +50,77 @@ test("agenda.json vacía (sin sesiones citadas) → la app renderiza igual", asy
   await esperarHemiciclo(page);
 });
 
+// ---- el feed en sí: contenido, filtros en el hash, deep-links ----
+
+const agendaConProxima = () => {
+  const en8dias = new Date(Date.now() + 8 * 86400000).toISOString().slice(0, 10);
+  return {
+    meta: {
+      nota: "",
+      ventanaDias: 60,
+      consultado: new Date().toISOString(),
+      fuentes: [{ n: "HCDN — Listado de sesiones", u: "https://www.diputados.gov.ar/sesiones/", consultado: new Date().toISOString(), ok: true }],
+    },
+    proximas: [
+      {
+        fecha: en8dias,
+        titulo: "Sesión Ordinaria Especial CITADA",
+        estado: "citada",
+        idSesion: 9999,
+        fuenteU: "https://www.diputados.gov.ar/sesiones/",
+        temarioU: "https://www.diputados.gov.ar/secparl/dclp/procesar.html?id_sesion=9999&tipo=temario",
+        temas: [
+          { titulo: "Presupuesto 2027 — dictamen de mayoría", fuentes: [{ n: "HCDN Plan de Labor", u: "https://www.diputados.gov.ar/x" }] },
+        ],
+      },
+    ],
+    recientes: [],
+    comisiones: [],
+  };
+};
+
+test("el feed muestra la sesión citada futura con temario y sin colores de resultado", async ({ page }) => {
+  await page.route("**/data/agenda.json", (route) =>
+    route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(agendaConProxima()) })
+  );
+  await page.goto("/#/panel");
+  await esperarHemiciclo(page);
+  await expect(page.getByText("CITADA").first()).toBeVisible();
+  await expect(page.getByText(/Presupuesto 2027/)).toBeVisible();
+  await expect(page.getByText(/El temario puede cambiar. No se predicen resultados./)).toBeVisible();
+  // la card AHORA muestra el countdown honesto
+  await expect(page.getByText(/en 8 días|en 7 días/).first()).toBeVisible();
+});
+
+test("estado vacío honesto cuando no hay citaciones", async ({ page }) => {
+  await page.goto("/#/panel");
+  await esperarHemiciclo(page);
+  await expect(page.getByText("Sin sesiones citadas").first()).toBeVisible();
+  await expect(page.getByText(/se revisa 2 veces por día|Se revisa la fuente oficial/).first()).toBeVisible();
+});
+
+test("los filtros del feed escriben el hash (link compartible)", async ({ page }) => {
+  await page.goto("/#/panel");
+  await esperarHemiciclo(page);
+  // filtrar por bloque LLA
+  await page.getByRole("button", { name: /LLA/ }).first().click();
+  expect(await page.evaluate(() => location.hash)).toContain("bloc=lla");
+  // apagar movimientos
+  await page.getByRole("button", { name: /Movimientos/, exact: false }).first().click();
+  expect(await page.evaluate(() => location.hash)).toContain("feed=vot%2Cses");
+  // período ordinarias también viaja en el hash
+  await page.getByRole("button", { name: /Ordinarias/ }).first().click();
+  expect(await page.evaluate(() => location.hash)).toContain("per=ord");
+});
+
+test("deep-link con filtros pre-aplica el estado", async ({ page }) => {
+  await page.goto("/#/panel?per=ext&bloc=lla&feed=vot,ses");
+  await esperarHemiciclo(page);
+  await expect(page.getByRole("button", { name: /Extraord/ }).first()).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: /LLA/ }).first()).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: /Movimientos/ }).first()).toHaveAttribute("aria-pressed", "false");
+});
+
 test("sin agenda no hay errores de consola", async ({ page }) => {
   const errores: string[] = [];
   page.on("console", (msg) => {
