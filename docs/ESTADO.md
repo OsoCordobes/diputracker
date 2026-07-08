@@ -1,7 +1,8 @@
 # Estado del proyecto — DipuTracker
 
-_Resumen del estado al 7-jul-2026. Para el detalle técnico de los datos, ver
-[DATASET.md](DATASET.md); para arrancar, ver el [README](../README.md)._
+_Resumen del estado al 8-jul-2026 (v5). Para el detalle técnico de los datos, ver
+[DATASET.md](DATASET.md); para el diseño canónico y su changelog, [DESIGN.md](DESIGN.md);
+para arrancar, ver el [README](../README.md)._
 
 ## En una línea
 
@@ -14,6 +15,15 @@ página no quede en blanco.
 
 Las 257 bancas reales de la Cámara de Diputados, con:
 
+- **Home "live post"** (v5): estado del recinto AHORA (última sesión, próxima citación con
+  countdown, frescura de datos), **crónica cronológica** del período (votaciones + sesiones
+  citadas/fracasadas + movimientos, divisor HOY) y filtros compartibles que viven en la URL.
+- **Agenda parlamentaria** desde fuentes oficiales (`agenda.json`): sesiones citadas a
+  futuro, temario del Plan de Labor (curado con fuentes) y reuniones de comisión.
+  **Cero predicciones**: se muestra qué está citado, jamás cómo va a salir.
+- **Un gráfico por índice** (SVG bespoke, "capturable" con filtros visibles y fuente+corte
+  en el pie): strip plot de 257 bancas, tira de registro por bloque, dumbbell de Banzhaf,
+  matriz de rupturas y mapa de mosaico de 24 distritos.
 - **Índice de alineamiento** con el gobierno (provisional a nivel bloque, con disidencias documentadas).
 - **Poder de bisagra** (índice de Banzhaf) por bloque.
 - **Simulador de mayorías** sobre la composición real.
@@ -33,12 +43,12 @@ Las 257 bancas reales de la Cámara de Diputados, con:
 
 | Pieza | Estado |
 |---|---|
-| Frontend | Next.js (App Router), pixel-perfect al diseño de Claude Design |
+| Frontend | Next.js (App Router); diseño canónico v5 versionado en [DESIGN.md](DESIGN.md) (base: prototipo Claude Design; paridad numérica intacta) |
 | Hosting | Vercel, auto-deploy en cada push a `main` |
-| Datos | versionados en el repo (`public/data/`), servidos como API pública con CORS |
-| Actualización | GitHub Actions 2×/día → ETL → validación → commit → redeploy |
-| Detección de sesiones | listado oficial vivo (`diputados.gov.ar/sesiones`), tolerancia ±1 día |
-| Tests | 31 en total: 26 unitarios (motor + ETL + forma de datos) + 5 E2E (render) |
+| Datos | versionados en el repo (`public/data/`, 4 datasets), servidos como API pública con CORS |
+| Actualización | GitHub Actions 2×/día → ETL (nómina + votaciones + agenda) → validación → commit → redeploy |
+| Detección de sesiones | listado oficial vivo (`diputados.gov.ar/sesiones`), tolerancia ±1 día; citaciones futuras y comisiones vía `etl-agenda` |
+| Tests | 92 en total: 64 unitarios (motor + ETL + agenda + feed + charts + forma de datos) + 28 E2E (rutas, feed, orden editorial, render) |
 | CI | build + validación + tests + smoke E2E en cada commit |
 | Seguridad | CSP, anti-clickjacking, headers; sin secretos en el repo |
 | SEO | Open Graph, Twitter Card, JSON-LD Dataset, sitemap, robots, 404 propia |

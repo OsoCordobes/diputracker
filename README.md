@@ -104,6 +104,7 @@ npm run etl:votaciones # chequea nuevas actas / dataset nominal
 - [`docs/ESTADO.md`](docs/ESTADO.md) — estado del proyecto de un vistazo.
 - [`docs/DATASET.md`](docs/DATASET.md) — diccionario de datos y guía de la API.
 - [`docs/MANTENIMIENTO.md`](docs/MANTENIMIENTO.md) — runbook: cómo curar una votación nueva y operar el proyecto.
+- [`docs/DESIGN.md`](docs/DESIGN.md) — diseño canónico versionado y su changelog (v5: live post).
 
 ## Cómo citar
 
