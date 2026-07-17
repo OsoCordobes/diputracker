@@ -381,5 +381,21 @@
   "errores": [],
   "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
   "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-07-17T00:15:20.316Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [],
+  "aborted": false
+ },
+ {
+  "ts": "2026-07-17T00:15:31.061Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 0,
+  "nominalDisponible": false,
+  "errores": [],
+  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
+  "nominalRecursos": 4
  }
 ]
