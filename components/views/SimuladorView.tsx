@@ -54,15 +54,15 @@ export default function SimuladorView({ V }: { V: DTVals }) {
 
         <div>
           <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "14px" }}>
-            <button onClick={V.simLaboral} style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: 600, cursor: "pointer", color: "#1C1A17" }}>Reforma laboral (feb-2026)</button>
-            <button onClick={V.simGov} style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: 600, cursor: "pointer", color: "#1C1A17" }}>Oficialismo + aliados</button>
-            <button onClick={V.simReset} style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Reiniciar</button>
+            <button onClick={V.simLaboral} className="dt-m-tt" style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: 600, cursor: "pointer", color: "#1C1A17" }}>Reforma laboral (feb-2026)</button>
+            <button onClick={V.simGov} className="dt-m-tt" style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", fontWeight: 600, cursor: "pointer", color: "#1C1A17" }}>Oficialismo + aliados</button>
+            <button onClick={V.simReset} className="dt-m-tt" style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "9px", padding: "8px 13px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Reiniciar</button>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
             <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#9A958A" }}>Asignar posición por bloque</div>
             <div style={{ fontSize: "11.5px", color: "#B45309", fontWeight: 600 }}>{V.simPivotCount} bloque(s) pivote</div>
           </div>
-          <div className="dt-scroll" style={{ display: "flex", flexDirection: "column", gap: "1px", background: "#EFEBE3", border: "1px solid #EFEBE3", borderRadius: "12px", overflow: "hidden", maxHeight: "520px", overflowY: "auto" }}>
+          <div className="dt-scroll dt-simlist" style={{ display: "flex", flexDirection: "column", gap: "1px", background: "#EFEBE3", border: "1px solid #EFEBE3", borderRadius: "12px", overflow: "hidden", maxHeight: "520px", overflowY: "auto" }}>
             {V.simRows.map((r: any, i: number) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "9px 14px", background: "#FFFFFF" }}>
                 <span style={{ width: "9px", height: "9px", borderRadius: "50%", flexShrink: 0, background: r.chip }}></span>
@@ -70,7 +70,7 @@ export default function SimuladorView({ V }: { V: DTVals }) {
                   <div style={{ display: "flex", alignItems: "center", gap: "7px" }}><span style={{ fontSize: "13px", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.nombre}</span>{r.pivotal && (<span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.05em", color: "#B45309", background: "#FFF6EA", border: "1px solid #F0D9B8", borderRadius: "4px", padding: "1px 5px", whiteSpace: "nowrap" }}>PIVOTE</span>)}</div>
                   <div className="dt-num" style={{ fontSize: "11px", color: "#A8A296" }}>{r.count}</div>
                 </div>
-                <div style={{ display: "flex", gap: "2px", background: "#F0EDE6", borderRadius: "7px", padding: "2px", flexShrink: 0 }}>
+                <div className="dt-simseg" style={{ display: "flex", gap: "2px", background: "#F0EDE6", borderRadius: "7px", padding: "2px", flexShrink: 0 }}>
                   <button onClick={r.setAf} aria-pressed={r.afBg !== "#FFFFFF"} title="A favor" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.afBg, color: r.afFg }}>AF</button>
                   <button onClick={r.setNeg} aria-pressed={r.negBg !== "#FFFFFF"} title="En contra" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.negBg, color: r.negFg }}>NG</button>
                   <button onClick={r.setAbs} aria-pressed={r.absBg !== "#FFFFFF"} title="Abstención" style={{ border: "none", borderRadius: "5px", width: "30px", height: "26px", cursor: "pointer", fontFamily: "inherit", fontSize: "11px", fontWeight: 600, background: r.absBg, color: r.absFg }}>AB</button>

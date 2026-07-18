@@ -36,6 +36,21 @@ export default function HomeView({ V }: { V: DTVals }) {
       <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "14px 28px 0" }}>
         <div style={{ position: "relative", background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "16px", padding: "26px 30px 22px", boxShadow: "0 1px 2px rgba(28,26,23,0.03),0 14px 38px -28px rgba(28,26,23,0.22)" }}>
           <div style={{ position: "relative" }}>{V.hemicycle}</div>
+          {V.peekOpen && (
+            <div className="dt-pop" data-testid="dt-peek" style={{ display: "flex", alignItems: "center", gap: "12px", background: "#1C1A17", color: "#FAFAF9", borderRadius: "12px", padding: "12px 14px", marginTop: "14px", boxShadow: "0 14px 30px -12px rgba(0,0,0,.4)" }}>
+              <div className="dt-num" style={{ width: "44px", height: "44px", borderRadius: "9px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", color: "#FFFFFF", background: `${V.peek.swatch} center/cover`, backgroundImage: V.peek.fotoCss }}>{V.peek.initials}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: "14px", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{V.peek.nombre}</div>
+                <div style={{ fontSize: "11.5px", color: "#C9C4BA", marginTop: "1px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{V.peek.blocDistrito}</div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginTop: "2px" }}>
+                  <span className="dt-num" style={{ fontSize: "17px", fontWeight: 500, color: V.peek.idxColor }}>{V.peek.indice}</span>
+                  <span style={{ fontSize: "10px", color: "#9A958A" }}>{V.peek.indiceNota}</span>
+                </div>
+              </div>
+              <button onClick={V.peek.verFicha} style={{ flexShrink: 0, background: "#FDBA74", color: "#1C1A17", border: "none", borderRadius: "9px", padding: "0 16px", minHeight: "44px", fontFamily: "inherit", fontSize: "13px", fontWeight: 700, cursor: "pointer" }}>Ver ficha →</button>
+              <button onClick={V.peek.cerrar} aria-label="Cerrar" style={{ flexShrink: 0, background: "none", border: "none", color: "#9A958A", width: "34px", minHeight: "44px", fontSize: "16px", cursor: "pointer", fontFamily: "inherit" }}>✕</button>
+            </div>
+          )}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", flexWrap: "wrap", marginTop: "6px", borderTop: "1px solid #F0EDE6", paddingTop: "18px" }}>
             <div>
               <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#9A958A", marginBottom: "8px" }}>{V.legendTitle}</div>

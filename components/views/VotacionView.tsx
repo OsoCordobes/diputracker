@@ -106,8 +106,8 @@ export default function VotacionView({ V }: { V: DTVals }) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px" }}>
               <div className="dt-num" style={{ fontSize: "12px", color: "#A8A296" }}>{V.votCountLabel}</div>
               <div style={{ display: "flex", gap: "8px" }}>
-                <button onClick={V.prevPage} style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Anterior</button>
-                <button onClick={V.nextPage} style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Siguiente</button>
+                <button onClick={V.prevPage} className="dt-m-tt" style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Anterior</button>
+                <button onClick={V.nextPage} className="dt-m-tt" style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Siguiente</button>
               </div>
             </div>
           </div>

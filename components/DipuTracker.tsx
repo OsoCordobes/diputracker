@@ -19,6 +19,7 @@ import {
 import { shareCardDep, shareCardVot } from "@/lib/share-cards";
 import { downloadCsv } from "@/lib/csv";
 import { useFailedPhotos } from "@/lib/useFailedPhotos";
+import { useCoarsePointer } from "@/lib/useMediaQuery";
 import CountUp from "@/components/CountUp";
 import Hemicycle from "@/components/svg/Hemicycle";
 import MiniHemi from "@/components/svg/MiniHemi";
@@ -58,6 +59,7 @@ interface State {
   compareMode: boolean;
   query: string;
   hoverId: number | null;
+  peekId: number | null;
   selLaw: number;
   vQuery: string;
   filterBloc: string;
@@ -87,6 +89,7 @@ export default function DipuTracker() {
     compareMode: false,
     query: "",
     hoverId: null,
+    peekId: null,
     selLaw: 0,
     vQuery: "",
     filterBloc: "",
@@ -122,6 +125,9 @@ export default function DipuTracker() {
     [S.loading]
   );
   const failedPhotos = useFailedPhotos(photoUrls);
+  // Puntero táctil: cambia el comportamiento del hemiciclo (peek en vez de tooltip).
+  // Solo condiciona handlers y UI post-interacción — nunca el DOM inicial (SSR-safe).
+  const coarse = useCoarsePointer();
 
   // ---------- helpers con estado ----------
   const setHash = useCallback((h: string) => {
@@ -253,12 +259,12 @@ export default function DipuTracker() {
 
   // ---------- navegación ----------
   const setView = (v: View, hash: string) => {
-    setS({ view: v, fichaId: null });
+    setS({ view: v, fichaId: null, peekId: null });
     setHash(hash);
     if (typeof window !== "undefined") window.scrollTo(0, 0);
   };
   const openFicha = (id: number) => {
-    setS({ fichaId: id, copied: false });
+    setS({ fichaId: id, copied: false, peekId: null });
     setHash("/diputado/" + id);
   };
   const compHash = (list: number[]) => "/comparador" + (list && list.length ? "/" + list.join(",") : "");
@@ -493,13 +499,36 @@ export default function DipuTracker() {
       <Hemicycle
         D={D}
         mode={S.mode}
-        hoverId={S.hoverId}
+        hoverId={coarse ? S.peekId : S.hoverId}
         daltonico={MODO_DALTONICO}
         failedPhotos={failedPhotos}
         onHover={(id) => setS({ hoverId: id })}
         onOpen={(id) => openFicha(id)}
+        coarse={coarse}
+        onSeatTap={(id) => {
+          if (id == null) setS({ peekId: null });
+          else if (stateRef.current.peekId === id) openFicha(id); // segundo tap abre la ficha
+          else setS({ peekId: id });
+        }}
       />
     );
+    // peek card bajo el hemiciclo (solo touch): tap 1 = preview, tap 2 / botón = ficha
+    out.peekOpen = coarse && S.peekId != null && !!D.byId[S.peekId];
+    if (out.peekOpen) {
+      const pd = D.byId[S.peekId as number];
+      out.peek = {
+        nombre: displayName(pd.a),
+        blocDistrito: pd.blocShort + " · " + pd.d,
+        indice: pd.indice == null ? "—" : String(pd.indice),
+        indiceNota: pd.indice == null ? "sin datos" : "índice provisional",
+        idxColor: pd.indice == null ? "#C9C4BA" : rampD(pd.indice / 100),
+        initials: iniOf(pd),
+        fotoCss: fotoCss(pd),
+        swatch: swatch(pd.indice),
+        verFicha: () => openFicha(pd.id),
+        cerrar: () => setS({ peekId: null }),
+      };
+    }
 
     // disidencias
     const disDeps = D.deps.filter((d) => d.hasExc);
@@ -1257,7 +1286,7 @@ export default function DipuTracker() {
 
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [S, failedPhotos]);
+  }, [S, failedPhotos, coarse]);
 
   void bump;
 

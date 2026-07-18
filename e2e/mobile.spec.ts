@@ -52,3 +52,30 @@ test("ninguna vista desborda horizontalmente el viewport", async ({ page }) => {
     expect(cortados, `contenido cortado/inalcanzable en ${ruta}`).toEqual([]);
   }
 });
+
+test("tap en el hemiciclo abre la peek card y de ahí la ficha", async ({ page }) => {
+  await page.goto("/#/panel");
+  await ready(page);
+  // tap en el centro del arco: el hit-testing magnético resuelve la banca más cercana.
+  // (click, no touchscreen.tap: el CDP no sintetiza el click post-tap que sí emite
+  // un browser táctil real; el handler de la app escucha click, como corresponde)
+  const svg = page.locator('svg[aria-label*="Hemiciclo"]');
+  const box = (await svg.boundingBox())!;
+  await svg.click({ position: { x: box.width / 2, y: box.height * 0.45 } });
+  const peek = page.getByTestId("dt-peek");
+  await expect(peek).toBeVisible();
+  await peek.getByRole("button", { name: /Ver ficha/ }).click();
+  await expect(page.getByRole("dialog", { name: /Ficha del diputado/ })).toBeVisible();
+});
+
+test("la bottom nav navega entre secciones", async ({ page }) => {
+  await page.goto("/#/panel");
+  await ready(page);
+  const nav = page.locator(".dt-bottomnav");
+  await expect(nav).toBeVisible();
+  await nav.getByRole("button", { name: "Índices" }).tap();
+  await expect(page.getByText(/Cinco lecturas de la misma Cámara/)).toBeVisible();
+  expect(await page.evaluate(() => location.hash)).toBe("#/indices");
+  await nav.getByRole("button", { name: "Simulador" }).tap();
+  await expect(page.getByText(/Simulación de votación/).first()).toBeVisible();
+});

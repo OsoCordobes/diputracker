@@ -83,4 +83,9 @@ a:hover{color:#8A3D06;}
   .dt-m-padnav{padding-bottom:calc(62px + env(safe-area-inset-bottom));}
   .dt-topnavtabs{display:none !important;} /* las 5 tabs del top nav viven abajo en móvil */
   .dt-searchbtn{min-height:44px;}
+  /* targets táctiles ≥44px (Apple HIG / Material) */
+  .dt-m-tt{min-height:44px !important;}
+  .dt-simseg{gap:3px !important;}
+  .dt-simseg button{width:40px !important;height:44px !important;font-size:12px !important;}
+  .dt-simlist{max-height:none !important;overflow-y:visible !important;} /* sin scroll anidado en touch */
 }

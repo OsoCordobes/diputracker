@@ -11,9 +11,14 @@ interface Props {
   failedPhotos?: Set<string>;
   onHover: (id: number | null) => void;
   onOpen: (id: number) => void;
+  // Touch: con coarse activo el tap no abre la ficha directo — el contenedor resuelve
+  // el asiento más cercano (hit-testing magnético) y avisa por onSeatTap (null = tap
+  // fuera del umbral, para descartar el peek). El tooltip hover queda suprimido.
+  coarse?: boolean;
+  onSeatTap?: (id: number | null) => void;
 }
 
-export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, onHover, onOpen }: Props) {
+export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, onHover, onOpen, coarse, onSeatTap }: Props) {
   const g = D.geo;
   const svgRef = useRef<SVGSVGElement>(null);
   // Roving tabindex: una sola parada de Tab; las flechas recorren las bancas en orden
@@ -36,6 +41,29 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, o
     setRovingId(nid);
     (svgRef.current?.querySelector(`[data-seat-id="${nid}"]`) as SVGElement | null)?.focus();
   };
+  // Una banca mide ~3-4px reales en un teléfono: el tap se resuelve contra el asiento
+  // más cercano dentro de un radio de 28px reales, medido en unidades del viewBox.
+  const nearestSeat = (clientX: number, clientY: number): number | null => {
+    const svg = svgRef.current;
+    if (!svg) return null;
+    const rect = svg.getBoundingClientRect();
+    if (!rect.width) return null;
+    const scale = g.W / rect.width;
+    const vx = (clientX - rect.left) * scale;
+    const vy = (clientY - rect.top) * scale;
+    let best: number | null = null;
+    let bd = (28 * scale) ** 2;
+    for (const d of D.deps) {
+      const p = mode === "indice" ? d.posI : d.posB;
+      const q = (p.x - vx) ** 2 + (p.y - vy) ** 2;
+      if (q < bd) {
+        bd = q;
+        best = d.id;
+      }
+    }
+    return best;
+  };
+
   const interColor = (d: DTData["deps"][number]) => {
     if (d.b === "LLA") return "#7C3AED";
     if (d.b === "UXP") return "#38BDF8";
@@ -60,6 +88,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, o
       style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}
       role="group"
       aria-label="Hemiciclo de 257 bancas reales. Con el foco en una banca, las flechas recorren el hemiciclo."
+      onClick={coarse && onSeatTap ? (ev) => onSeatTap(nearestSeat(ev.clientX, ev.clientY)) : undefined}
     >
       {markers.map((mm, i) => {
         const m = mm[0];
@@ -112,14 +141,18 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, o
                 "Diputado " + displayName(d.a) + ", bloque " + d.blocName + (d.indice != null ? ", índice " + d.indice : ", sin datos")
               }
               style={{ cursor: "pointer", transition: "fill 700ms cubic-bezier(.4,0,.2,1), r 150ms, stroke 150ms", outline: "none" }}
-              onMouseEnter={() => onHover(d.id)}
-              onMouseLeave={() => onHover(null)}
+              onMouseEnter={coarse ? undefined : () => onHover(d.id)}
+              onMouseLeave={coarse ? undefined : () => onHover(null)}
               onFocus={() => {
-                onHover(d.id);
+                if (!coarse) onHover(d.id);
                 setRovingId(d.id);
               }}
-              onBlur={() => onHover(null)}
-              onClick={() => onOpen(d.id)}
+              onBlur={coarse ? undefined : () => onHover(null)}
+              onClick={() => {
+                // en touch el click burbujea al svg y lo resuelve el hit-testing magnético
+                if (coarse && onSeatTap) return;
+                onOpen(d.id);
+              }}
               onKeyDown={(ev) => {
                 if (ev.key === "Enter" || ev.key === " ") {
                   ev.preventDefault();
@@ -142,7 +175,7 @@ export default function Hemicycle({ D, mode, hoverId, daltonico, failedPhotos, o
           </g>
         );
       })}
-      {hov && hovPos && (
+      {!coarse && hov && hovPos && (
         <foreignObject
           x={hovPos.x > g.cx ? hovPos.x - tw - 12 : hovPos.x + 12}
           y={Math.max(8, hovPos.y - 74)}
