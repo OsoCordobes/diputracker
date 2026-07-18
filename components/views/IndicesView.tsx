@@ -54,9 +54,9 @@ export default function IndicesView({ V }: { V: DTVals }) {
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center", marginTop: "22px" }}>
             <div style={{ flex: 1, minWidth: "220px", display: "flex", alignItems: "center", gap: "8px", background: "#FFFFFF", border: "1px solid #E0DBD0", borderRadius: "9px", padding: "8px 12px" }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8A296" strokeWidth="2.2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
-              <input value={V.ixQ} onChange={V.onIxQ} placeholder="Filtrar por nombre o distrito…" style={{ border: "none", outline: "none", background: "none", fontFamily: "inherit", fontSize: "13px", width: "100%", color: "#1C1A17" }} />
+              <input value={V.ixQ} onChange={V.onIxQ} placeholder="Filtrar por nombre o distrito…" className="dt-field" style={{ border: "none", outline: "none", background: "none", fontFamily: "inherit", fontSize: "13px", width: "100%", color: "#1C1A17" }} />
             </div>
-            <select value={V.ixBloc} onChange={V.onIxBloc} style={{ border: "1px solid #E0DBD0", borderRadius: "9px", padding: "9px 11px", fontFamily: "inherit", fontSize: "12.5px", background: "#FFFFFF", color: "#1C1A17" }}>
+            <select value={V.ixBloc} onChange={V.onIxBloc} className="dt-field" style={{ border: "1px solid #E0DBD0", borderRadius: "9px", padding: "9px 11px", fontFamily: "inherit", fontSize: "12.5px", background: "#FFFFFF", color: "#1C1A17" }}>
               {V.ixBlocOptions.map((o: any, i: number) => (<option key={i} value={o.value}>{o.label}</option>))}
             </select>
             <div style={{ display: "inline-flex", background: "#F0EDE6", border: "1px solid #E2DDD2", borderRadius: "9px", padding: "2px" }}>

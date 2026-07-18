@@ -46,3 +46,17 @@ a:hover{color:#8A3D06;}
 .hov-row-sel:hover{background:#F4F1EB !important;}
 .hov-dark:hover{background:#2B2823 !important;}
 .hov-border:hover{border-color:#C9C4BA !important;}
+
+/* ===== móvil — todas estas reglas viven en media queries que el desktop nunca matchea ===== */
+.dt-app{min-height:100vh;}
+@supports (min-height:100dvh){.dt-app{min-height:100dvh;}} /* viewport dinámico: sin salto de barra en iOS Safari */
+.dt-strip{padding-top:calc(7px + env(safe-area-inset-top)) !important;} /* strip bajo el notch con viewport-fit=cover */
+@media (max-width:920px){
+  html,body{overflow-x:clip;} /* red de seguridad contra scroll lateral accidental */
+  button{touch-action:manipulation;} /* sin doble-tap zoom en botones */
+  .dt-field{font-size:16px !important;} /* ≥16px: iOS no hace auto-zoom al enfocar inputs/selects */
+}
+@media (pointer:coarse){
+  body{-webkit-tap-highlight-color:transparent;}
+  .dt-kbdhint{display:none !important;} /* atajos de teclado (⌘K, ↑↓⏎) no aplican en touch */
+}

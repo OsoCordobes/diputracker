@@ -1260,7 +1260,7 @@ export default function DipuTracker() {
   void bump;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#FAFAF9" }}>
+    <div className="dt-app" style={{ background: "#FAFAF9" }}>
       <TopChrome V={V} />
       {V.ready && (
         <>

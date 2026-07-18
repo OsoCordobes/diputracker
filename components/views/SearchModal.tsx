@@ -53,7 +53,7 @@ export default function SearchModal({ V }: { V: DTVals }) {
           )}
         </div>
         <div style={{ padding: "10px 20px", borderTop: "1px solid #E7E3DB", fontSize: "11.5px", color: "#A8A296", display: "flex", justifyContent: "space-between" }}>
-          <span>{V.searchCount}</span><span>↑↓ navegar · Enter abrir · Esc cerrar</span>
+          <span>{V.searchCount}</span><span className="dt-kbdhint">↑↓ navegar · Enter abrir · Esc cerrar</span>
         </div>
       </div>
     </div>
