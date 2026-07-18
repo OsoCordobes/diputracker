@@ -89,3 +89,44 @@ a:hover{color:#8A3D06;}
   .dt-simseg button{width:40px !important;height:44px !important;font-size:12px !important;}
   .dt-simlist{max-height:none !important;overflow-y:visible !important;} /* sin scroll anidado en touch */
 }
+
+/* ficha como bottom sheet en móvil (desktop conserva el drawer lateral) */
+@keyframes dtSheetIn{from{opacity:0;transform:translateY(48px);}to{opacity:1;transform:none;}}
+.dt-sheethandle{display:none;}
+.dt-btnicon{display:none;}
+@media (max-width:920px){
+  .dt-drawer{top:auto !important;left:0 !important;right:0 !important;bottom:0 !important;
+    width:100% !important;max-height:88dvh;border-left:none !important;border-top:1px solid #E7E3DB;
+    border-radius:18px 18px 0 0;box-shadow:0 -24px 60px -30px rgba(28,26,23,.4) !important;
+    animation-name:dtSheetIn;overscroll-behavior:contain;
+    padding-bottom:env(safe-area-inset-bottom);}
+  .dt-sheethandle{display:block;width:40px;height:4px;border-radius:2px;background:#D8D3C8;margin:8px auto 0;flex-shrink:0;}
+  .dt-drawerhead{flex-wrap:wrap;gap:8px;}
+  .dt-drawerhead button{min-height:44px !important;min-width:44px;}
+  .dt-drawerhead .dt-btnlabel{display:none;} /* en móvil los botones del header son icon-only */
+  .dt-drawerhead .dt-btnicon{display:inline-flex;}
+}
+@media (max-width:560px){
+  .dt-m-stack{grid-template-columns:1fr !important;} /* sub-grids 1fr 1fr apretados en 360px */
+  /* ranking de alineamiento: de tabla con scroll-x (min-width 730px) a cards apiladas */
+  .dt-ali .dt-minw{min-width:0 !important;}
+  .dt-alihead{display:none !important;}
+  .dt-alirow{grid-template-columns:40px minmax(0,1fr) 48px !important;
+    grid-template-areas:"ava who idx" "ava bloc idx" "bar bar bar" !important;
+    gap:3px 10px !important;padding:12px 16px !important;}
+  .dt-c-rank,.dt-c-base{display:none !important;}
+  .dt-c-ava{grid-area:ava;}
+  .dt-c-who{grid-area:who;}
+  .dt-c-bloc{grid-area:bloc;}
+  .dt-c-idx{grid-area:idx;align-self:center;}
+  .dt-c-bar{grid-area:bar;margin-top:5px;}
+  .dt-m-fs11{font-size:11px !important;} /* piso de legibilidad para labels de 9-9.5px */
+}
+@media (max-width:920px){
+  /* affordance de scroll horizontal: fade en el borde derecho de las tablas que scrollean */
+  .dt-m-scrollfade{mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);}
+}
+@media (prefers-reduced-motion:reduce){
+  .dt-drawer{animation:none !important;} /* re-guard: la regla del sheet no debe rehabilitar la animación */
+}

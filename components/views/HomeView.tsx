@@ -176,7 +176,7 @@ export default function HomeView({ V }: { V: DTVals }) {
             <div key={i} onClick={v.onOpen} className="hov-row" style={{ background: "#FFFFFF", padding: "20px 22px", cursor: "pointer", transition: "background .15s" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px" }}>
                 <div style={{ fontSize: "16px", fontWeight: 600, lineHeight: 1.25, letterSpacing: "-0.01em", maxWidth: "72%" }}>{v.corto}</div>
-                <div style={{ textAlign: "right", flexShrink: 0 }}><div className="dt-num" style={{ fontSize: "11.5px", color: "#A8A296", whiteSpace: "nowrap" }}>{v.fecha}</div><div className="dt-num" style={{ fontSize: "9px", letterSpacing: "0.08em", color: "#B0AB9F", marginTop: "3px" }}>{v.perLabel}</div></div>
+                <div style={{ textAlign: "right", flexShrink: 0 }}><div className="dt-num" style={{ fontSize: "11.5px", color: "#A8A296", whiteSpace: "nowrap" }}>{v.fecha}</div><div className="dt-num dt-m-fs11" style={{ fontSize: "9px", letterSpacing: "0.08em", color: "#B0AB9F", marginTop: "3px" }}>{v.perLabel}</div></div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "5px" }}>
                 <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.04em", color: v.resColor, textTransform: "uppercase" }}>{v.resLabel}</span>

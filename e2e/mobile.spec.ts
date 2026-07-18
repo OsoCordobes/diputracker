@@ -68,6 +68,19 @@ test("tap en el hemiciclo abre la peek card y de ahí la ficha", async ({ page }
   await expect(page.getByRole("dialog", { name: /Ficha del diputado/ })).toBeVisible();
 });
 
+test("la ficha abre como sheet y cierra con ✕ y con el backdrop", async ({ page }) => {
+  await page.goto("/#/diputado/1");
+  const ficha = page.getByRole("dialog", { name: /Ficha del diputado/ });
+  await expect(ficha).toBeVisible({ timeout: 15_000 });
+  await ficha.getByRole("button", { name: "Cerrar ficha" }).click();
+  await expect(ficha).toBeHidden();
+  // reabrir y cerrar tocando el backdrop
+  await page.goto("/#/diputado/2");
+  await expect(page.getByRole("dialog", { name: /Ficha del diputado/ })).toBeVisible();
+  await page.mouse.click(10, 60); // esquina superior: fuera del sheet, sobre el backdrop
+  await expect(page.getByRole("dialog", { name: /Ficha del diputado/ })).toBeHidden();
+});
+
 test("la bottom nav navega entre secciones", async ({ page }) => {
   await page.goto("/#/panel");
   await ready(page);

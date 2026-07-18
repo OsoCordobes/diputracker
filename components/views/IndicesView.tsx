@@ -67,24 +67,24 @@ export default function IndicesView({ V }: { V: DTVals }) {
             <button onClick={V.downloadCsv} aria-live="polite" title="Descarga el dataset completo: las 257 bancas con índice, bloque, mandato y registros individuales" className="hov-dark" style={{ display: "inline-flex", alignItems: "center", gap: "7px", background: "#1C1A17", color: "#FAFAF9", border: "none", borderRadius: "9px", padding: "9px 14px", fontFamily: "inherit", fontSize: "12px", fontWeight: 600, cursor: "pointer", transition: "background .2s" }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M4 21h16"></path></svg>{V.csvLabel}</button>
           </div>
 
-          <div style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", marginTop: "14px", overflowX: "auto" }}>
-            <div className="dt-minw" style={{ display: "grid", gridTemplateColumns: "44px 40px minmax(0,1fr) 150px 200px 56px 96px", gap: "12px", alignItems: "center", padding: "10px 18px", borderBottom: "1px solid #EFEBE3", background: "#FBF9F4", fontSize: "10px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#9A958A" }}>
+          <div className="dt-ali" style={{ background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "14px", marginTop: "14px", overflowX: "auto" }}>
+            <div className="dt-minw dt-alihead" style={{ display: "grid", gridTemplateColumns: "44px 40px minmax(0,1fr) 150px 200px 56px 96px", gap: "12px", alignItems: "center", padding: "10px 18px", borderBottom: "1px solid #EFEBE3", background: "#FBF9F4", fontSize: "10px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#9A958A" }}>
               <span>#</span><span></span><span>Diputado</span><span>Bloque</span><span>Índice de alineamiento</span><span style={{ textAlign: "right" }}>0–100</span><span style={{ textAlign: "right" }}>Base</span>
             </div>
             {V.ixRows.map((r: any, i: number) => (
-              <div key={i} onClick={r.onClick} className="dt-row dt-minw hov-row" style={{ display: "grid", gridTemplateColumns: "44px 40px minmax(0,1fr) 150px 200px 56px 96px", gap: "12px", alignItems: "center", padding: "9px 18px", borderBottom: "1px solid #F2EFE9", cursor: "pointer", animationDelay: r.delay }}>
-                <span className="dt-num" style={{ fontSize: "11.5px", color: "#B0AB9F" }}>{r.rank}</span>
-                <div className="dt-num" style={{ width: "32px", height: "32px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", color: "#FFFFFF", background: `${r.swatch} center/cover`, backgroundImage: r.fotoCss }}>{r.initials}</div>
-                <div style={{ minWidth: 0 }}>
+              <div key={i} onClick={r.onClick} className="dt-row dt-minw dt-alirow hov-row" style={{ display: "grid", gridTemplateColumns: "44px 40px minmax(0,1fr) 150px 200px 56px 96px", gap: "12px", alignItems: "center", padding: "9px 18px", borderBottom: "1px solid #F2EFE9", cursor: "pointer", animationDelay: r.delay }}>
+                <span className="dt-num dt-c-rank" style={{ fontSize: "11.5px", color: "#B0AB9F" }}>{r.rank}</span>
+                <div className="dt-num dt-c-ava" style={{ width: "32px", height: "32px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", color: "#FFFFFF", background: `${r.swatch} center/cover`, backgroundImage: r.fotoCss }}>{r.initials}</div>
+                <div className="dt-c-who" style={{ minWidth: 0 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "7px" }}><span style={{ fontSize: "13.5px", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.nombre}</span>{r.hasExc && (<span title="Disidencia o ausencia con registro individual" style={{ width: "13px", height: "13px", borderRadius: "50%", border: "1.6px solid #1C1A17", flexShrink: 0 }}></span>)}</div>
                   <div style={{ fontSize: "11.5px", color: "#8A857A" }}>{r.distrito}</div>
                 </div>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#57534E", minWidth: 0 }}><span style={{ width: "8px", height: "8px", borderRadius: "50%", flexShrink: 0, background: r.chip }}></span><span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.blocShort}</span></span>
-                <div style={{ position: "relative", height: "9px", borderRadius: "5px", background: "#F0EDE6", overflow: "hidden" }}>
+                <span className="dt-c-bloc" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#57534E", minWidth: 0 }}><span style={{ width: "8px", height: "8px", borderRadius: "50%", flexShrink: 0, background: r.chip }}></span><span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.blocShort}</span></span>
+                <div className="dt-c-bar" style={{ position: "relative", height: "9px", borderRadius: "5px", background: "#F0EDE6", overflow: "hidden" }}>
                   <div className="dt-bar" style={{ position: "absolute", inset: "0 auto 0 0", width: r.barW, borderRadius: "5px", background: r.barColor, animationDelay: r.delay }}></div>
                 </div>
-                <span className="dt-num" style={{ fontSize: "14px", fontWeight: 600, textAlign: "right", color: r.idxColor }}>{r.indice}</span>
-                <span className="dt-num" style={{ fontSize: "10.5px", color: "#A8A296", textAlign: "right" }}>{r.base}</span>
+                <span className="dt-num dt-c-idx" style={{ fontSize: "14px", fontWeight: 600, textAlign: "right", color: r.idxColor }}>{r.indice}</span>
+                <span className="dt-num dt-c-base" style={{ fontSize: "10.5px", color: "#A8A296", textAlign: "right" }}>{r.base}</span>
               </div>
             ))}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", padding: "12px 18px", flexWrap: "wrap" }}>
@@ -193,14 +193,14 @@ export default function IndicesView({ V }: { V: DTVals }) {
               <div className="dt-num" style={{ fontSize: "12px", color: "#A8A296" }}>{V.terCount}</div>
             </div>
             <div style={{ fontSize: "13.5px", color: "#78736A", lineHeight: 1.5, maxWidth: "730px", marginBottom: "16px" }}>La barra es la composición por bloque de cada delegación; el número, su alineamiento promedio (0 oposición → 100 oficialismo). Cada fila abre la delegación banca por banca.</div>
-            <div className="dt-xwrap" style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+            <div className="dt-xwrap dt-m-scrollfade" style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
               {V.terRows.map((t: any, i: number) => (
                 <div key={i} onClick={t.onClick} className="dt-row dt-minw2 hov-row" style={{ display: "grid", gridTemplateColumns: "190px 1fr 92px 168px", gap: "16px", alignItems: "center", padding: "9px 10px", borderRadius: "9px", cursor: "pointer", animationDelay: t.delay, transition: "background .15s" }}>
                   <div style={{ minWidth: 0 }}><div style={{ fontSize: "13.5px", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t.nombre}</div><div className="dt-num" style={{ fontSize: "10.5px", color: "#A8A296" }}>{t.count}</div></div>
                   <div style={{ display: "flex", height: "14px", borderRadius: "4px", overflow: "hidden", border: "1px solid #EFEBE3" }}>
                     {t.segs.map((s: any, j: number) => (<div key={j} title={s.tip} style={{ width: s.w, background: s.chip, opacity: 0.92 }}></div>))}
                   </div>
-                  <div style={{ textAlign: "right" }}><span className="dt-num" style={{ fontSize: "13.5px", fontWeight: 600, color: "#B45309" }}>{t.ren}</span><div className="dt-num" style={{ fontSize: "9.5px", color: "#A8A296", letterSpacing: "0.04em" }}>en juego 2027</div></div>
+                  <div style={{ textAlign: "right" }}><span className="dt-num" style={{ fontSize: "13.5px", fontWeight: 600, color: "#B45309" }}>{t.ren}</span><div className="dt-num dt-m-fs11" style={{ fontSize: "9.5px", color: "#A8A296", letterSpacing: "0.04em" }}>en juego 2027</div></div>
                   <div style={{ display: "flex", alignItems: "center", gap: "9px", justifyContent: "flex-end" }}>
                     <span style={{ width: "11px", height: "11px", borderRadius: "50%", flexShrink: 0, background: t.promSw, border: "1px solid rgba(28,26,23,0.18)" }}></span>
                     <span className="dt-num" style={{ fontSize: "15px", fontWeight: 600, minWidth: "28px", textAlign: "right" }}>{t.prom}</span>

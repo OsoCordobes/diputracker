@@ -67,7 +67,7 @@ export default function SimuladorView({ V }: { V: DTVals }) {
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "9px 14px", background: "#FFFFFF" }}>
                 <span style={{ width: "9px", height: "9px", borderRadius: "50%", flexShrink: 0, background: r.chip }}></span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "7px" }}><span style={{ fontSize: "13px", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.nombre}</span>{r.pivotal && (<span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.05em", color: "#B45309", background: "#FFF6EA", border: "1px solid #F0D9B8", borderRadius: "4px", padding: "1px 5px", whiteSpace: "nowrap" }}>PIVOTE</span>)}</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "7px" }}><span style={{ fontSize: "13px", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.nombre}</span>{r.pivotal && (<span className="dt-m-fs11" style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.05em", color: "#B45309", background: "#FFF6EA", border: "1px solid #F0D9B8", borderRadius: "4px", padding: "1px 5px", whiteSpace: "nowrap" }}>PIVOTE</span>)}</div>
                   <div className="dt-num" style={{ fontSize: "11px", color: "#A8A296" }}>{r.count}</div>
                 </div>
                 <div className="dt-simseg" style={{ display: "flex", gap: "2px", background: "#F0EDE6", borderRadius: "7px", padding: "2px", flexShrink: 0 }}>

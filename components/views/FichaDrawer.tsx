@@ -19,6 +19,39 @@ function trapTab(e: React.KeyboardEvent<HTMLElement>) {
 
 export default function FichaDrawer({ V }: { V: DTVals }) {
   const drawerRef = useRef<HTMLDivElement>(null);
+  // Swipe-down para cerrar el bottom sheet (móvil). Los handlers viven solo en el
+  // handle y el header — así no compiten con el scroll interno del cuerpo. En desktop
+  // no hay eventos touch, por lo que el drawer lateral no se ve afectado.
+  const dragStartY = useRef<number | null>(null);
+  const sheetDrag = {
+    onTouchStart: (e: React.TouchEvent<HTMLElement>) => {
+      dragStartY.current = e.touches[0].clientY;
+    },
+    onTouchMove: (e: React.TouchEvent<HTMLElement>) => {
+      const el = drawerRef.current;
+      if (el == null || dragStartY.current == null) return;
+      const dy = e.touches[0].clientY - dragStartY.current;
+      if (dy > 0) {
+        el.style.transition = "none";
+        el.style.transform = `translateY(${dy}px)`;
+      }
+    },
+    onTouchEnd: (e: React.TouchEvent<HTMLElement>) => {
+      const el = drawerRef.current;
+      const dy = dragStartY.current == null ? 0 : e.changedTouches[0].clientY - dragStartY.current;
+      dragStartY.current = null;
+      if (!el) return;
+      if (dy > 90) {
+        V.closeFicha();
+      } else {
+        el.style.transition = "transform .2s ease";
+        el.style.transform = "";
+        setTimeout(() => {
+          if (el) el.style.transition = "";
+        }, 250);
+      }
+    },
+  };
   // Opener capturado en el primer render, antes de que el drawer robe el foco.
   const openerRef = useRef<HTMLElement | null>(typeof document !== "undefined" ? (document.activeElement as HTMLElement) : null);
   useEffect(() => {
@@ -35,13 +68,14 @@ export default function FichaDrawer({ V }: { V: DTVals }) {
         <>
           <div className="dt-fade" style={{ position: "fixed", inset: 0, zIndex: 80, background: "rgba(28,26,23,0.32)", backdropFilter: "blur(2px)" }} onClick={V.closeFicha}></div>
           <div ref={drawerRef} onKeyDown={trapTab} role="dialog" aria-modal="true" aria-label={"Ficha del diputado " + V.fNombre} tabIndex={-1} className="dt-scroll dt-drawer" style={{ position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 81, width: "min(480px,100vw)", background: "#FAFAF9", borderLeft: "1px solid #E7E3DB", boxShadow: "-30px 0 60px -30px rgba(28,26,23,0.3)", overflowY: "auto", outline: "none" }}>
-            <div style={{ position: "sticky", top: 0, background: "rgba(250,250,249,0.9)", backdropFilter: "blur(8px)", borderBottom: "1px solid #E7E3DB", padding: "14px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 2 }}>
+            <span className="dt-sheethandle" aria-hidden="true" {...sheetDrag}></span>
+            <div className="dt-drawerhead" {...sheetDrag} style={{ position: "sticky", top: 0, background: "rgba(250,250,249,0.9)", backdropFilter: "blur(8px)", borderBottom: "1px solid #E7E3DB", padding: "14px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 2 }}>
               <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9A958A" }}>Ficha del diputado</span>
               <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                <button onClick={V.shareCard} aria-live="polite" title="Descargar tarjeta PNG lista para redes o una nota" className="dt-num" style={{ background: "#1C1A17", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#FAFAF9", fontSize: "11.5px" }}>{V.shareLabel}</button>
-                <button onClick={V.copyCita} aria-live="polite" title="Copiar resumen citable para una nota" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.citaLabel}</button>
-                <button onClick={V.copyLink} aria-live="polite" title="Copiar link directo" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px" }}>{V.copyLabel}</button>
-                <button onClick={V.closeFicha} style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", width: "30px", height: "30px", cursor: "pointer", color: "#57534E", fontSize: "15px" }}>✕</button>
+                <button onClick={V.shareCard} aria-live="polite" title="Descargar tarjeta PNG lista para redes o una nota" className="dt-num" style={{ background: "#1C1A17", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#FAFAF9", fontSize: "11.5px", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px" }}><span className="dt-btnlabel">{V.shareLabel}</span><span className="dt-btnicon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M4 21h16"></path></svg></span></button>
+                <button onClick={V.copyCita} aria-live="polite" title="Copiar resumen citable para una nota" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px" }}><span className="dt-btnlabel">{V.citaLabel}</span><span className="dt-btnicon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 7h8M9 12h8M9 17h5"></path><path d="M5 7h.01M5 12h.01M5 17h.01"></path></svg></span></button>
+                <button onClick={V.copyLink} aria-live="polite" title="Copiar link directo" className="dt-num" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", height: "30px", padding: "0 12px", cursor: "pointer", color: "#57534E", fontSize: "11.5px", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px" }}><span className="dt-btnlabel">{V.copyLabel}</span><span className="dt-btnicon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"></path><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"></path></svg></span></button>
+                <button onClick={V.closeFicha} aria-label="Cerrar ficha" style={{ background: "#F0EDE6", border: "none", borderRadius: "8px", width: "30px", height: "30px", cursor: "pointer", color: "#57534E", fontSize: "15px" }}>✕</button>
               </div>
             </div>
             <div style={{ padding: "24px 26px 50px" }}>
@@ -103,7 +137,7 @@ export default function FichaDrawer({ V }: { V: DTVals }) {
                       </div>
                       <div style={{ textAlign: "right", flexShrink: 0 }}>
                         <div style={{ fontSize: "11.5px", fontWeight: 600, color: v.fg, whiteSpace: "nowrap" }}>{v.label}</div>
-                        <div className="dt-num" style={{ fontSize: "9.5px", color: "#B0AB9F", marginTop: "1px" }}>{v.srcLabel}</div>
+                        <div className="dt-num dt-m-fs11" style={{ fontSize: "9.5px", color: "#B0AB9F", marginTop: "1px" }}>{v.srcLabel}</div>
                       </div>
                     </div>
                   ))}
@@ -111,7 +145,7 @@ export default function FichaDrawer({ V }: { V: DTVals }) {
                 <div style={{ fontSize: "11.5px", color: "#A8A296", marginTop: "8px", lineHeight: 1.45, display: "flex", gap: "7px" }}><span style={{ color: "#B45309" }}>●</span> “Línea de bloque” = posición mayoritaria documentada del bloque; “registro” = voto o ausencia individual documentada.</div>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "#EFEBE3", border: "1px solid #EFEBE3", borderRadius: "12px", overflow: "hidden", marginTop: "18px" }}>
+              <div className="dt-m-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "#EFEBE3", border: "1px solid #EFEBE3", borderRadius: "12px", overflow: "hidden", marginTop: "18px" }}>
                 <div style={{ background: "#FFFFFF", padding: "14px 16px" }}><div className="dt-num" style={{ fontSize: "17px", fontWeight: 500 }}>{V.fDieta}</div><div style={{ fontSize: "11.5px", color: "#9A958A", marginTop: "2px" }}>Dieta mensual <a href={V.dietaU} target="_blank" rel="noopener noreferrer" style={{ color: "#B45309", textDecoration: "none" }}>(fuente ↗)</a></div></div>
                 <div style={{ background: "#FFFFFF", padding: "14px 16px" }}><a href="https://www2.jus.gov.ar/consultaddjj/Home/Busqueda" target="_blank" rel="noopener noreferrer" style={{ fontSize: "14px", fontWeight: 600, color: "#B45309", textDecoration: "none" }}>Buscar su DDJJ ↗</a><div style={{ fontSize: "11.5px", color: "#9A958A", marginTop: "2px" }}>patrimonio declarado · búsqueda por apellido en la OA · <a href="#/patrimonio" style={{ color: "#B45309", textDecoration: "none" }}>cómo funciona</a></div></div>
               </div>
