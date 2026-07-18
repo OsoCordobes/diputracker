@@ -26,6 +26,7 @@ import Sparkline from "@/components/svg/Sparkline";
 import SimHemi from "@/components/svg/SimHemi";
 
 import TopChrome from "@/components/views/TopChrome";
+import BottomNav from "@/components/views/BottomNav";
 import HomeView from "@/components/views/HomeView";
 import VotacionView from "@/components/views/VotacionView";
 import ComparadorView from "@/components/views/ComparadorView";
@@ -359,6 +360,7 @@ export default function DipuTracker() {
     out.navPatFg = navFg("patrimonio");
     out.navSimBg = navBg("simulador");
     out.navSimFg = navFg("simulador");
+    out.navActive = S.view;
 
     const D = Dref.current;
     if (!D) return out;
@@ -1260,8 +1262,9 @@ export default function DipuTracker() {
   void bump;
 
   return (
-    <div className="dt-app" style={{ background: "#FAFAF9" }}>
+    <div className="dt-app dt-m-padnav" style={{ background: "#FAFAF9" }}>
       <TopChrome V={V} />
+      <BottomNav V={V} />
       {V.ready && (
         <>
           {V.isHome && <HomeView V={V} />}

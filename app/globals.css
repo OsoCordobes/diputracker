@@ -28,12 +28,14 @@ a:hover{color:#8A3D06;}
   .dt-view,.dt-row,.dt-seatg,.dt-drawer,.dt-fade,.dt-pop,.dt-bar{animation:none;}
   .dt-seat,.dt-seatg,.dt-bar{transition:none !important;}
 }
-@media (max-width:1120px){.dt-searchlabel{display:none;}.dt-g4{grid-template-columns:repeat(2,1fr) !important;}}
+@media (max-width:1120px){.dt-searchlabel{display:none;}.dt-g4{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}}
 .dt-xwrap{overflow-x:auto;overflow-y:hidden;}
 .dt-minw{min-width:730px;}
 .dt-minw2{min-width:620px;}
 @media (max-width:920px){
-  .dt-g2,.dt-g3,.dt-g4{grid-template-columns:1fr !important;}
+  /* minmax(0,1fr): el track puede encoger por debajo del min-content de sus hijos
+     (con 1fr a secas, un hijo ancho fuerza a TODA la columna a desbordar la página) */
+  .dt-g2,.dt-g3,.dt-g4{grid-template-columns:minmax(0,1fr) !important;}
   .dt-h1{font-size:33px !important;}
   .dt-hidem{display:none !important;}
 }
@@ -59,4 +61,26 @@ a:hover{color:#8A3D06;}
 @media (pointer:coarse){
   body{-webkit-tap-highlight-color:transparent;}
   .dt-kbdhint{display:none !important;} /* atajos de teclado (⌘K, ↑↓⏎) no aplican en touch */
+}
+@media (max-width:920px){
+  /* controles segmentados como carrusel de chips: nada desborda la página, se desliza con el dedo */
+  .dt-chipscroll{display:flex !important;flex-wrap:nowrap !important;max-width:100%;overflow-x:auto;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;
+    mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 18px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 18px),transparent);}
+  .dt-chipscroll::-webkit-scrollbar{display:none;}
+  .dt-chipscroll>button{flex-shrink:0;scroll-snap-align:start;min-height:44px;}
+  .dt-chipscroll>span{flex-shrink:0;}
+}
+
+/* bottom nav móvil: fija abajo, con blur y safe-area; en desktop no existe */
+.dt-bottomnav{display:none;}
+@media (max-width:920px){
+  .dt-bottomnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
+    background:rgba(250,250,249,0.94);backdrop-filter:blur(10px) saturate(140%);
+    -webkit-backdrop-filter:blur(10px) saturate(140%);border-top:1px solid #E7E3DB;
+    padding:4px env(safe-area-inset-right) calc(4px + env(safe-area-inset-bottom)) env(safe-area-inset-left);}
+  .dt-m-padnav{padding-bottom:calc(62px + env(safe-area-inset-bottom));}
+  .dt-topnavtabs{display:none !important;} /* las 5 tabs del top nav viven abajo en móvil */
+  .dt-searchbtn{min-height:44px;}
 }

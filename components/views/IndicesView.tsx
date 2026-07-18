@@ -9,7 +9,7 @@ export default function IndicesView({ V }: { V: DTVals }) {
       <p style={{ fontSize: "15px", color: "#78736A", lineHeight: 1.55, margin: "8px 0 0", maxWidth: "760px" }}>Cada índice responde una pregunta distinta con los mismos datos oficiales. Cada uno se presenta con qué mide, cómo se calcula y qué no permite afirmar.</p>
 
       <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap", marginTop: "24px" }}>
-        <div style={{ display: "inline-flex", background: "#F0EDE6", border: "1px solid #E2DDD2", borderRadius: "10px", padding: "3px" }}>
+        <div className="dt-chipscroll" style={{ display: "inline-flex", background: "#F0EDE6", border: "1px solid #E2DDD2", borderRadius: "10px", padding: "3px" }}>
           <button onClick={V.tabAli} aria-pressed={V.tabAliBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "8px 15px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", background: V.tabAliBg, color: V.tabAliFg, boxShadow: V.tabAliSh, transition: "all .2s" }}>Alineamiento</button>
           <button onClick={V.tabDis} aria-pressed={V.tabDisBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "8px 15px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", background: V.tabDisBg, color: V.tabDisFg, boxShadow: V.tabDisSh, transition: "all .2s" }}>Disciplina de bloque</button>
           <button onClick={V.tabPow} aria-pressed={V.tabPowBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "8px 15px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", background: V.tabPowBg, color: V.tabPowFg, boxShadow: V.tabPowSh, transition: "all .2s" }}>Poder de bisagra</button>
@@ -59,7 +59,7 @@ export default function IndicesView({ V }: { V: DTVals }) {
             <select value={V.ixBloc} onChange={V.onIxBloc} className="dt-field" style={{ border: "1px solid #E0DBD0", borderRadius: "9px", padding: "9px 11px", fontFamily: "inherit", fontSize: "12.5px", background: "#FFFFFF", color: "#1C1A17" }}>
               {V.ixBlocOptions.map((o: any, i: number) => (<option key={i} value={o.value}>{o.label}</option>))}
             </select>
-            <div style={{ display: "inline-flex", background: "#F0EDE6", border: "1px solid #E2DDD2", borderRadius: "9px", padding: "2px" }}>
+            <div className="dt-chipscroll" style={{ display: "inline-flex", background: "#F0EDE6", border: "1px solid #E2DDD2", borderRadius: "9px", padding: "2px" }}>
               <button onClick={V.ixSortDesc} aria-pressed={V.ixSDescBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "7px 12px", fontFamily: "inherit", fontSize: "12px", fontWeight: 600, cursor: "pointer", background: V.ixSDescBg, color: V.ixSDescFg, transition: "all .2s" }}>Mayor alineamiento</button>
               <button onClick={V.ixSortAsc} aria-pressed={V.ixSAscBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "7px 12px", fontFamily: "inherit", fontSize: "12px", fontWeight: 600, cursor: "pointer", background: V.ixSAscBg, color: V.ixSAscFg, transition: "all .2s" }}>Menor alineamiento</button>
               <button onClick={V.ixSortAz} aria-pressed={V.ixSAzBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "7px 12px", fontFamily: "inherit", fontSize: "12px", fontWeight: 600, cursor: "pointer", background: V.ixSAzBg, color: V.ixSAzFg, transition: "all .2s" }}>A–Z</button>
