@@ -6,12 +6,14 @@ const isDev = process.env.NODE_ENV === "development";
 //  - style-src 'unsafe-inline': el diseño es 100% estilos inline (fidelidad pixel-perfect).
 //  - img-src: fotos oficiales de la HCDN + favicon/tarjetas data-URI + blobs (CSV/PNG).
 //  - font-src 'self': next/font/google auto-hospeda las tipografías (no hay pedidos externos).
-//  - connect-src 'self': la app solo pide /data/*.json del mismo origen.
+//  - connect-src 'self': la app solo pide /data/*.json del mismo origen; Vercel Analytics
+//    manda sus beacons a /_vercel/insights/* (mismo origen), así que también queda cubierto.
 //  - frame-ancestors 'none' (anti-clickjacking), base-uri/form-action 'self', object-src 'none'.
-// En dev se habilitan 'unsafe-eval' y el websocket de HMR; en producción no.
+// En dev se habilitan 'unsafe-eval', el websocket de HMR y el script debug de Vercel
+// Analytics (va.vercel-scripts.com, solo en dev; en producción es same-origin).
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' https://parlamentaria.hcdn.gob.ar data: blob:",
   "font-src 'self'",

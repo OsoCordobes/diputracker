@@ -29,6 +29,7 @@ export default function FooterView({ V }: { V: DTVals }) {
             <a href="#/simulador" style={{ textDecoration: "none", color: "#57534E", width: "fit-content" }}>Simulador de mayorías</a>
             <a href="#/comparador" style={{ textDecoration: "none", color: "#57534E", width: "fit-content" }}>Comparador de diputados</a>
             <a href="#/movimientos" style={{ textDecoration: "none", color: "#57534E", width: "fit-content" }}>Bloques y movimientos</a>
+            <a href="#/como-se-hizo" style={{ textDecoration: "none", color: "#57534E", width: "fit-content" }}>Cómo se hizo (humano + IA)</a>
             <button onClick={V.downloadCsv} aria-live="polite" style={{ background: "none", border: "none", padding: 0, fontFamily: "inherit", fontSize: "12.5px", color: "#B45309", cursor: "pointer", textAlign: "left", width: "fit-content", fontWeight: 600 }}>{V.csvLabelFooter}</button>
           </div>
         </div>

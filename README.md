@@ -99,6 +99,14 @@ npm run etl:nomina   # refresca la nómina desde las fuentes oficiales
 npm run etl:votaciones # chequea nuevas actas / dataset nominal
 ```
 
+## Cómo se hizo
+
+El proyecto se desarrolló en colaboración humano + IA (Claude, de Anthropic): diseño, código y
+curaduría de datos verificada con agentes contra fuentes independientes. La IA nunca genera
+datos: cada cifra proviene de una fuente citada y un validador automático rechaza cualquier
+actualización inconsistente. La historia completa está en la sección
+[**Cómo se hizo**](https://diputracker.vercel.app/#/como-se-hizo) de la app.
+
 ## Documentación
 
 - [`docs/ESTADO.md`](docs/ESTADO.md) — estado del proyecto de un vistazo.

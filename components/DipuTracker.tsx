@@ -33,6 +33,7 @@ import MovView from "@/components/views/MovView";
 import SimuladorView from "@/components/views/SimuladorView";
 import IndicesView from "@/components/views/IndicesView";
 import PatrimonioView from "@/components/views/PatrimonioView";
+import ComoSeHizoView from "@/components/views/ComoSeHizoView";
 import FooterView from "@/components/views/FooterView";
 import FichaDrawer from "@/components/views/FichaDrawer";
 import SearchModal from "@/components/views/SearchModal";
@@ -153,6 +154,10 @@ export default function DipuTracker() {
     }
     if (p[0] === "patrimonio") {
       setS({ view: "patrimonio", fichaId: null });
+      return;
+    }
+    if (p[0] === "como-se-hizo") {
+      setS({ view: "comoSeHizo", fichaId: null });
       return;
     }
     if (p[0] === "comparador") {
@@ -319,6 +324,7 @@ export default function DipuTracker() {
       isSimulador: S.view === "simulador",
       isIndices: S.view === "indices",
       isPatrimonio: S.view === "patrimonio",
+      isComoSeHizo: S.view === "comoSeHizo",
       goHome: () => setView("home", "/panel"),
       goVotacion: () => setView("votacion", "/votacion/" + (Dref.current ? Dref.current.votaciones[S.selLaw].id : "")),
       goComparador: () => setView("comparador", "/comparador"),
@@ -326,6 +332,7 @@ export default function DipuTracker() {
       goSimulador: () => setView("simulador", "/simulador"),
       goIndices: () => setView("indices", "/indices"),
       goPatrimonio: () => setView("patrimonio", "/patrimonio"),
+      goComoSeHizo: () => setView("comoSeHizo", "/como-se-hizo"),
       openSearch: () => setS({ searchOpen: true, compareMode: false, query: "", searchSel: 0 }),
       openSearchCompare: () => setS({ searchOpen: true, compareMode: true, query: "", searchSel: 0 }),
       closeSearch: () => setS({ searchOpen: false }),
@@ -1264,6 +1271,7 @@ export default function DipuTracker() {
           {V.isSimulador && <SimuladorView V={V} />}
           {V.isIndices && <IndicesView V={V} />}
           {V.isPatrimonio && <PatrimonioView V={V} />}
+          {V.isComoSeHizo && <ComoSeHizoView V={V} />}
           <FooterView V={V} />
           {V.fichaOpen && <FichaDrawer V={V} />}
           {V.searchOpen && <SearchModal V={V} />}
