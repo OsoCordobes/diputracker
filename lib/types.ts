@@ -183,6 +183,7 @@ export type View =
   | "mov"
   | "simulador"
   | "indices"
-  | "patrimonio";
+  | "patrimonio"
+  | "comoSeHizo";
 export type ITab = "ali" | "dis" | "pow" | "rup" | "ter";
 export type SimPos = "AF" | "NEG" | "ABS" | "AUS";

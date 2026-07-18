@@ -5,7 +5,7 @@ export default function TopChrome({ V }: { V: DTVals }) {
   return (
     <>
       {/* ===================== REAL DATA STRIP ===================== */}
-      <div style={{ background: "#1C1A17", color: "#D8D3C8", fontSize: "11.5px", letterSpacing: "0.02em", padding: "7px 28px", textAlign: "center" }}>
+      <div className="dt-strip" style={{ background: "#1C1A17", color: "#D8D3C8", fontSize: "11.5px", letterSpacing: "0.02em", padding: "7px 28px", textAlign: "center" }}>
         <span style={{ color: "#FDBA74", fontWeight: 600 }}>DATOS OFICIALES HCDN</span> · 257 bancas · {V.nVots} votaciones reales: extraordinarias dic-2025→feb-2026 + ordinarias abr→jun 2026 · índice provisional a nivel bloque, con registros individuales documentados · <a href="#/indices" style={{ color: "#FDBA74", textDecoration: "none", borderBottom: "1px solid rgba(253,186,116,0.45)" }}>metodología</a>
       </div>
 
@@ -16,7 +16,7 @@ export default function TopChrome({ V }: { V: DTVals }) {
             <span style={{ fontFamily: "var(--font-serif), Georgia, serif", fontWeight: 600, fontSize: "20px", letterSpacing: "-0.01em" }}>DipuTracker</span>
             <span style={{ fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#9A958A", fontWeight: 600, paddingTop: "2px" }}>HCDN · 257 bancas</span>
           </div>
-          <div style={{ display: "flex", gap: "4px", marginLeft: "6px" }}>
+          <div className="dt-topnavtabs" style={{ display: "flex", gap: "4px", marginLeft: "6px" }}>
             <button onClick={V.goHome} style={{ background: V.navHomeBg, color: V.navHomeFg, border: "none", borderRadius: "7px", padding: "7px 13px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 500, cursor: "pointer", letterSpacing: "0.01em" }}>Panel</button>
             <button onClick={V.goIndices} style={{ background: V.navIdxBg, color: V.navIdxFg, border: "none", borderRadius: "7px", padding: "7px 13px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 500, cursor: "pointer" }}>Índices</button>
             <button onClick={V.goVotacion} style={{ background: V.navVotBg, color: V.navVotFg, border: "none", borderRadius: "7px", padding: "7px 13px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 500, cursor: "pointer" }}>Votaciones</button>
@@ -24,10 +24,10 @@ export default function TopChrome({ V }: { V: DTVals }) {
             <button onClick={V.goSimulador} style={{ background: V.navSimBg, color: V.navSimFg, border: "none", borderRadius: "7px", padding: "7px 13px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 500, cursor: "pointer" }}>Simulador</button>
           </div>
           <div style={{ marginLeft: "auto" }}>
-            <button onClick={V.openSearch} className="hov-border" style={{ display: "flex", alignItems: "center", gap: "9px", background: "#FFFFFF", border: "1px solid #E0DBD0", borderRadius: "8px", padding: "8px 13px", cursor: "pointer", color: "#8A857A", fontFamily: "inherit", fontSize: "13px", minWidth: 0, textAlign: "left" }}>
+            <button onClick={V.openSearch} className="hov-border dt-searchbtn" style={{ display: "flex", alignItems: "center", gap: "9px", background: "#FFFFFF", border: "1px solid #E0DBD0", borderRadius: "8px", padding: "8px 13px", cursor: "pointer", color: "#8A857A", fontFamily: "inherit", fontSize: "13px", minWidth: 0, textAlign: "left" }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8A296" strokeWidth="2.2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
               <span className="dt-searchlabel" style={{ flex: 1, whiteSpace: "nowrap" }}>Buscar por nombre, distrito o bloque</span>
-              <span className="dt-num" style={{ fontSize: "11px", border: "1px solid #E0DBD0", borderRadius: "4px", padding: "1px 5px", color: "#B0AB9F" }}>⌘K</span>
+              <span className="dt-num dt-kbdhint" style={{ fontSize: "11px", border: "1px solid #E0DBD0", borderRadius: "4px", padding: "1px 5px", color: "#B0AB9F" }}>⌘K</span>
             </button>
           </div>
         </div>

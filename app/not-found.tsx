@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div style={{ minHeight: "100vh", background: "#FAFAF9", display: "flex", alignItems: "center", justifyContent: "center", padding: "28px" }}>
+    <div className="dt-app" style={{ background: "#FAFAF9", display: "flex", alignItems: "center", justifyContent: "center", padding: "28px" }}>
       <div style={{ textAlign: "center", maxWidth: "480px" }}>
         <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "#B45309" }}>
           DipuTracker

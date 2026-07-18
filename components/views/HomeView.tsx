@@ -12,7 +12,7 @@ export default function HomeView({ V }: { V: DTVals }) {
         </div>
         <h1 className="dt-h1" style={{ fontFamily: "var(--font-serif), Georgia, serif", fontWeight: 600, fontSize: "46px", lineHeight: 1.04, letterSpacing: "-0.02em", margin: "14px 0 0", maxWidth: "880px" }}>Índice de alineamiento con el gobierno nacional</h1>
         <p style={{ fontSize: "18px", lineHeight: 1.5, color: "#57534E", maxWidth: "720px", margin: "16px 0 0" }}>Las 257 bancas reales, coloreadas por su acompañamiento al oficialismo en las {V.nVotsWord} votaciones decisivas del período — extraordinarias dic–feb y ordinarias abr–jun 2026. No es color de partido: es comportamiento registrado — hoy medido por la posición documentada de cada bloque, con las disidencias individuales que dejaron registro.</p>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "18px", alignItems: "center" }}>
+        <div className="dt-chipscroll" style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "18px", alignItems: "center" }}>
           <span style={{ fontSize: "10.5px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#9A958A" }}>Período computado</span>
           <button onClick={V.perTodo} aria-pressed={V.perTodoBg === "#1C1A17"} className="dt-num" style={{ fontSize: "12px", background: V.perTodoBg, color: V.perTodoFg, border: `1px solid ${V.perTodoBorder}`, borderRadius: "20px", padding: "5px 13px", cursor: "pointer", fontFamily: "inherit", transition: "all .2s", whiteSpace: "nowrap" }}>Todo · dic 2025 → jun 2026 · {V.perTodoCount}</button>
           <button onClick={V.perExt} aria-pressed={V.perExtBg === "#1C1A17"} className="dt-num" style={{ fontSize: "12px", background: V.perExtBg, color: V.perExtFg, border: `1px solid ${V.perExtBorder}`, borderRadius: "20px", padding: "5px 13px", cursor: "pointer", fontFamily: "inherit", transition: "all .2s", whiteSpace: "nowrap" }}>Extraordinarias · {V.perExtCount}</button>
@@ -23,7 +23,7 @@ export default function HomeView({ V }: { V: DTVals }) {
       </div>
 
       <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "26px 28px 0", display: "flex", alignItems: "center", gap: "18px", flexWrap: "wrap" }}>
-        <div style={{ display: "inline-flex", background: "#F0EDE6", border: "1px solid #E2DDD2", borderRadius: "10px", padding: "3px" }}>
+        <div className="dt-chipscroll" style={{ display: "inline-flex", background: "#F0EDE6", border: "1px solid #E2DDD2", borderRadius: "10px", padding: "3px" }}>
           <button onClick={V.setIndice} aria-pressed={V.modeIndiceBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "8px 15px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", background: V.modeIndiceBg, color: V.modeIndiceFg, boxShadow: V.modeIndiceSh, transition: "all .2s" }}>Por índice</button>
           <button onClick={V.setBloque} aria-pressed={V.modeBloqueBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "8px 15px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", background: V.modeBloqueBg, color: V.modeBloqueFg, boxShadow: V.modeBloqueSh, transition: "all .2s" }}>Por bloque</button>
           <button onClick={V.setInter} aria-pressed={V.modeInterBg !== "transparent"} style={{ border: "none", borderRadius: "7px", padding: "8px 15px", fontFamily: "inherit", fontSize: "13.5px", fontWeight: 600, cursor: "pointer", background: V.modeInterBg, color: V.modeInterFg, boxShadow: V.modeInterSh, transition: "all .2s" }}>Interbloques</button>
@@ -36,6 +36,21 @@ export default function HomeView({ V }: { V: DTVals }) {
       <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "14px 28px 0" }}>
         <div style={{ position: "relative", background: "#FFFFFF", border: "1px solid #E7E3DB", borderRadius: "16px", padding: "26px 30px 22px", boxShadow: "0 1px 2px rgba(28,26,23,0.03),0 14px 38px -28px rgba(28,26,23,0.22)" }}>
           <div style={{ position: "relative" }}>{V.hemicycle}</div>
+          {V.peekOpen && (
+            <div className="dt-pop" data-testid="dt-peek" style={{ display: "flex", alignItems: "center", gap: "12px", background: "#1C1A17", color: "#FAFAF9", borderRadius: "12px", padding: "12px 14px", marginTop: "14px", boxShadow: "0 14px 30px -12px rgba(0,0,0,.4)" }}>
+              <div className="dt-num" style={{ width: "44px", height: "44px", borderRadius: "9px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", color: "#FFFFFF", background: `${V.peek.swatch} center/cover`, backgroundImage: V.peek.fotoCss }}>{V.peek.initials}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: "14px", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{V.peek.nombre}</div>
+                <div style={{ fontSize: "11.5px", color: "#C9C4BA", marginTop: "1px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{V.peek.blocDistrito}</div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginTop: "2px" }}>
+                  <span className="dt-num" style={{ fontSize: "17px", fontWeight: 500, color: V.peek.idxColor }}>{V.peek.indice}</span>
+                  <span style={{ fontSize: "10px", color: "#9A958A" }}>{V.peek.indiceNota}</span>
+                </div>
+              </div>
+              <button onClick={V.peek.verFicha} style={{ flexShrink: 0, background: "#FDBA74", color: "#1C1A17", border: "none", borderRadius: "9px", padding: "0 16px", minHeight: "44px", fontFamily: "inherit", fontSize: "13px", fontWeight: 700, cursor: "pointer" }}>Ver ficha →</button>
+              <button onClick={V.peek.cerrar} aria-label="Cerrar" style={{ flexShrink: 0, background: "none", border: "none", color: "#9A958A", width: "34px", minHeight: "44px", fontSize: "16px", cursor: "pointer", fontFamily: "inherit" }}>✕</button>
+            </div>
+          )}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", flexWrap: "wrap", marginTop: "6px", borderTop: "1px solid #F0EDE6", paddingTop: "18px" }}>
             <div>
               <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#9A958A", marginBottom: "8px" }}>{V.legendTitle}</div>
@@ -161,7 +176,7 @@ export default function HomeView({ V }: { V: DTVals }) {
             <div key={i} onClick={v.onOpen} className="hov-row" style={{ background: "#FFFFFF", padding: "20px 22px", cursor: "pointer", transition: "background .15s" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px" }}>
                 <div style={{ fontSize: "16px", fontWeight: 600, lineHeight: 1.25, letterSpacing: "-0.01em", maxWidth: "72%" }}>{v.corto}</div>
-                <div style={{ textAlign: "right", flexShrink: 0 }}><div className="dt-num" style={{ fontSize: "11.5px", color: "#A8A296", whiteSpace: "nowrap" }}>{v.fecha}</div><div className="dt-num" style={{ fontSize: "9px", letterSpacing: "0.08em", color: "#B0AB9F", marginTop: "3px" }}>{v.perLabel}</div></div>
+                <div style={{ textAlign: "right", flexShrink: 0 }}><div className="dt-num" style={{ fontSize: "11.5px", color: "#A8A296", whiteSpace: "nowrap" }}>{v.fecha}</div><div className="dt-num dt-m-fs11" style={{ fontSize: "9px", letterSpacing: "0.08em", color: "#B0AB9F", marginTop: "3px" }}>{v.perLabel}</div></div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "5px" }}>
                 <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.04em", color: v.resColor, textTransform: "uppercase" }}>{v.resLabel}</span>

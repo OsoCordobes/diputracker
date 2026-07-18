@@ -28,12 +28,14 @@ a:hover{color:#8A3D06;}
   .dt-view,.dt-row,.dt-seatg,.dt-drawer,.dt-fade,.dt-pop,.dt-bar{animation:none;}
   .dt-seat,.dt-seatg,.dt-bar{transition:none !important;}
 }
-@media (max-width:1120px){.dt-searchlabel{display:none;}.dt-g4{grid-template-columns:repeat(2,1fr) !important;}}
+@media (max-width:1120px){.dt-searchlabel{display:none;}.dt-g4{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}}
 .dt-xwrap{overflow-x:auto;overflow-y:hidden;}
 .dt-minw{min-width:730px;}
 .dt-minw2{min-width:620px;}
 @media (max-width:920px){
-  .dt-g2,.dt-g3,.dt-g4{grid-template-columns:1fr !important;}
+  /* minmax(0,1fr): el track puede encoger por debajo del min-content de sus hijos
+     (con 1fr a secas, un hijo ancho fuerza a TODA la columna a desbordar la página) */
+  .dt-g2,.dt-g3,.dt-g4{grid-template-columns:minmax(0,1fr) !important;}
   .dt-h1{font-size:33px !important;}
   .dt-hidem{display:none !important;}
 }
@@ -46,3 +48,85 @@ a:hover{color:#8A3D06;}
 .hov-row-sel:hover{background:#F4F1EB !important;}
 .hov-dark:hover{background:#2B2823 !important;}
 .hov-border:hover{border-color:#C9C4BA !important;}
+
+/* ===== móvil — todas estas reglas viven en media queries que el desktop nunca matchea ===== */
+.dt-app{min-height:100vh;}
+@supports (min-height:100dvh){.dt-app{min-height:100dvh;}} /* viewport dinámico: sin salto de barra en iOS Safari */
+.dt-strip{padding-top:calc(7px + env(safe-area-inset-top)) !important;} /* strip bajo el notch con viewport-fit=cover */
+@media (max-width:920px){
+  html,body{overflow-x:clip;} /* red de seguridad contra scroll lateral accidental */
+  button{touch-action:manipulation;} /* sin doble-tap zoom en botones */
+  .dt-field{font-size:16px !important;} /* ≥16px: iOS no hace auto-zoom al enfocar inputs/selects */
+}
+@media (pointer:coarse){
+  body{-webkit-tap-highlight-color:transparent;}
+  .dt-kbdhint{display:none !important;} /* atajos de teclado (⌘K, ↑↓⏎) no aplican en touch */
+}
+@media (max-width:920px){
+  /* controles segmentados como carrusel de chips: nada desborda la página, se desliza con el dedo */
+  .dt-chipscroll{display:flex !important;flex-wrap:nowrap !important;max-width:100%;overflow-x:auto;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;
+    mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 18px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 18px),transparent);}
+  .dt-chipscroll::-webkit-scrollbar{display:none;}
+  .dt-chipscroll>button{flex-shrink:0;scroll-snap-align:start;min-height:44px;}
+  .dt-chipscroll>span{flex-shrink:0;}
+}
+
+/* bottom nav móvil: fija abajo, con blur y safe-area; en desktop no existe */
+.dt-bottomnav{display:none;}
+@media (max-width:920px){
+  .dt-bottomnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
+    background:rgba(250,250,249,0.94);backdrop-filter:blur(10px) saturate(140%);
+    -webkit-backdrop-filter:blur(10px) saturate(140%);border-top:1px solid #E7E3DB;
+    padding:4px env(safe-area-inset-right) calc(4px + env(safe-area-inset-bottom)) env(safe-area-inset-left);}
+  .dt-m-padnav{padding-bottom:calc(62px + env(safe-area-inset-bottom));}
+  .dt-topnavtabs{display:none !important;} /* las 5 tabs del top nav viven abajo en móvil */
+  .dt-searchbtn{min-height:44px;}
+  /* targets táctiles ≥44px (Apple HIG / Material) */
+  .dt-m-tt{min-height:44px !important;}
+  .dt-simseg{gap:3px !important;}
+  .dt-simseg button{width:40px !important;height:44px !important;font-size:12px !important;}
+  .dt-simlist{max-height:none !important;overflow-y:visible !important;} /* sin scroll anidado en touch */
+}
+
+/* ficha como bottom sheet en móvil (desktop conserva el drawer lateral) */
+@keyframes dtSheetIn{from{opacity:0;transform:translateY(48px);}to{opacity:1;transform:none;}}
+.dt-sheethandle{display:none;}
+.dt-btnicon{display:none;}
+@media (max-width:920px){
+  .dt-drawer{top:auto !important;left:0 !important;right:0 !important;bottom:0 !important;
+    width:100% !important;max-height:88dvh;border-left:none !important;border-top:1px solid #E7E3DB;
+    border-radius:18px 18px 0 0;box-shadow:0 -24px 60px -30px rgba(28,26,23,.4) !important;
+    animation-name:dtSheetIn;overscroll-behavior:contain;
+    padding-bottom:env(safe-area-inset-bottom);}
+  .dt-sheethandle{display:block;width:40px;height:4px;border-radius:2px;background:#D8D3C8;margin:8px auto 0;flex-shrink:0;}
+  .dt-drawerhead{flex-wrap:wrap;gap:8px;}
+  .dt-drawerhead button{min-height:44px !important;min-width:44px;}
+  .dt-drawerhead .dt-btnlabel{display:none;} /* en móvil los botones del header son icon-only */
+  .dt-drawerhead .dt-btnicon{display:inline-flex;}
+}
+@media (max-width:560px){
+  .dt-m-stack{grid-template-columns:1fr !important;} /* sub-grids 1fr 1fr apretados en 360px */
+  /* ranking de alineamiento: de tabla con scroll-x (min-width 730px) a cards apiladas */
+  .dt-ali .dt-minw{min-width:0 !important;}
+  .dt-alihead{display:none !important;}
+  .dt-alirow{grid-template-columns:40px minmax(0,1fr) 48px !important;
+    grid-template-areas:"ava who idx" "ava bloc idx" "bar bar bar" !important;
+    gap:3px 10px !important;padding:12px 16px !important;}
+  .dt-c-rank,.dt-c-base{display:none !important;}
+  .dt-c-ava{grid-area:ava;}
+  .dt-c-who{grid-area:who;}
+  .dt-c-bloc{grid-area:bloc;}
+  .dt-c-idx{grid-area:idx;align-self:center;}
+  .dt-c-bar{grid-area:bar;margin-top:5px;}
+  .dt-m-fs11{font-size:11px !important;} /* piso de legibilidad para labels de 9-9.5px */
+}
+@media (max-width:920px){
+  /* affordance de scroll horizontal: fade en el borde derecho de las tablas que scrollean */
+  .dt-m-scrollfade{mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);}
+}
+@media (prefers-reduced-motion:reduce){
+  .dt-drawer{animation:none !important;} /* re-guard: la regla del sheet no debe rehabilitar la animación */
+}

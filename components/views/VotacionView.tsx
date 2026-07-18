@@ -83,9 +83,9 @@ export default function VotacionView({ V }: { V: DTVals }) {
             <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#9A958A", flex: 1 }}>Bancas · posición asignada</div>
             <div style={{ flex: 1, minWidth: "200px", display: "flex", alignItems: "center", gap: "8px", background: "#FFFFFF", border: "1px solid #E0DBD0", borderRadius: "9px", padding: "7px 12px" }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8A296" strokeWidth="2.2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
-              <input value={V.vQuery} onChange={V.onVQuery} placeholder="Filtrar por nombre…" style={{ border: "none", outline: "none", background: "none", fontFamily: "inherit", fontSize: "13px", width: "100%", color: "#1C1A17" }} />
+              <input value={V.vQuery} onChange={V.onVQuery} placeholder="Filtrar por nombre…" className="dt-field" style={{ border: "none", outline: "none", background: "none", fontFamily: "inherit", fontSize: "13px", width: "100%", color: "#1C1A17" }} />
             </div>
-            <select value={V.filterBloc} onChange={V.onFilterBloc} style={{ border: "1px solid #E0DBD0", borderRadius: "9px", padding: "8px 11px", fontFamily: "inherit", fontSize: "12.5px", background: "#FFFFFF", color: "#1C1A17" }}>
+            <select value={V.filterBloc} onChange={V.onFilterBloc} className="dt-field" style={{ border: "1px solid #E0DBD0", borderRadius: "9px", padding: "8px 11px", fontFamily: "inherit", fontSize: "12.5px", background: "#FFFFFF", color: "#1C1A17" }}>
               {V.blocOptions.map((o: any, i: number) => (<option key={i} value={o.value}>{o.label}</option>))}
             </select>
           </div>
@@ -106,8 +106,8 @@ export default function VotacionView({ V }: { V: DTVals }) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px" }}>
               <div className="dt-num" style={{ fontSize: "12px", color: "#A8A296" }}>{V.votCountLabel}</div>
               <div style={{ display: "flex", gap: "8px" }}>
-                <button onClick={V.prevPage} style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Anterior</button>
-                <button onClick={V.nextPage} style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Siguiente</button>
+                <button onClick={V.prevPage} className="dt-m-tt" style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Anterior</button>
+                <button onClick={V.nextPage} className="dt-m-tt" style={{ border: "1px solid #E0DBD0", background: "#FFFFFF", borderRadius: "8px", padding: "6px 12px", fontFamily: "inherit", fontSize: "12.5px", cursor: "pointer", color: "#57534E" }}>Siguiente</button>
               </div>
             </div>
           </div>

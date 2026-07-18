@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Libre_Franklin, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const franklin = Libre_Franklin({
@@ -55,8 +56,13 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: "#1C1A17",
+  width: "device-width",
+  initialScale: 1,
+  // cover: permite extender strip superior, bottom nav y sheet bajo notch/home-indicator
+  // (los paddings con env(safe-area-inset-*) viven en globals.css).
+  viewportFit: "cover",
 };
 
 const JSON_LD = {
@@ -82,7 +88,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://parlamentaria.hcdn.gob.ar" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       </head>
-      <body style={{ fontFamily: "var(--font-sans), -apple-system, sans-serif" }}>{children}</body>
+      <body style={{ fontFamily: "var(--font-sans), -apple-system, sans-serif" }}>
+        {children}
+        {/* solo en deploys de Vercel: en next start local/CI el script no existe (404) */}
+        {process.env.VERCEL && <Analytics />}
+      </body>
     </html>
   );
 }

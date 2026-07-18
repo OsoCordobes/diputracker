@@ -19,6 +19,7 @@ import {
 import { shareCardDep, shareCardVot } from "@/lib/share-cards";
 import { downloadCsv } from "@/lib/csv";
 import { useFailedPhotos } from "@/lib/useFailedPhotos";
+import { useCoarsePointer } from "@/lib/useMediaQuery";
 import CountUp from "@/components/CountUp";
 import Hemicycle from "@/components/svg/Hemicycle";
 import MiniHemi from "@/components/svg/MiniHemi";
@@ -26,6 +27,7 @@ import Sparkline from "@/components/svg/Sparkline";
 import SimHemi from "@/components/svg/SimHemi";
 
 import TopChrome from "@/components/views/TopChrome";
+import BottomNav from "@/components/views/BottomNav";
 import HomeView from "@/components/views/HomeView";
 import VotacionView from "@/components/views/VotacionView";
 import ComparadorView from "@/components/views/ComparadorView";
@@ -33,6 +35,7 @@ import MovView from "@/components/views/MovView";
 import SimuladorView from "@/components/views/SimuladorView";
 import IndicesView from "@/components/views/IndicesView";
 import PatrimonioView from "@/components/views/PatrimonioView";
+import ComoSeHizoView from "@/components/views/ComoSeHizoView";
 import FooterView from "@/components/views/FooterView";
 import FichaDrawer from "@/components/views/FichaDrawer";
 import SearchModal from "@/components/views/SearchModal";
@@ -56,6 +59,7 @@ interface State {
   compareMode: boolean;
   query: string;
   hoverId: number | null;
+  peekId: number | null;
   selLaw: number;
   vQuery: string;
   filterBloc: string;
@@ -85,6 +89,7 @@ export default function DipuTracker() {
     compareMode: false,
     query: "",
     hoverId: null,
+    peekId: null,
     selLaw: 0,
     vQuery: "",
     filterBloc: "",
@@ -120,6 +125,9 @@ export default function DipuTracker() {
     [S.loading]
   );
   const failedPhotos = useFailedPhotos(photoUrls);
+  // Puntero táctil: cambia el comportamiento del hemiciclo (peek en vez de tooltip).
+  // Solo condiciona handlers y UI post-interacción — nunca el DOM inicial (SSR-safe).
+  const coarse = useCoarsePointer();
 
   // ---------- helpers con estado ----------
   const setHash = useCallback((h: string) => {
@@ -153,6 +161,10 @@ export default function DipuTracker() {
     }
     if (p[0] === "patrimonio") {
       setS({ view: "patrimonio", fichaId: null });
+      return;
+    }
+    if (p[0] === "como-se-hizo") {
+      setS({ view: "comoSeHizo", fichaId: null });
       return;
     }
     if (p[0] === "comparador") {
@@ -247,12 +259,12 @@ export default function DipuTracker() {
 
   // ---------- navegación ----------
   const setView = (v: View, hash: string) => {
-    setS({ view: v, fichaId: null });
+    setS({ view: v, fichaId: null, peekId: null });
     setHash(hash);
     if (typeof window !== "undefined") window.scrollTo(0, 0);
   };
   const openFicha = (id: number) => {
-    setS({ fichaId: id, copied: false });
+    setS({ fichaId: id, copied: false, peekId: null });
     setHash("/diputado/" + id);
   };
   const compHash = (list: number[]) => "/comparador" + (list && list.length ? "/" + list.join(",") : "");
@@ -319,6 +331,7 @@ export default function DipuTracker() {
       isSimulador: S.view === "simulador",
       isIndices: S.view === "indices",
       isPatrimonio: S.view === "patrimonio",
+      isComoSeHizo: S.view === "comoSeHizo",
       goHome: () => setView("home", "/panel"),
       goVotacion: () => setView("votacion", "/votacion/" + (Dref.current ? Dref.current.votaciones[S.selLaw].id : "")),
       goComparador: () => setView("comparador", "/comparador"),
@@ -326,6 +339,7 @@ export default function DipuTracker() {
       goSimulador: () => setView("simulador", "/simulador"),
       goIndices: () => setView("indices", "/indices"),
       goPatrimonio: () => setView("patrimonio", "/patrimonio"),
+      goComoSeHizo: () => setView("comoSeHizo", "/como-se-hizo"),
       openSearch: () => setS({ searchOpen: true, compareMode: false, query: "", searchSel: 0 }),
       openSearchCompare: () => setS({ searchOpen: true, compareMode: true, query: "", searchSel: 0 }),
       closeSearch: () => setS({ searchOpen: false }),
@@ -352,6 +366,7 @@ export default function DipuTracker() {
     out.navPatFg = navFg("patrimonio");
     out.navSimBg = navBg("simulador");
     out.navSimFg = navFg("simulador");
+    out.navActive = S.view;
 
     const D = Dref.current;
     if (!D) return out;
@@ -484,13 +499,36 @@ export default function DipuTracker() {
       <Hemicycle
         D={D}
         mode={S.mode}
-        hoverId={S.hoverId}
+        hoverId={coarse ? S.peekId : S.hoverId}
         daltonico={MODO_DALTONICO}
         failedPhotos={failedPhotos}
         onHover={(id) => setS({ hoverId: id })}
         onOpen={(id) => openFicha(id)}
+        coarse={coarse}
+        onSeatTap={(id) => {
+          if (id == null) setS({ peekId: null });
+          else if (stateRef.current.peekId === id) openFicha(id); // segundo tap abre la ficha
+          else setS({ peekId: id });
+        }}
       />
     );
+    // peek card bajo el hemiciclo (solo touch): tap 1 = preview, tap 2 / botón = ficha
+    out.peekOpen = coarse && S.peekId != null && !!D.byId[S.peekId];
+    if (out.peekOpen) {
+      const pd = D.byId[S.peekId as number];
+      out.peek = {
+        nombre: displayName(pd.a),
+        blocDistrito: pd.blocShort + " · " + pd.d,
+        indice: pd.indice == null ? "—" : String(pd.indice),
+        indiceNota: pd.indice == null ? "sin datos" : "índice provisional",
+        idxColor: pd.indice == null ? "#C9C4BA" : rampD(pd.indice / 100),
+        initials: iniOf(pd),
+        fotoCss: fotoCss(pd),
+        swatch: swatch(pd.indice),
+        verFicha: () => openFicha(pd.id),
+        cerrar: () => setS({ peekId: null }),
+      };
+    }
 
     // disidencias
     const disDeps = D.deps.filter((d) => d.hasExc);
@@ -1248,13 +1286,14 @@ export default function DipuTracker() {
 
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [S, failedPhotos]);
+  }, [S, failedPhotos, coarse]);
 
   void bump;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#FAFAF9" }}>
+    <div className="dt-app dt-m-padnav" style={{ background: "#FAFAF9" }}>
       <TopChrome V={V} />
+      <BottomNav V={V} />
       {V.ready && (
         <>
           {V.isHome && <HomeView V={V} />}
@@ -1264,6 +1303,7 @@ export default function DipuTracker() {
           {V.isSimulador && <SimuladorView V={V} />}
           {V.isIndices && <IndicesView V={V} />}
           {V.isPatrimonio && <PatrimonioView V={V} />}
+          {V.isComoSeHizo && <ComoSeHizoView V={V} />}
           <FooterView V={V} />
           {V.fichaOpen && <FichaDrawer V={V} />}
           {V.searchOpen && <SearchModal V={V} />}
