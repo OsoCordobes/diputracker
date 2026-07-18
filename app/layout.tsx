@@ -90,7 +90,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body style={{ fontFamily: "var(--font-sans), -apple-system, sans-serif" }}>
         {children}
-        <Analytics />
+        {/* solo en deploys de Vercel: en next start local/CI el script no existe (404) */}
+        {process.env.VERCEL && <Analytics />}
       </body>
     </html>
   );

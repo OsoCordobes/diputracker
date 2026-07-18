@@ -21,7 +21,12 @@ export default defineConfig({
     baseURL: `http://localhost:${PORT}`,
     trace: "on-first-retry",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], launchOptions } }],
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"], launchOptions }, testIgnore: /mobile\.spec/ },
+    // iPhone 13 (viewport/touch/UA) forzado sobre Chromium: el CI solo instala ese browser.
+    // Con isMobile+hasTouch el media query (pointer:coarse) matchea, como en un teléfono real.
+    { name: "mobile", use: { ...devices["iPhone 13"], browserName: "chromium" as const, launchOptions }, testMatch: /mobile\.spec/ },
+  ],
   webServer: {
     command: `npm run build && npx next start -p ${PORT}`,
     url: `http://localhost:${PORT}`,
