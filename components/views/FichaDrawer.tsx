@@ -114,7 +114,7 @@ export default function FichaDrawer({ V }: { V: DTVals }) {
                     <div style={{ fontSize: "13px", fontWeight: 600, marginTop: "11px" }}>{V.fLabel}</div>
                     <div style={{ marginTop: "14px", paddingTop: "12px", borderTop: "1px solid #F2EFE9" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-                        <span style={{ fontSize: "10.5px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#9A958A" }}>Evolución votación a votación</span>
+                        <span style={{ fontSize: "10.5px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#9A958A" }}>Acompañamiento votación a votación</span>
                       </div>
                       {V.fSpark}
                     </div>
