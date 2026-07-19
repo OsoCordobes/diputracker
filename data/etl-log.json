@@ -469,5 +469,25 @@
   ],
   "fuenteSesiones": "https://www.hcdn.gob.ar/sesiones/",
   "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-07-19T12:07:43.909Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "fetch failed"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-07-19T12:07:56.979Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 0,
+  "nominalDisponible": false,
+  "errores": [
+   "https://www.diputados.gov.ar/sesiones/: fetch failed"
+  ],
+  "fuenteSesiones": "https://www.hcdn.gob.ar/sesiones/",
+  "nominalRecursos": 4
  }
 ]
