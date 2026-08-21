@@ -1911,5 +1911,27 @@
    "listado de sesiones: ninguna fuente de sesiones respondió"
   ],
   "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-08-21T11:45:05.564Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "fetch failed"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-08-21T11:45:42.850Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 0,
+  "nominalDisponible": false,
+  "errores": [
+   "https://www.diputados.gov.ar/sesiones/: fetch failed",
+   "https://www.hcdn.gob.ar/sesiones/: fetch failed",
+   "https://votaciones.hcdn.gob.ar/votaciones/2026: fetch failed",
+   "listado de sesiones: ninguna fuente de sesiones respondió"
+  ],
+  "nominalRecursos": 4
  }
 ]
