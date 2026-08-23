@@ -1,14 +1,5 @@
 [
  {
-  "ts": "2026-07-07T12:46:46.131Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [
-   "distrito no reconocido: \"CIUDAD DE BUENOS AIRES\" (Ajmechet, Sabrina)"
-  ],
-  "aborted": true
- },
- {
   "ts": "2026-07-07T12:47:19.488Z",
   "script": "etl-nomina",
   "cambios": [],
@@ -2011,6 +2002,28 @@
  },
  {
   "ts": "2026-08-23T11:39:42.919Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 0,
+  "nominalDisponible": false,
+  "errores": [
+   "https://www.diputados.gov.ar/sesiones/: fetch failed",
+   "https://www.hcdn.gob.ar/sesiones/: fetch failed",
+   "https://votaciones.hcdn.gob.ar/votaciones/2026: fetch failed",
+   "listado de sesiones: ninguna fuente de sesiones respondió"
+  ],
+  "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-08-23T23:39:21.593Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "fetch failed"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-08-23T23:39:57.854Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 0,
   "nominalDisponible": false,
