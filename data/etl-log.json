@@ -1,28 +1,5 @@
 [
  {
-  "ts": "2026-07-07T12:47:19.488Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [
-   "bloques nuevos no mapeados: PTS-FRENTE DE IZQUIERDA Y DE TRABAJADORES UNIDAD | PARTIDO OBRERO EN EL FRENTE DE IZQUIERDA Y DE TRABAJADORES-UNIDAD — requiere curaduría (agregar a bloques[] con corto/chip/presidencia)"
-  ],
-  "aborted": true
- },
- {
-  "ts": "2026-07-07T12:48:06.434Z",
-  "script": "etl-nomina",
-  "cambios": [
-   "ALTA: Andreussi, Barbara (LLA, Jujuy)",
-   "ALTA: Flores, Maria Gabriela (LLA, Salta)",
-   "ALTA: Pitrola, Nestor (POFIT, Buenos Aires)",
-   "BAJA: Andreussi, Bárbara (LLA, Jujuy)",
-   "BAJA: Flores, María Gabriela (LLA, Salta)",
-   "BAJA: Pitrola, Néstor (POFIT, Buenos Aires)"
-  ],
-  "errores": [],
-  "aborted": false
- },
- {
   "ts": "2026-07-07T12:49:39.220Z",
   "script": "etl-nomina",
   "cambios": [],
@@ -2024,6 +2001,28 @@
  },
  {
   "ts": "2026-08-23T23:39:57.854Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 0,
+  "nominalDisponible": false,
+  "errores": [
+   "https://www.diputados.gov.ar/sesiones/: fetch failed",
+   "https://www.hcdn.gob.ar/sesiones/: fetch failed",
+   "https://votaciones.hcdn.gob.ar/votaciones/2026: fetch failed",
+   "listado de sesiones: ninguna fuente de sesiones respondió"
+  ],
+  "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-08-24T11:46:14.685Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "fetch failed"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-08-24T11:46:51.163Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 0,
   "nominalDisponible": false,
