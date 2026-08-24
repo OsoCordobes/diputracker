@@ -1,19 +1,5 @@
 [
  {
-  "ts": "2026-07-07T12:49:39.220Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [],
-  "aborted": false
- },
- {
-  "ts": "2026-07-07T12:51:54.101Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [],
-  "aborted": false
- },
- {
   "ts": "2026-07-07T12:52:10.297Z",
   "script": "etl-votaciones",
   "nuevasActas": 0,
@@ -2023,6 +2009,28 @@
  },
  {
   "ts": "2026-08-24T11:46:51.163Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 0,
+  "nominalDisponible": false,
+  "errores": [
+   "https://www.diputados.gov.ar/sesiones/: fetch failed",
+   "https://www.hcdn.gob.ar/sesiones/: fetch failed",
+   "https://votaciones.hcdn.gob.ar/votaciones/2026: fetch failed",
+   "listado de sesiones: ninguna fuente de sesiones respondió"
+  ],
+  "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-08-24T23:40:36.802Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "fetch failed"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-08-24T23:41:13.059Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 0,
   "nominalDisponible": false,
