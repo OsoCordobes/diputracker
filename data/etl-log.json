@@ -1,22 +1,5 @@
 [
  {
-  "ts": "2026-07-07T12:52:10.297Z",
-  "script": "etl-votaciones",
-  "nuevasActas": 0,
-  "nominalDisponible": false,
-  "errores": [
-   "votaciones.hcdn.gob.ar: HTTP 404 en https://votaciones.hcdn.gob.ar/votaciones/2026"
-  ],
-  "nominalRecursos": 4
- },
- {
-  "ts": "2026-07-07T17:07:46.302Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [],
-  "aborted": false
- },
- {
   "ts": "2026-07-07T19:15:01.566Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 0,
@@ -2031,6 +2014,28 @@
  },
  {
   "ts": "2026-08-24T23:41:13.059Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 0,
+  "nominalDisponible": false,
+  "errores": [
+   "https://www.diputados.gov.ar/sesiones/: fetch failed",
+   "https://www.hcdn.gob.ar/sesiones/: fetch failed",
+   "https://votaciones.hcdn.gob.ar/votaciones/2026: fetch failed",
+   "listado de sesiones: ninguna fuente de sesiones respondió"
+  ],
+  "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-08-25T11:46:57.662Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "fetch failed"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-08-25T11:47:34.675Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 0,
   "nominalDisponible": false,
