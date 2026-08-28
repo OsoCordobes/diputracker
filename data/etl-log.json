@@ -1,21 +1,5 @@
 [
  {
-  "ts": "2026-07-09T13:59:53.876Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [],
-  "aborted": false
- },
- {
-  "ts": "2026-07-09T14:00:13.467Z",
-  "script": "etl-votaciones",
-  "nuevasSesiones": 0,
-  "nominalDisponible": false,
-  "errores": [],
-  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
-  "nominalRecursos": 4
- },
- {
   "ts": "2026-07-10T01:01:53.768Z",
   "script": "etl-nomina",
   "cambios": [],
@@ -2065,6 +2049,27 @@
  },
  {
   "ts": "2026-08-28T06:57:24.051Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 1,
+  "nominalDisponible": false,
+  "errores": [],
+  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
+  "fechasNuevas": [
+   "2026-08-26"
+  ],
+  "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-08-28T21:26:25.780Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "bloques nuevos no mapeados:  — requiere curaduría (agregar a bloques[] con corto/chip/presidencia)"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-08-28T21:26:36.151Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 1,
   "nominalDisponible": false,
