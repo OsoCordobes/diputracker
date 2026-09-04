@@ -1,21 +1,5 @@
 [
  {
-  "ts": "2026-07-16T12:53:23.202Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [],
-  "aborted": false
- },
- {
-  "ts": "2026-07-16T12:53:34.093Z",
-  "script": "etl-votaciones",
-  "nuevasSesiones": 0,
-  "nominalDisponible": false,
-  "errores": [],
-  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
-  "nominalRecursos": 4
- },
- {
   "ts": "2026-07-17T00:15:20.316Z",
   "script": "etl-nomina",
   "cambios": [],
@@ -2135,6 +2119,27 @@
  },
  {
   "ts": "2026-09-04T01:03:33.523Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 1,
+  "nominalDisponible": false,
+  "errores": [],
+  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
+  "fechasNuevas": [
+   "2026-08-26"
+  ],
+  "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-09-04T14:59:21.280Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "bloques nuevos no mapeados: ARGENTINA FEDERAL | IZQUIERDA SOCIALISTA - FRENTE DE IZQUIERDA UNIDAD — requiere curaduría (agregar a bloques[] con corto/chip/presidencia)"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-09-04T14:59:31.626Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 1,
   "nominalDisponible": false,
