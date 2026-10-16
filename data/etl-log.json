@@ -1,27 +1,5 @@
 [
  {
-  "ts": "2026-08-27T04:32:53.941Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [
-   "fetch failed"
-  ],
-  "aborted": true
- },
- {
-  "ts": "2026-08-27T04:33:30.932Z",
-  "script": "etl-votaciones",
-  "nuevasSesiones": 0,
-  "nominalDisponible": false,
-  "errores": [
-   "https://www.diputados.gov.ar/sesiones/: fetch failed",
-   "https://www.hcdn.gob.ar/sesiones/: fetch failed",
-   "https://votaciones.hcdn.gob.ar/votaciones/2026: fetch failed",
-   "listado de sesiones: ninguna fuente de sesiones respondió"
-  ],
-  "nominalRecursos": 4
- },
- {
   "ts": "2026-08-27T21:03:19.785Z",
   "script": "etl-nomina",
   "cambios": [],
@@ -2164,6 +2142,29 @@
  },
  {
   "ts": "2026-10-15T15:37:20.676Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 3,
+  "nominalDisponible": false,
+  "errores": [],
+  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
+  "fechasNuevas": [
+   "2026-08-26",
+   "2026-09-09",
+   "2026-10-15"
+  ],
+  "nominalRecursos": 4
+ },
+ {
+  "ts": "2026-10-16T01:28:26.832Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "bloques nuevos no mapeados: ARGENTINA FEDERAL | IZQUIERDA SOCIALISTA - FRENTE DE IZQUIERDA UNIDAD — requiere curaduría (agregar a bloques[] con corto/chip/presidencia)"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-10-16T01:28:36.927Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 3,
   "nominalDisponible": false,
