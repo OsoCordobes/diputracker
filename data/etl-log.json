@@ -1,27 +1,5 @@
 [
  {
-  "ts": "2026-09-15T15:35:16.613Z",
-  "script": "etl-nomina",
-  "cambios": [],
-  "errores": [
-   "bloques nuevos no mapeados: ARGENTINA FEDERAL | IZQUIERDA SOCIALISTA - FRENTE DE IZQUIERDA UNIDAD — requiere curaduría (agregar a bloques[] con corto/chip/presidencia)"
-  ],
-  "aborted": true
- },
- {
-  "ts": "2026-09-15T15:35:26.478Z",
-  "script": "etl-votaciones",
-  "nuevasSesiones": 2,
-  "nominalDisponible": false,
-  "errores": [],
-  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
-  "fechasNuevas": [
-   "2026-08-26",
-   "2026-09-09"
-  ],
-  "nominalRecursos": 4
- },
- {
   "ts": "2026-09-16T01:28:35.196Z",
   "script": "etl-nomina",
   "cambios": [],
@@ -2250,6 +2228,31 @@
  },
  {
   "ts": "2026-11-04T03:02:22.683Z",
+  "script": "etl-votaciones",
+  "nuevasSesiones": 4,
+  "nominalDisponible": false,
+  "errores": [
+   "datos.hcdn.gob.ar: fetch failed"
+  ],
+  "fuenteSesiones": "https://www.diputados.gov.ar/sesiones/",
+  "fechasNuevas": [
+   "2026-08-26",
+   "2026-09-09",
+   "2026-10-15",
+   "2026-10-21"
+  ]
+ },
+ {
+  "ts": "2026-11-04T18:40:15.597Z",
+  "script": "etl-nomina",
+  "cambios": [],
+  "errores": [
+   "bloques nuevos no mapeados: ARGENTINA FEDERAL | IZQUIERDA SOCIALISTA - FRENTE DE IZQUIERDA UNIDAD — requiere curaduría (agregar a bloques[] con corto/chip/presidencia)"
+  ],
+  "aborted": true
+ },
+ {
+  "ts": "2026-11-04T18:40:31.282Z",
   "script": "etl-votaciones",
   "nuevasSesiones": 4,
   "nominalDisponible": false,
